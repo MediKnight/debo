@@ -1,75 +1,72 @@
 package de.bo.base.store2.sql;
 
-import java.sql.*;
-
 import de.bo.base.store2.*;
 
-public abstract class SQLRecord extends AbstractStorable
-{
-    protected SQLRecord() {
-	super();
-	data = new Object[getAttributes().length];
-    }
-
-    protected SQLRecord(StoreKeeper storeKeeper) {
-	super(storeKeeper);
-	data = new Object[getAttributes().length];
-    }
-
-    public String debugInfo() {
-	if ( data == null )
-	    return "<< not set >>";
-
-	StringBuffer sb = new StringBuffer();
-	for ( int i=0; i<data.length; i++ ) {
-	    if ( i > 0 )
-		sb.append(" | ");
-	    if ( data[i] == null )
-		sb.append("<null>");
-	    else
-		sb.append(data[i].toString());
+public abstract class SQLRecord extends AbstractStorable {
+	protected SQLRecord() {
+		super();
+		data = new Object[getAttributes().length];
 	}
 
-	return sb.toString();
-    }
+	protected SQLRecord(StoreKeeper storeKeeper) {
+		super(storeKeeper);
+		data = new Object[getAttributes().length];
+	}
 
-    // Paket-interne Funktion: Empfängt Daten vom Objekt
-    void getInternal(Object[] data) {
-	get(data);
-    }
+	public String debugInfo() {
+		if (data == null)
+			return "<< not set >>";
 
-    protected void get(Object[] data) {
-	for ( int i=0; i<this.data.length; i++ )
-	    data[i] = this.data[i];
-    }
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < data.length; i++) {
+			if (i > 0)
+				sb.append(" | ");
+			if (data[i] == null)
+				sb.append("<null>");
+			else
+				sb.append(data[i].toString());
+		}
 
-    // Paket-interne Funktion: Überträgt Daten zum Objekt
-    void putInternal(Object[] data) {
-	put(data);
-    }
+		return sb.toString();
+	}
 
-    protected void put(Object[] data) {
-	for ( int i=0; i<data.length; i++ )
-	    this.data[i] = data[i];
-    }
+	// Paket-interne Funktion: Empfängt Daten vom Objekt
+	void getInternal(Object[] data) {
+		get(data);
+	}
 
-    // Paket-interne Funktion: Setzt Primärschlüssel
-    void setKeyInternal(Object key) {
-	setKey(key);
-    }
+	protected void get(Object[] data) {
+		for (int i = 0; i < this.data.length; i++)
+			data[i] = this.data[i];
+	}
 
-    /**
-     * Liefert globale Objekt-Bezeichnung (Tabellen-Name).
-     */
-    public abstract String getIdentifier();
+	// Paket-interne Funktion: Überträgt Daten zum Objekt
+	void putInternal(Object[] data) {
+		put(data);
+	}
 
-    /**
-     * Liefert Schlüssel-Attribut.
-     */
-    public abstract String getKeyIdentifier();
+	protected void put(Object[] data) {
+		for (int i = 0; i < data.length; i++)
+			this.data[i] = data[i];
+	}
 
-    /**
-     * Liefert alle Attribute.
-     */
-    public abstract String[] getAttributes();
+	// Paket-interne Funktion: Setzt Primärschlüssel
+	void setKeyInternal(Object key) {
+		setKey(key);
+	}
+
+	/**
+	 * Liefert globale Objekt-Bezeichnung (Tabellen-Name).
+	 */
+	public abstract String getIdentifier();
+
+	/**
+	 * Liefert Schlüssel-Attribut.
+	 */
+	public abstract String getKeyIdentifier();
+
+	/**
+	 * Liefert alle Attribute.
+	 */
+	public abstract String[] getAttributes();
 }

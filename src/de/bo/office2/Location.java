@@ -1,7 +1,5 @@
 package de.bo.office2;
 
-import java.util.*;
-
 import de.bo.base.store.StoreKeeper;
 
 /**
@@ -15,143 +13,142 @@ import de.bo.base.store.StoreKeeper;
  * @see EmployeeContainer
  */
 
-public class Location extends EmployeeContainer
-{
+public class Location extends EmployeeContainer {
 
-  /**
-   * Erzeugt Standort mit Default-Storekeeper.
-   */
-  public Location() {
-    super();
-  }
-
-  /**
-   * Erzeugt Standort mit gegebenen Storekeeper.
-   */
-  public Location(StoreKeeper storeKeeper) {
-    super( storeKeeper );
-  }
-
-  /**
-   * Liefert zugehörige Firma (lädt sie bei Bedarf).
-   */
-  public Company getCompany() {
-    return (Company)getParent( 0 );
-  }
-
-  /**
-   * Erzeugt Eltern-Objekt zum gegebenen Index (im Bereich von
-   * <code>getParentCount()</code>).
-   *
-   * Hier ist nur 0 als Index gültig, d.h. die Funktion erzeugt eine Firma.
-   */
-  protected Bobo createParent(int index) {
-    Bobo record = null;
-    if ( index == 0 ) {
-      record = new Company();
-      record.setStoreKeeper( getStoreKeeper() );
+    /**
+     * Erzeugt Standort mit Default-Storekeeper.
+     */
+    public Location() {
+        super();
     }
-    return record;
-  }
 
-  /**
-   * Liefert "Eltern"-Schlüssel zum gegebenen Index (im Bereich von
-   * <code>getParentCount()</code>).
-   *
-   * Hier ist nur 0 als Index gültig, d.h. die Funktion liefert den Schlüssel
-   * der Firma.
-   */
-  protected Object getParentKey(int index) {
-    return data[1];
-  }
+    /**
+     * Erzeugt Standort mit gegebenen Storekeeper.
+     */
+    public Location(StoreKeeper storeKeeper) {
+        super(storeKeeper);
+    }
 
-  /**
-   * Liefert Anzahl der "Eltern".
-   *
-   * @return <code>1</code>
-   */
-  public int getParentCount() {
-    return 1;
-  }
+    /**
+     * Liefert zugehörige Firma (lädt sie bei Bedarf).
+     */
+    public Company getCompany() {
+        return (Company) getParent(0);
+    }
 
-  /**
-   * Liefert Name des Standorts.
-   */
-  public String getName() {
-    return getStoreToolkit().objectToString( data[2] );
-  }
+    /**
+     * Erzeugt Eltern-Objekt zum gegebenen Index (im Bereich von
+     * <code>getParentCount()</code>).
+     *
+     * Hier ist nur 0 als Index gültig, d.h. die Funktion erzeugt eine Firma.
+     */
+    protected Bobo createParent(int index) {
+        Bobo record = null;
+        if (index == 0) {
+            record = new Company();
+            record.setStoreKeeper(getStoreKeeper());
+        }
+        return record;
+    }
 
-  /**
-   * Liefert zusätzliche Info zum Standort.
-   */
-  public String getRemark() {
-    return getStoreToolkit().objectToString( data[3] );
-  }
+    /**
+     * Liefert "Eltern"-Schlüssel zum gegebenen Index (im Bereich von
+     * <code>getParentCount()</code>).
+     *
+     * Hier ist nur 0 als Index gültig, d.h. die Funktion liefert den Schlüssel
+     * der Firma.
+     */
+    protected Object getParentKey(int index) {
+        return data[1];
+    }
 
-  /**
-   * Setzen der Standort-Daten.
-   */
-  public void set(String name,String remark) {
-    setName( name );
-    setRemark( remark );
-  }
+    /**
+     * Liefert Anzahl der "Eltern".
+     *
+     * @return <code>1</code>
+     */
+    public int getParentCount() {
+        return 1;
+    }
 
-  /**
-   * Setzen des Namen.
-   */
-  public void setName(String name) {
-    data[2] = getStoreToolkit().stringToObject( name );
-  }
+    /**
+     * Liefert Name des Standorts.
+     */
+    public String getName() {
+        return getStoreToolkit().objectToString(data[2]);
+    }
 
-  /**
-   * Setzen der Zusatzinfo.
-   */
-  public void setRemark(String remark) {
-    data[3] = getStoreToolkit().stringToObject( remark );
-  }
+    /**
+     * Liefert zusätzliche Info zum Standort.
+     */
+    public String getRemark() {
+        return getStoreToolkit().objectToString(data[3]);
+    }
 
-  /**
-   * Liefert Name des Standorts.
-   */
-  public String toString() {
-    return getName();
-  }
+    /**
+     * Setzen der Standort-Daten.
+     */
+    public void set(String name, String remark) {
+        setName(name);
+        setRemark(remark);
+    }
 
-  /**
-   * Liefert Namen des Objekttyps "Standort".
-   *
-   * (i.A. Name der Tabelle "standort")
-   *
-   * @return <code>"standort"</code>
-   */
-  public String getIdentifier() {
-    return "standort";
-  }
+    /**
+     * Setzen des Namen.
+     */
+    public void setName(String name) {
+        data[2] = getStoreToolkit().stringToObject(name);
+    }
 
-  /**
-   * Liefert Namen des Primärschlüssels "Standort".
-   *
-   * (i.A. Spaltenattribute des Primärschlüssels)
-   *
-   * @return <code>"sid"</code>
-   */
-  public String getKeyIdentifier() {
-    return "sid";
-  }
+    /**
+     * Setzen der Zusatzinfo.
+     */
+    public void setRemark(String remark) {
+        data[3] = getStoreToolkit().stringToObject(remark);
+    }
 
-  /**
-   * Liefert Attribute des Objekttyps "Standort".
-   *
-   * (i.A. Spaltenattribute der Tabelle "standort")
-   */
-  public String[] getAttributes() {
-    return new String[] { "sid", "fid", "sname", "bemerkung" };
-  }
+    /**
+     * Liefert Name des Standorts.
+     */
+    public String toString() {
+        return getName();
+    }
 
-  /**
-   * Liefert Anzahl der Attribute.
-   */
-  public int getColumnCount() {
-    return 4;
-  }
+    /**
+     * Liefert Namen des Objekttyps "Standort".
+     *
+     * (i.A. Name der Tabelle "standort")
+     *
+     * @return <code>"standort"</code>
+     */
+    public String getIdentifier() {
+        return "standort";
+    }
+
+    /**
+     * Liefert Namen des Primärschlüssels "Standort".
+     *
+     * (i.A. Spaltenattribute des Primärschlüssels)
+     *
+     * @return <code>"sid"</code>
+     */
+    public String getKeyIdentifier() {
+        return "sid";
+    }
+
+    /**
+     * Liefert Attribute des Objekttyps "Standort".
+     *
+     * (i.A. Spaltenattribute der Tabelle "standort")
+     */
+    public String[] getAttributes() {
+        return new String[] { "sid", "fid", "sname", "bemerkung" };
+    }
+
+    /**
+     * Liefert Anzahl der Attribute.
+     */
+    public int getColumnCount() {
+        return 4;
+    }
 }

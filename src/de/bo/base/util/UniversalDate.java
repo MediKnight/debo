@@ -5,8 +5,6 @@
 package de.bo.base.util;
 
 import java.util.*;
-import java.text.*;
-
 
 /**
  * Ein universelles Datum. Ein universelles Datum liefert bei Bedarf ein
@@ -28,7 +26,7 @@ public interface UniversalDate {
      *
      * @param description	Eine textuelle Beschreibung des Datums
      */
-    public void setDescription( String description );
+    public void setDescription(String description);
 
     /**
      * Liefert die textuelle Beschreibung des Datums.

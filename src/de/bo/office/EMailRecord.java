@@ -4,68 +4,65 @@ import java.sql.*;
 
 import de.bo.base.dbs.*;
 
-public class EMailRecord extends ExternalRecord
-{
-  protected String username;
-  protected String domain; 
-  protected String remark;
- 
-  public EMailRecord(AbstractTable table) {
-    super( table );
-  }
+public class EMailRecord extends ExternalRecord {
+    protected String username;
+    protected String domain;
+    protected String remark;
 
-  public boolean create()
-    throws SQLException {
+    public EMailRecord(AbstractTable table) {
+        super(table);
+    }
 
-    username  = domain = remark = "";
-    return super.create();
-  }
+    public boolean create() throws SQLException {
 
-  protected void makeDataAbstract() {
-    record[4] = username;
-    record[5] = domain;
-    record[6] = remark;
-  }
-  protected void makeDataConcrete() {
-    username   = DBUtilities.objectToString( record[4] );
-    domain     = DBUtilities.objectToString( record[5] );
-    remark     = DBUtilities.objectToString( record[6] );
-  }
+        username = domain = remark = "";
+        return super.create();
+    }
 
-  protected Object createKey()
-    throws SQLException {
-    return DBUtilities.createKey( table.getConnection(), "id" );
-  }
+    protected void makeDataAbstract() {
+        record[4] = username;
+        record[5] = domain;
+        record[6] = remark;
+    }
+    protected void makeDataConcrete() {
+        username = DBUtilities.objectToString(record[4]);
+        domain = DBUtilities.objectToString(record[5]);
+        remark = DBUtilities.objectToString(record[6]);
+    }
 
-  public String getName() {
-    return username;
-  }
-  
-  public String getDomain() {
-    return domain;
-  }
-  
-  public String getRemark() {
-    return remark;
-  }
+    protected Object createKey() throws SQLException {
+        return DBUtilities.createKey(table.getConnection(), "id");
+    }
 
-  public String toString() {
-    return username+"@"+domain;
-  }
+    public String getName() {
+        return username;
+    }
 
-  public void set(String username,String domain,String remark) {
-    this.username = username;
-    this.domain = domain;
-    this.remark = remark;
-  }
+    public String getDomain() {
+        return domain;
+    }
 
-  public void setName(String sname) {
-    this.username = username;
-  }
-  public void setDomain(String sname) {
-    this.domain = domain;
-  }
-  public void setRemark(String remark) {
-    this.remark = remark;
-  }
+    public String getRemark() {
+        return remark;
+    }
+
+    public String toString() {
+        return username + "@" + domain;
+    }
+
+    public void set(String username, String domain, String remark) {
+        this.username = username;
+        this.domain = domain;
+        this.remark = remark;
+    }
+
+    public void setName(String sname) {
+        this.username = sname;
+    }
+    public void setDomain(String sname) {
+        this.domain = sname;
+    }
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

@@ -1,33 +1,28 @@
 package de.bo.base.sql;
 
-import java.util.*;
+public class QueryOutputData {
+	protected TableCache cache;
+	protected Object priKey;
+	protected TableAttribute attribute;
 
-import de.bo.base.sql.*;
+	public QueryOutputData(
+		TableCache cache,
+		Object priKey,
+		TableAttribute attribute) {
+		this.cache = cache;
+		this.priKey = priKey;
+		this.attribute = attribute;
+	}
 
-public class QueryOutputData
-{
-  protected TableCache cache;
-  protected Object priKey;
-  protected TableAttribute attribute;
+	public TableCache getTableCache() {
+		return cache;
+	}
 
-  public QueryOutputData(TableCache cache,Object priKey,
-			 TableAttribute attribute)
-  {
-    this.cache = cache;
-    this.priKey = priKey;
-    this.attribute = attribute;
-  }
+	public Object getPriKey() {
+		return priKey;
+	}
 
-  public TableCache getTableCache()
-  {
-    return cache;
-  }
-  public Object getPriKey()
-  {
-    return priKey;
-  }
-  public TableAttribute getAttribute()
-  {
-    return attribute;
-  }
+	public TableAttribute getAttribute() {
+		return attribute;
+	}
 }

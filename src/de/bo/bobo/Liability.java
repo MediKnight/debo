@@ -1,23 +1,18 @@
 package de.bo.bobo;
 
-import java.util.*;
-
 import de.bo.base.store2.*;
-import de.bo.base.store2.sql.*;
-import de.bo.base.util.*;
 
 /**
  * Baltic-Online Geschäftsobjekt <b>Verbindlichkeit</b>.
  * <p>
  */
 
-public class Liability extends Bill
-{
+public class Liability extends Bill {
     /**
      * Erzeugt Verbindlichkeit mit Default-Storekeeper
      */
     public Liability() {
-	super();
+        super();
     }
 
     /**
@@ -26,15 +21,15 @@ public class Liability extends Bill
      * @param storeKeeper verwendetes Datensystem
      */
     public Liability(StoreKeeper storeKeeper) {
-	super(storeKeeper);
+        super(storeKeeper);
     }
 
     public Object getSupplier() {
-	return getObject(12);
+        return getObject(12);
     }
 
     public void setSupplier(Object key) {
-	setObject(12,key);
+        setObject(12, key);
     }
 
     /**
@@ -45,7 +40,7 @@ public class Liability extends Bill
      * @return <code>"verbind"</code>
      */
     public String getIdentifier() {
-	return "verbind";
+        return "verbind";
     }
 
     /**
@@ -54,28 +49,37 @@ public class Liability extends Bill
      * (i.A. Spaltenattribute der Tabelle "verbind")
      */
     public String[] getAttributes() {
-	return new String[] {
-	    "id", "nr", "datum", "buchung", "betrag", "mwst",
-		"gesamt", "art", "aid", "faellig", "bezahlt",
-		"bemerkung",
-		"lieferant" };
+        return new String[] {
+            "id",
+            "nr",
+            "datum",
+            "buchung",
+            "betrag",
+            "mwst",
+            "gesamt",
+            "art",
+            "aid",
+            "faellig",
+            "bezahlt",
+            "bemerkung",
+            "lieferant" };
     }
 
     /**
      * Liefert Anzahl der Attribute.
      */
     public int getColumnCount() {
-	return 13;
+        return 13;
     }
 
     protected String getLinkKeyIdentifier() {
-	return "vid";
+        return "vid";
     }
 
     /**
      * Creates the "other" bill.
      */
     protected Bill createLinkBill() {
-	return new Claim();
+        return new Claim();
     }
 }

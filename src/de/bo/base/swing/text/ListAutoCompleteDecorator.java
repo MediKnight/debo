@@ -1,7 +1,5 @@
 package de.bo.base.swing.text;
 
-import java.util.*;
-
 import javax.swing.*;
 import javax.swing.text.*;
 
@@ -38,12 +36,13 @@ public class ListAutoCompleteDecorator extends AutoCompleteDocumentDecorator {
      * @param documentComboBox Die DocumentComboBox, deren Text vervollständigt
      *  werden soll.
      */
-    public ListAutoCompleteDecorator( ListModel model, JTextComponent textComponent ) {
-	super( textComponent );
+    public ListAutoCompleteDecorator(
+        ListModel model,
+        JTextComponent textComponent) {
+        super(textComponent);
 
-	this.model = model;
+        this.model = model;
     }
-
 
     /**
      * Diese Methode liefert eine <CODE>Enumeration</CODE> mit den möglichen
@@ -54,30 +53,30 @@ public class ListAutoCompleteDecorator extends AutoCompleteDocumentDecorator {
      * @return Eine <CODE>Enumeration</CODE> von <CODE>String</CODE> die
      *  die möglichen Vervollständigungen angibt.
      */
-    public String getCompletion( String s ) {
-	String element = null;
-	String elementWithCase = null;
+    public String getCompletion(String s) {
+        String element = null;
+        String elementWithCase = null;
 
-	if( isCaseInsensitive() ) {
-	    s = s.toLowerCase();
-	}
+        if (isCaseInsensitive()) {
+            s = s.toLowerCase();
+        }
 
-	for( int i = 0; i < model.getSize(); i++ ) {
-	    elementWithCase = model.getElementAt( i ).toString();
+        for (int i = 0; i < model.getSize(); i++) {
+            elementWithCase = model.getElementAt(i).toString();
 
-	    if( isCaseInsensitive() ) {
-		element = elementWithCase.toLowerCase();
-	    } else {
-		element = elementWithCase;
-	    }
+            if (isCaseInsensitive()) {
+                element = elementWithCase.toLowerCase();
+            } else {
+                element = elementWithCase;
+            }
 
-	    if( element.startsWith( s ) ) {
-		if( element.length() > s.length() ) {
-		    return elementWithCase.substring( s.length() );
-		}
-	    }
-	}
-	
-	return null;
+            if (element.startsWith(s)) {
+                if (element.length() > s.length()) {
+                    return elementWithCase.substring(s.length());
+                }
+            }
+        }
+
+        return null;
     }
 }
