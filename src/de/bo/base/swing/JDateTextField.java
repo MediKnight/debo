@@ -76,6 +76,6 @@ public class JDateTextField extends JTextField
       }
     });
     f.pack();
-    f.show();
+    f.setVisible(true);
   }
 }
