@@ -1,8 +1,6 @@
 package de.bo.base.sql;
 
-import java.util.*;
-
-import de.bo.base.sql.*;
+import java.util.Vector;
 
 public class QueryInputData
 {

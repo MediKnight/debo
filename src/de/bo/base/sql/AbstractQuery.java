@@ -1,9 +1,7 @@
 package de.bo.base.sql;
 
-import java.util.*;
-import java.sql.*;
-
-import de.bo.base.sql.*;
+import java.sql.SQLException;
+import java.util.Vector;
 
 public abstract class AbstractQuery
 {

@@ -1,10 +1,12 @@
 package de.bo.base.sql;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
-import java.util.*;
-import java.io.*;
-
-import de.bo.base.sql.*;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Vector;
 
 /**
  * Diese Klasse bildet eine (Teil-)Tabelle im Speicher ab.

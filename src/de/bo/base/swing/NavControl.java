@@ -54,14 +54,17 @@ package de.bo.base.swing;
  * @version 1.0
  * @author Frank Tonn (ft)
  * @company Baltic Online Computer GmbH
- *
- * @todo document usage, retrieve font from properties
  */
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Enumeration;
+import java.util.Vector;
+
 import javax.swing.*;
-import java.util.*;
 
 public class NavControl extends JPanel implements ActionListener {
 
@@ -75,46 +78,48 @@ public class NavControl extends JPanel implements ActionListener {
     private ButtonGroup buttonGroup = new ButtonGroup();
     private Vector listeners = new Vector();
 
-
     /* Constructors
      * ---------------------------------------------------------------------- */
 
     /** Creates new form NavControl */
     public NavControl() {
-        initComponents ();
+        initComponents();
     }
 
     /* Building
      * ---------------------------------------------------------------------- */
 
     /** This method is used to add a card and create a corresponding button.*/
-    public void addCard(JComponent card, String label /* JLabel label */) {
-        cards.add(card, label/*.getText()*/);
+    public void addCard(JComponent card, String label /* JLabel label */
+    ) {
+        cards.add(card, label /*.getText()*/
+        );
         //Create corresponding Button
         NavButton b = new NavButton(label);
         buttonGroup.add(b);
-        b.setActionCommand(label/*.getText()*/);
+        b.setActionCommand(label /*.getText()*/
+        );
         b.addActionListener(this);
         upperButtons.add(b);
         b.setSelected(true);
-        ((CardLayout)cards.getLayout()).show(cards, label);
+        ((CardLayout) cards.getLayout()).show(cards, label);
     }
 
     /** The constructor calls this method to initialize the component. */
-    private void initComponents () {
-        setLayout (new BorderLayout ());
+    private void initComponents() {
+        setLayout(new BorderLayout());
 
-        upperButtons = new JPanel ();
+        upperButtons = new JPanel();
         upperButtons.setLayout(new GridLayout(0, 1));
-        add (upperButtons, java.awt.BorderLayout.NORTH);
+        add(upperButtons, java.awt.BorderLayout.NORTH);
 
-        cards = new JPanel ();
-        cards.setLayout (new CardLayout ());
-        add (cards, BorderLayout.CENTER);
+        cards = new JPanel();
+        cards.setLayout(new CardLayout());
+        add(cards, BorderLayout.CENTER);
 
-        lowerButtons = new JPanel ();
+        lowerButtons = new JPanel();
         lowerButtons.setLayout(new GridLayout(0, 1));
-        add (lowerButtons, java.awt.BorderLayout.SOUTH);
+        add(lowerButtons, java.awt.BorderLayout.SOUTH);
     }
 
     /* Event handling
@@ -132,19 +137,20 @@ public class NavControl extends JPanel implements ActionListener {
 
     /** Notify all listeners. */
     protected void fireActionEvent(String label) {
-        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, label);
+        ActionEvent event =
+            new ActionEvent(this, ActionEvent.ACTION_PERFORMED, label);
         Enumeration enum = listeners.elements();
         while (enum.hasMoreElements())
-              ((ActionListener)enum.nextElement()).actionPerformed(event);
+             ((ActionListener) enum.nextElement()).actionPerformed(event);
     }
 
     /**  This is the action handler called by the NavButtons. */
     public void actionPerformed(final ActionEvent e) {
-        Component source = (Component)e.getSource();
+        Component source = (Component) e.getSource();
         if (source.getParent().equals(upperButtons))
-             shuffleDown(source);
+            shuffleDown(source);
         else
-              shuffleUp(source);
+            shuffleUp(source);
         validate();
     }
 
@@ -152,48 +158,48 @@ public class NavControl extends JPanel implements ActionListener {
     private void shuffleDown(Component c) {
         boolean found = false;
         Vector todo = new Vector();
-        //Find the clicked button and put everything below it into the todo list
-        for (int i=0; i < upperButtons.getComponentCount(); i++) {
-          if (found)
-            todo.add(upperButtons.getComponent(i));
-          else
-            found = (upperButtons.getComponent(i).equals(c));
+        //Find the clicked button and put everything below it into the Todo list
+        for (int i = 0; i < upperButtons.getComponentCount(); i++) {
+            if (found)
+                todo.add(upperButtons.getComponent(i));
+            else
+                found = (upperButtons.getComponent(i).equals(c));
         }
         if (todo.isEmpty() && lowerButtons.getComponentCount() > 0) {
-          //The lowermost of the upper buttons has been clicked,
-          //take the uppermost of the lower buttons and shuffle it up.
-          shuffleUp(lowerButtons.getComponent(0));
-          return;
+            //The lowermost of the upper buttons has been clicked,
+            //take the uppermost of the lower buttons and shuffle it up.
+            shuffleUp(lowerButtons.getComponent(0));
+            return;
         }
-        //Remove the todo-buttons from the upper buttons
+        //Remove the Todo-buttons from the upper buttons
         Enumeration enum;
         for (enum = todo.elements(); enum.hasMoreElements();)
-          upperButtons.remove((Component)enum.nextElement());
-        //Remove all lower buttons and put them on the todo list
+            upperButtons.remove((Component) enum.nextElement());
+        //Remove all lower buttons and put them on the Todo list
         while (lowerButtons.getComponentCount() > 0) {
-          Component next = lowerButtons.getComponent(0);
-          todo.add(next);
-          lowerButtons.remove(next);
+            Component next = lowerButtons.getComponent(0);
+            todo.add(next);
+            lowerButtons.remove(next);
         }
-        //Add all todo-buttons to the lower buttons
+        //Add all Todo-buttons to the lower buttons
         for (enum = todo.elements(); enum.hasMoreElements();)
-          lowerButtons.add((Component)enum.nextElement());
-        ((CardLayout)cards.getLayout()).show(cards, ((NavButton)c).getText());
-        fireActionEvent(((NavButton)c).getText());
+            lowerButtons.add((Component) enum.nextElement());
+        ((CardLayout) cards.getLayout()).show(cards, ((NavButton) c).getText());
+        fireActionEvent(((NavButton) c).getText());
     }
 
     /** This method is called if one of the lower buttons has been clicked. */
     private void shuffleUp(Component c) {
-          boolean found = false;
-          while (!found && lowerButtons.getComponentCount() > 0) {
-            NavButton next = (NavButton)lowerButtons.getComponent(0);
+        boolean found = false;
+        while (!found && lowerButtons.getComponentCount() > 0) {
+            NavButton next = (NavButton) lowerButtons.getComponent(0);
             found = (next.equals(c));
             lowerButtons.remove(next);
             upperButtons.add(next);
             next.setSelected(true);
-          }
-        ((CardLayout)cards.getLayout()).show(cards, ((NavButton)c).getText());
-        fireActionEvent(((NavButton)c).getText());
+        }
+        ((CardLayout) cards.getLayout()).show(cards, ((NavButton) c).getText());
+        fireActionEvent(((NavButton) c).getText());
     }
 
     /* Member classes
@@ -202,37 +208,37 @@ public class NavControl extends JPanel implements ActionListener {
     /** This inner class is used for the buttons. We need a subclass
       * instead of JButton itself, because we want to suppress focus
       * traversal. */
-    private class NavButton extends JButton implements ItemListener{
+    private class NavButton extends JButton implements ItemListener {
 
-          /** Creates new NavButton */
-          public NavButton(JLabel label) {
+        /** Creates new NavButton */
+        public NavButton(JLabel label) {
             this(label.getText(), label.getIcon());
-          }
+        }
 
-          public NavButton(String label) {
+        public NavButton(String label) {
             this(label, null);
-          }
+        }
 
-          public NavButton(String label, Icon icon) {
+        public NavButton(String label, Icon icon) {
             super(label, icon);
             setMargin(defaultInsets);
             setFont(plainFont);
             setRequestFocusEnabled(false);
             setModel(new JToggleButton.ToggleButtonModel());
             getModel().addItemListener(this);
-          }
+        }
 
-          public void itemStateChanged(ItemEvent i) {
-              if (i.getStateChange() == ItemEvent.SELECTED)
-                 setFont(boldFont);
-              else
+        public void itemStateChanged(ItemEvent i) {
+            if (i.getStateChange() == ItemEvent.SELECTED)
+                setFont(boldFont);
+            else
                 setFont(plainFont);
-          }
+        }
 
-          /** This method is needed to suppress focus traversal additionally
-            * to the call to #setRequestFocusEnabled in constructor. */
-          public boolean isFocusable() {
-              return false;
-          }
+        /** This method is needed to suppress focus traversal additionally
+          * to the call to #setRequestFocusEnabled in constructor. */
+        public boolean isFocusable() {
+            return false;
+        }
     }
 }

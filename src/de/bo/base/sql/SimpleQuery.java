@@ -1,6 +1,5 @@
 package de.bo.base.sql;
 
-import de.bo.base.sql.*;
 
 public class SimpleQuery extends AbstractQuery
 {
