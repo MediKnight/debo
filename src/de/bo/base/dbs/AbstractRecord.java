@@ -1,9 +1,6 @@
 package de.bo.base.dbs;
 
-import java.sql.*;
-
-import de.bo.base.application.*;
-import de.bo.base.util.*;
+import java.sql.SQLException;
 
 /**
  * Darstellung eines Datensatzes einer Tabelle.

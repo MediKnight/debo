@@ -4,11 +4,7 @@
 
 package de.bo.base.swing;
 
-import java.util.*;
-
-import java.awt.event.*;
-
-import javax.swing.*;
+import javax.swing.MutableComboBoxModel;
 
 
 /**

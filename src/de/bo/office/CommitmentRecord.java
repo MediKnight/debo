@@ -1,9 +1,9 @@
 package de.bo.office;
 
-import java.sql.*;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import de.bo.base.dbs.*;
+import java.sql.SQLException;
+
+import de.bo.base.dbs.AbstractTable;
+import de.bo.base.dbs.DBUtilities;
 
 // Das ist die Verbindlichkeit.
 

@@ -1,10 +1,12 @@
 package de.bo.base.swing.text;
 
-import javax.swing.*;
-import javax.swing.event.*;
+import java.awt.Toolkit;
 import java.util.Date;
-import javax.swing.text.*;
-import java.awt.*;
+
+import javax.swing.JOptionPane;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 
 public class DateDocumentDecorator extends DocumentDecorator
 {

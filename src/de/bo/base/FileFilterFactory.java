@@ -1,7 +1,6 @@
 package de.bo.base;
 
-import java.io.*;
-import javax.swing.filechooser.*;
+import java.io.File;
 
 public class FileFilterFactory
 {

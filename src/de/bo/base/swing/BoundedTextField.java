@@ -1,9 +1,12 @@
 package de.bo.base.swing;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.text.*; 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import javax.swing.JTextField;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 /**
  * BoundedTextField ist eine von JTextField abgeleitete Klasse zur

@@ -4,8 +4,7 @@
 
 package de.bo.base.util;
 
-import java.util.*;
-import java.text.*;
+import java.util.Date;
 
 
 /**

@@ -1,7 +1,5 @@
 package de.bo.office2;
 
-import java.util.*;
-
 import de.bo.base.store.StoreKeeper;
 
 /**

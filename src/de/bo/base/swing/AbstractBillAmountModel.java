@@ -4,12 +4,11 @@
 
 package de.bo.base.swing;
 
-import java.util.*;
-import java.io.*;
+import java.io.Serializable;
 
-import javax.swing.event.*;
-
-import de.bo.base.util.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.EventListenerList;
 
 
 /**

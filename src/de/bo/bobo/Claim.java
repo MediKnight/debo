@@ -1,10 +1,7 @@
 package de.bo.bobo;
 
-import java.util.*;
-
-import de.bo.base.store2.*;
-import de.bo.base.store2.sql.*;
-import de.bo.base.util.*;
+import de.bo.base.store2.StoreKeeper;
+import de.bo.base.util.CurrencyNumber;
 
 /**
  * Baltic-Online Geschäftsobjekt <b>Forderung</b>.

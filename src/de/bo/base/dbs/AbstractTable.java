@@ -1,9 +1,8 @@
 package de.bo.base.dbs;
 
 import java.sql.*;
-import java.util.*;
-
-import de.bo.base.application.*;
+import java.util.Stack;
+import java.util.Vector;
 
 /**
  * Instanzen von Ableitungen dieser Klasse repräsentieren Tabellen

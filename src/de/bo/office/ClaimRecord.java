@@ -1,10 +1,10 @@
 package de.bo.office;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.SQLException;
 
-import de.bo.base.dbs.*;
-import de.bo.base.util.*;
+import de.bo.base.dbs.AbstractTable;
+import de.bo.base.dbs.DBUtilities;
+import de.bo.base.util.CurrencyNumber;
 
 // Das ist die Forderung.
 

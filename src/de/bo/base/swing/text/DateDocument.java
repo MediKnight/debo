@@ -4,14 +4,15 @@
 
 package de.bo.base.swing.text;
 
-import java.util.*;
+import java.awt.Toolkit;
 
-import java.awt.*;
+import javax.swing.ListModel;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.PlainDocument;
 
-import javax.swing.*;
-import javax.swing.text.*;
-
-import de.bo.base.util.*;
+import de.bo.base.util.DateFormatChecker;
 
 
 /**

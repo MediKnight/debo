@@ -1,8 +1,7 @@
 package de.bo.bobo;
 
-import java.util.*;
-
-import de.bo.base.store2.*;
+import de.bo.base.store2.StoreException;
+import de.bo.base.store2.StoreKeeper;
 
 /**
  * Baltic-Online Geschäftsobjekt <b>Mitarbeiter</b>.

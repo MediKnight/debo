@@ -1,8 +1,9 @@
 package de.bo.base.swing.text;
 
 import java.util.Enumeration;
+
 import javax.swing.text.Document;
-import javax.swing.text.JTextComponent;
+
 import de.bo.base.swing.DocumentComboBox;
 
 /**

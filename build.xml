@@ -1,0 +1,30 @@
+<project name="debo" default="dist">
+  <!-- 
+    =================================
+     Project directory layout
+    =================================
+  -->
+  <property name="project.src" value="src"/>
+  <property name="project.classes" value="bin"/>
+  <property name="project.lib" value="lib"/>
+
+
+  <!--
+    ==================================
+     Distribution parameters
+    ==================================
+  -->  
+  <property name="dist.dir" value="dist"/>
+  <property name="dist.jar" value="debo.jar"/>
+
+  <target name="init">
+    <tstamp>
+      <format property="build.date" pattern="yyyy/MM/dd HH:mm:ss zz" />
+    </tstamp>
+  </target>
+
+  <target name="dist" depends="init">
+    <mkdir dir="${dist.dir}"/>
+    <jar jarfile="${dist.dir}/${dist.jar}" basedir="${project.classes}"/>
+  </target>
+</project>

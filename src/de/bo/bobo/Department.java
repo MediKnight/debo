@@ -1,11 +1,6 @@
 package de.bo.bobo;
 
-import java.util.*;
-import java.text.DateFormat;
-
-import de.bo.base.store2.*;
-import de.bo.base.store2.sql.*;
-import de.bo.base.util.*;
+import de.bo.base.store2.StoreKeeper;
 
 /**
  * Baltic-Online Geschäftsobjekt <b>Abteilung</b>.

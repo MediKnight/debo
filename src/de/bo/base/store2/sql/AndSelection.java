@@ -1,7 +1,5 @@
 package de.bo.base.store2.sql;
 
-import de.bo.base.store2.*;
-import java.util.*;
 
 public class AndSelection extends SelectionContainer
 {

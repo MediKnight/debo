@@ -1,13 +1,14 @@
 package de.bo.base.swing.glue;
 
-import java.text.*;
-import javax.swing.*;
-import javax.swing.text.Document;
-import javax.swing.text.BadLocationException;
+import java.text.NumberFormat;
+import java.text.ParseException;
+
+import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import de.bo.base.memento.Glue;
+
 import de.bo.base.memento.FloatMemento;
+import de.bo.base.memento.Glue;
 
 /**
  * Diese Klasse stellt eine Verbindung zwischen einem <CODE>JTextField</CODE>

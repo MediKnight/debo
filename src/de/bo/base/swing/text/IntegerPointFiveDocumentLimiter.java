@@ -1,8 +1,10 @@
 package de.bo.base.swing.text;
 
-import java.text.*;
-import java.util.Locale;
-import javax.swing.text.*;
+import java.text.DecimalFormatSymbols;
+
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 
 /**
  * Diese Klasse implementiert einen DocumentDecorator, der nur die Eingabe

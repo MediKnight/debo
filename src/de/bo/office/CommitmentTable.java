@@ -1,9 +1,6 @@
 package de.bo.office;
 
-import java.sql.*;
-import java.util.*;
-
-import de.bo.base.dbs.*;
+import java.sql.Connection;
 
 public class CommitmentTable extends AbstractBillTable
 {

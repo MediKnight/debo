@@ -1,9 +1,9 @@
 package de.bo.base.swing.text;
 
-import java.util.Enumeration;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.JTextComponent;
 
 /**
  * Diese Klasse stellt einen <CODE>DocumentDecorator</CODE> für

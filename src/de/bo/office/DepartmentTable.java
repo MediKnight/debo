@@ -1,9 +1,8 @@
 package de.bo.office;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
 
-import de.bo.base.dbs.*;
+import de.bo.base.dbs.AbstractTable;
 
 public class DepartmentTable extends AbstractTable
 {

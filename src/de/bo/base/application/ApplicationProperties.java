@@ -1,7 +1,9 @@
 package de.bo.base.application;
 
-import java.util.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class ApplicationProperties extends FiledProperties
 {

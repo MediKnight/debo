@@ -1,8 +1,7 @@
 package de.bo.base.application;
 
-import java.util.*;
-import java.io.*;
-import java.text.*;
+import java.text.DateFormat;
+import java.util.Calendar;
 
 public class ApplicationVersion
 {

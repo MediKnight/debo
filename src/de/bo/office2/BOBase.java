@@ -1,11 +1,17 @@
 package de.bo.office2;
 
-import de.bo.base.store.*;
-import de.bo.base.store.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Enumeration;
 
-import java.sql.*;
-import java.util.*;
-import java.lang.ref.*;
+import de.bo.base.store.Selection;
+import de.bo.base.store.Storable;
+import de.bo.base.store.sql.Database;
+import de.bo.base.store.sql.DefaultSelection;
+import de.bo.base.store.sql.SQLRuntimeException;
+import de.bo.base.store.sql.SQLToolkit;
 
 /**
  * Implementierung einer Datenbank-Klasse, optimiert für die
