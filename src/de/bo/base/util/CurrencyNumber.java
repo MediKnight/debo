@@ -345,7 +345,7 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
      * @return <code>this</code>
      */
     public CurrencyNumber mul(int x) {
-        value *= (long) x;
+        value *= x;
 
         return this;
     }
