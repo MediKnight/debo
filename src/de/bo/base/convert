@@ -1,0 +1,34 @@
+for i in ./AltGrPatch.java
+./memento/BooleanMemento.java
+./memento/FloatMemento.java
+./memento/Glue.java
+./memento/IntegerMemento.java
+./memento/StringMemento.java
+./swing/DocumentComboBox.java
+./swing/glue/CachingImageLabelGlue.java
+./swing/glue/CheckBoxGlue.java
+./swing/glue/ComboBoxGlue.java
+./swing/glue/FloatTextFieldGlue.java
+./swing/glue/ImageLabelGlue.java
+./swing/glue/LabelGlue.java
+./swing/glue/TextFieldGlue.java
+./swing/glue/ToolTipGlue.java
+./swing/JDateTextField.java
+./swing/NonResizingLabel.java
+./swing/plaf/basic/DocumentComboBoxEditor.java
+./swing/ProgressPanel.java
+./swing/StatusPanel.java
+./swing/text/AllowLimitedDocumentDecorator.java
+./swing/text/AllowStringDocumentDecorator.java
+./swing/text/AutoCompleteDocumentDecorator.java
+./swing/text/DateDocumentDecorator.java
+./swing/text/DocumentComboBoxCompleteDecorator.java
+./swing/text/DocumentDecorator.java
+./swing/text/IntegerLimitedDocumentDecorator.java
+./swing/text/IntegerPointFiveDocumentLimiter.java
+./swing/text/LengthLimitedDocumentDecorator.java
+./swing/text/LimitedDocumentDecorator.java
+./swing/text/RealLimitedDocumentDecorator.java
+./swing/text/TelephoneFormatDocumentDecorator.java
+./swing/text/UTFLengthDocumentDecorator.java
+./swing/text/UTFUtil.java ; do; dos2unix ./swing/text/UTFUtil.java|sed -e 's/	/  /g' >../base/./swing/text/UTFUtil.java; done
