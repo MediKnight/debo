@@ -26,12 +26,12 @@ public class LogWriter extends PrintWriter
   /**
    * Default max lenght of a logfile (1MB)
    */
-  protected final static long DEFAULT_MAXLENGTH = (long)(1024*1024);
+  protected final static long DEFAULT_MAXLENGTH = 1024*1024;
 
   /**
    * Default min lenght of a logfile (10KB)
    */
-  protected final static long DEFAULT_MINLENGTH = (long)(10*1024);
+  protected final static long DEFAULT_MINLENGTH = 10*1024;
 
   /**
    * Default max cycle of logfiles (10)
