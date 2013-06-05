@@ -12,11 +12,11 @@ import de.bo.base.store2.sql.*;
  * <p>
  * Adressen sind in diesem Sinne auch Telefonnummern und/oder
  * EMails, Web-Pages u.a.
- * Diese Adressen können direkt (benannt) behandelt werden oder
+ * Diese Adressen kï¿½nnen direkt (benannt) behandelt werden oder
  * indirekt per Index.
  * <p>
- * Diese Klasse ist auch im semantischen Sinne abstrakt und enthält
- * keine Primärdaten.
+ * Diese Klasse ist auch im semantischen Sinne abstrakt und enthï¿½lt
+ * keine Primï¿½rdaten.
  *
  * @see AddressRecord
  * @see #addressClasses
@@ -26,8 +26,8 @@ public abstract class AddressContainer extends Bobo
 {
 
   /**
-   * Array der möglichen Adressen-Klassen. Dieses Array ist die zentrale
-   * Information (und die einzige, die benötigt wird) zur indizierten
+   * Array der mï¿½glichen Adressen-Klassen. Dieses Array ist die zentrale
+   * Information (und die einzige, die benï¿½tigt wird) zur indizierten
    * Bestimmung von Adressen.<p>
    * Implementierung:<p><pre>
    *   protected static Class[] addressClasses = {
@@ -39,18 +39,20 @@ public abstract class AddressContainer extends Bobo
    *   };
    * </pre>
    */
-  protected static Class[] addressClasses = {
-    Address.class,
-    Telefon.class,
-    EMail.class,
-    WWW.class,
-    BankAccount.class
-  };
+  protected static ArrayList<Class<? extends AddressRecord>> addressClasses = new ArrayList<Class<? extends AddressRecord>>() {
+    private static final long serialVersionUID = 1L;
+  {
+    add(Address.class);
+    add(Telefon.class);
+    add(EMail.class);
+    add(WWW.class);
+    add(BankAccount.class);
+  }};
 
   /**
    * Der Inhalt des Containers.
    */
-  protected Collection[] addressData;
+  protected ArrayList<Collection<AddressRecord>> addressData;
 
   /**
    * Bezeichner des "Eltern"-Keys.
@@ -89,8 +91,8 @@ public abstract class AddressContainer extends Bobo
    * Alle Listen werden bei Bedarf (d.h. wenn
    * <code>addressData == null</code> gilt) geladen.
    * <p>
-   * Der Rückgabe-Typ ist genau, d.h. bei einem Index von <tt>1</tt>
-   * (Telefon) ist der Rückgabetyp <tt>Telefon[]</tt>.
+   * Der Rï¿½ckgabe-Typ ist genau, d.h. bei einem Index von <tt>1</tt>
+   * (Telefon) ist der Rï¿½ckgabetyp <tt>Telefon[]</tt>.
    * 
    * @param index Index des internen Adressen-Arrays
    */
@@ -100,9 +102,9 @@ public abstract class AddressContainer extends Bobo
     if ( addressData == null )
       retrieveAddresses();
 
-    // Diese Zeile erzeugt den genauesten Array-Typ, d.h. der Rückgabetyp
-    // ist abhängig vom index.
-    return (AddressRecord[])addressData[index].
+    // Diese Zeile erzeugt den genauesten Array-Typ, d.h. der Rï¿½ckgabetyp
+    // ist abhï¿½ngig vom index.
+    return (AddressRecord[])addressData.get(index).
       toArray((Object[])Array.newInstance(getAddressClass(index),0));
   }
 
@@ -112,11 +114,11 @@ public abstract class AddressContainer extends Bobo
    * @return <code>addressClasses.length</code>
    */
   public static final int getCount() {
-    return addressClasses.length;
+    return addressClasses.size();
   }
 
   /**
-   * Liefert Adressen im üblichen Sinne (nur Lesezugriff).
+   * Liefert Adressen im ï¿½blichen Sinne (nur Lesezugriff).
    *
    * @return <tt>(Address[])getAddresses(0)</tt>
    */
@@ -184,21 +186,21 @@ public abstract class AddressContainer extends Bobo
   }
 
   /**
-   * Laden aller zum Container zugehörigen Adressen.
+   * Laden aller zum Container zugehï¿½rigen Adressen.
    */
   protected void retrieveAddresses()
     throws StoreException {
 
     int n = getCount();
-    addressData = new Collection[n];
+    addressData = new ArrayList<Collection<AddressRecord>>(n);
 
     for ( int i=0; i<n; i++ )
-      addressData[i] = retrieveAddresses(i);
+      addressData.add(retrieveAddresses(i));
   }
 
 
   /**
-   * Laden der zum Index zugehörigen Adressen.
+   * Laden der zum Index zugehï¿½rigen Adressen.
    * <p>
    * Diese Methode wird im Bedarfsfall von allen Zugriffsfunktionen
    * aufgerufen und beinhaltet die Datenbanklogik.
@@ -207,7 +209,7 @@ public abstract class AddressContainer extends Bobo
    * @return gelieferte Adressen in Form einer <tt>Collection</tt>
    * @exception StoreException bei Datenbankfehler
    */
-  protected Collection retrieveAddresses(int index)
+  protected Collection<AddressRecord> retrieveAddresses(int index)
     throws StoreException {
 
     AddressRecord address = createAddress(index);
@@ -218,9 +220,9 @@ public abstract class AddressContainer extends Bobo
 				     parentKeyIdentifier,
 				     getKey());
 
-    Collection coll = base.retrieve(address,sel);
+    Collection<AddressRecord> coll = base.retrieve(address,sel);
 
-    for ( Iterator it=coll.iterator(); it.hasNext(); )
+    for ( Iterator<AddressRecord> it=coll.iterator(); it.hasNext(); )
       setParent((AddressRecord)it.next());
 
     return coll;
@@ -257,15 +259,15 @@ public abstract class AddressContainer extends Bobo
   }
 
   /**
-   * Liefert Adressen-Klasse zum zugehörigen Index.
+   * Liefert Adressen-Klasse zum zugehï¿½rigen Index.
    *
    * @param index Index des internen Adressen-Arrays
    * @return <tt>addressClasses[index]</tt>
    *
    * @see #getClassIndex(AddressRecord)
    */
-  public static Class getAddressClass(int index) {
-    return addressClasses[index];
+  public static Class<? extends AddressRecord> getAddressClass(int index) {
+    return addressClasses.get(index);
   }
 
   /**
@@ -277,18 +279,18 @@ public abstract class AddressContainer extends Bobo
    * @see #getAddressClass(int)
    */
   public static int getClassIndex(AddressRecord address) {
-    Class ac = address.getClass();
-    for ( int i=0; i<addressClasses.length; i++ )
-      if ( ac.equals(addressClasses[i]) )
+    Class<? extends AddressRecord> ac = address.getClass();
+    for ( int i=0; i<addressClasses.size(); i++ )
+      if ( ac.equals(addressClasses.get(i)) )
 	return i;
 
     throw new Error("Unknown AddressRecord type");
   }
 
   /**
-   * Fügt Adresse im üblichen Sinne dem Container zu.
+   * Fï¿½gt Adresse im ï¿½blichen Sinne dem Container zu.
    *
-   * @param address Adresse, die hinzugefügt werden soll.
+   * @param address Adresse, die hinzugefï¿½gt werden soll.
    * @see #addAddressRecord(int,AddressRecord)
    */
   public void addAddress(Address address)
@@ -298,7 +300,7 @@ public abstract class AddressContainer extends Bobo
   }
 
   /**
-   * Entfernt Adresse im üblichen Sinne aus dem Container.
+   * Entfernt Adresse im ï¿½blichen Sinne aus dem Container.
    *
    * @param address Adresse, die entfernt werden soll.
    * @see #removeAddressRecord(int,AddressRecord)
@@ -310,9 +312,9 @@ public abstract class AddressContainer extends Bobo
   }
 
   /**
-   * Fügt Telefon dem Container zu.
+   * Fï¿½gt Telefon dem Container zu.
    *
-   * @param telefon Telefon-Record, das hinzugefügt werden soll.
+   * @param telefon Telefon-Record, das hinzugefï¿½gt werden soll.
    * @see #addAddressRecord(int,AddressRecord)
    */
   public void addTelefon(Telefon telefon)
@@ -334,9 +336,9 @@ public abstract class AddressContainer extends Bobo
   }
 
   /**
-   * Fügt EMail dem Container zu.
+   * Fï¿½gt EMail dem Container zu.
    *
-   * @param email EMail-Record, das hinzugefügt werden soll.
+   * @param email EMail-Record, das hinzugefï¿½gt werden soll.
    * @see #addAddressRecord(int,AddressRecord)
    */
   public void addEMail(EMail email)
@@ -358,9 +360,9 @@ public abstract class AddressContainer extends Bobo
   }
 
   /**
-   * Fügt WWW dem Container zu.
+   * Fï¿½gt WWW dem Container zu.
    *
-   * @param www WWW-Record, das hinzugefügt werden soll.
+   * @param www WWW-Record, das hinzugefï¿½gt werden soll.
    * @see #addAddressRecord(int,AddressRecord)
    */
   public void addWWW(WWW www)
@@ -382,9 +384,9 @@ public abstract class AddressContainer extends Bobo
   }
 
   /**
-   * Fügt Bankverbindung dem Container zu.
+   * Fï¿½gt Bankverbindung dem Container zu.
    *
-   * @param account Bankverbindung, die hinzugefügt werden soll.
+   * @param account Bankverbindung, die hinzugefï¿½gt werden soll.
    * @see #addAddressRecord(int,AddressRecord)
    */
   public void addBankAccount(BankAccount account)
@@ -406,12 +408,12 @@ public abstract class AddressContainer extends Bobo
   }
 
   /**
-   * Fügt die gegebene Adresse dem Container zu und ruft
+   * Fï¿½gt die gegebene Adresse dem Container zu und ruft
    * <tt>address.store()</tt> auf.
    *
-   * @param address Adresse, die hinzugefügt wird
+   * @param address Adresse, die hinzugefï¿½gt wird
    * @exception StoreException, falls die Adresse schon einen
-   * gültigen Schlüssel besitzt
+   * gï¿½ltigen Schlï¿½ssel besitzt
    *
    * @see #removeAddressRecord(AddressRecord)
    */
@@ -422,15 +424,15 @@ public abstract class AddressContainer extends Bobo
   }
 
   /**
-   * Fügt die gegebene Adresse dem Container zu und ruft
+   * Fï¿½gt die gegebene Adresse dem Container zu und ruft
    * <tt>address.store()</tt> auf.
    *
    * @deprecated ersetzt durch {@link #addAddressRecord(AddressRecord)}
    *
    * @param index Index des internen Adressen-Arrays
-   * @param address Adresse, die hinzugefügt wird
+   * @param address Adresse, die hinzugefï¿½gt wird
    * @exception StoreException, falls die Adresse schon einen
-   * gültigen Schlüssel besitzt
+   * gï¿½ltigen Schlï¿½ssel besitzt
    *
    * @see #removeAddressRecord(int,AddressRecord)
    */
@@ -441,25 +443,25 @@ public abstract class AddressContainer extends Bobo
       throw new StoreException(address+ALLREADY_EXISTS);
 
     address.setStoreKeeper(getStoreKeeper());
-    if ( addressData[index] == null )
+    if ( addressData.get(index) == null )
       retrieveAddresses(index);
 
-    addressData[index].add(address);
+    addressData.get(index).add(address);
     setParent(address);
     address.store();
   }
 
   /**
-   * Kopiert die gegebene Adresse (ohne Schlüsselwert) und addiert
+   * Kopiert die gegebene Adresse (ohne Schlï¿½sselwert) und addiert
    * die Kopie zum Container.
    * <p>
    * Die gegebene Adresse muss im Container enthalten sein.
-   * Die neue Adresse besitzt einen gültigen Schlüssel.
+   * Die neue Adresse besitzt einen gï¿½ltigen Schlï¿½ssel.
    *
    * @param address Adresse, die kopiert wird
    * @return neue Adresse
    * @exception StoreException, falls die Adresse keinen
-   * gültigen Schlüssel besitzt
+   * gï¿½ltigen Schlï¿½ssel besitzt
    */
   public AddressRecord cloneAddressRecord(AddressRecord address)
     throws StoreException {
@@ -469,10 +471,10 @@ public abstract class AddressContainer extends Bobo
     if ( address.getKey() == null )
       throw new StoreException(address+NOT_CREATED);
 
-    if ( addressData[index] == null )
+    if ( addressData.get(index) == null )
       retrieveAddresses(index);
 
-    if ( !addressData[index].contains(address) )
+    if ( !addressData.get(index).contains(address) )
       throw new StoreException(address+NO_MEMBER_OF+this);
 
     try {
@@ -488,31 +490,31 @@ public abstract class AddressContainer extends Bobo
   }
 
   /**
-   * Entfernt die gegebene Adresse aus dem Container und löscht
+   * Entfernt die gegebene Adresse aus dem Container und lï¿½scht
    * diese.
    *
-   * @param address Adresse, die gelöscht wird
+   * @param address Adresse, die gelï¿½scht wird
    * @exception StoreException, falls die Adresse keinen
-   * gültigen Schlüssel besitzt
+   * gï¿½ltigen Schlï¿½ssel besitzt
    *
    * @see #addAddressRecord(int,AddressRecord)
    */
   public void removeAddressRecord(AddressRecord address)
     throws StoreException {
 
-    removeAddressRecord(getClassIndex(address),address);
+    removeAddressRecord(address);
   }
 
   /**
-   * Entfernt die gegebene Adresse aus dem Container und löscht
+   * Entfernt die gegebene Adresse aus dem Container und lï¿½scht
    * diese.
    *
    * @deprecated ersetzt durch {@link #removeAddressRecord(AddressRecord)}
    *
    * @param index Index des internen Adressen-Arrays
-   * @param address Adresse, die gelöscht wird
+   * @param address Adresse, die gelï¿½scht wird
    * @exception StoreException, falls die Adresse keinen
-   * gültigen Schlüssel besitzt
+   * gï¿½ltigen Schlï¿½ssel besitzt
    *
    * @see #addAddressRecord(int,AddressRecord)
    */
@@ -522,13 +524,13 @@ public abstract class AddressContainer extends Bobo
     if ( address.getKey() == null )
       throw new StoreException(address+NOT_CREATED);
 
-    if ( addressData[index] == null )
+    if ( addressData.get(index) == null )
       retrieveAddresses(index);
 
-    if ( !addressData[index].contains(address) )
+    if ( !addressData.get(index).contains(address) )
       throw new StoreException(address+NO_MEMBER_OF+this);
 
-    addressData[index].remove(address);
+    addressData.get(index).remove(address);
     address.delete();
   }
 
@@ -538,20 +540,19 @@ public abstract class AddressContainer extends Bobo
    * @param destContainer Ziel-Container
    * @param address Adresse, die verschoben wird
    * @exception StoreException, falls die Adresse keinen
-   * gültigen Schlüssel besitzt
+   * gï¿½ltigen Schlï¿½ssel besitzt
    */
   public synchronized void moveAddressRecord(AddressContainer destContainer,
 					     AddressRecord address)
     throws StoreException {
 
-    int index = getClassIndex(address);
-    removeAddressRecord(index,address);
+    removeAddressRecord(address);
 
-    // Löschen der Parent-Beziehungen
+    // Lï¿½schen der Parent-Beziehungen
     for ( int i=0; i<3; i++ )
       address.setParent(0,null);
 
-    destContainer.addAddressRecord(index,address);
+    destContainer.addAddressRecord(address);
   }
 
     synchronized void deleteAddresses(int index)
@@ -565,8 +566,8 @@ public abstract class AddressContainer extends Bobo
     synchronized void deleteAddresses()
 	throws StoreException {
 
-	// Lösche alle Adressen
-	for ( int i=0; i<addressClasses.length; i++ )
+	// Lï¿½sche alle Adressen
+	for ( int i=0; i<addressClasses.size(); i++ )
 	    deleteAddresses(i);
 
 	addressData = null;
