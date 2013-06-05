@@ -76,7 +76,7 @@ public class NavControl extends JPanel implements ActionListener {
     private JPanel cards;
     private JPanel lowerButtons;
     private ButtonGroup buttonGroup = new ButtonGroup();
-    private Vector listeners = new Vector();
+    private Vector<ActionListener> listeners = new Vector<ActionListener>();
 
     /* Constructors
      * ---------------------------------------------------------------------- */
@@ -139,9 +139,9 @@ public class NavControl extends JPanel implements ActionListener {
     protected void fireActionEvent(String label) {
         ActionEvent event =
             new ActionEvent(this, ActionEvent.ACTION_PERFORMED, label);
-        Enumeration enum = listeners.elements();
-        while (enum.hasMoreElements())
-             ((ActionListener) enum.nextElement()).actionPerformed(event);
+        Enumeration<ActionListener> listenerEnum = listeners.elements();
+        while (listenerEnum.hasMoreElements())
+             listenerEnum.nextElement().actionPerformed(event);
     }
 
     /**  This is the action handler called by the NavButtons. */
@@ -157,7 +157,7 @@ public class NavControl extends JPanel implements ActionListener {
     /* This method is called if one of the upper buttons has been clicked. */
     private void shuffleDown(Component c) {
         boolean found = false;
-        Vector todo = new Vector();
+        Vector<Component> todo = new Vector<Component>();
         //Find the clicked button and put everything below it into the Todo list
         for (int i = 0; i < upperButtons.getComponentCount(); i++) {
             if (found)
@@ -172,9 +172,9 @@ public class NavControl extends JPanel implements ActionListener {
             return;
         }
         //Remove the Todo-buttons from the upper buttons
-        Enumeration enum;
-        for (enum = todo.elements(); enum.hasMoreElements();)
-            upperButtons.remove((Component) enum.nextElement());
+        Enumeration<Component> components;
+        for (components = todo.elements(); components.hasMoreElements();)
+            upperButtons.remove(components.nextElement());
         //Remove all lower buttons and put them on the Todo list
         while (lowerButtons.getComponentCount() > 0) {
             Component next = lowerButtons.getComponent(0);
@@ -182,8 +182,8 @@ public class NavControl extends JPanel implements ActionListener {
             lowerButtons.remove(next);
         }
         //Add all Todo-buttons to the lower buttons
-        for (enum = todo.elements(); enum.hasMoreElements();)
-            lowerButtons.add((Component) enum.nextElement());
+        for (components = todo.elements(); components.hasMoreElements();)
+            lowerButtons.add(components.nextElement());
         ((CardLayout) cards.getLayout()).show(cards, ((NavButton) c).getText());
         fireActionEvent(((NavButton) c).getText());
     }
