@@ -4,17 +4,22 @@ package de.bo.base.util;
 import java.util.*;
 
 /**
- * Permutationen ändern die Reihenfolge von Elementen in
+ * Permutationen ï¿½ndern die Reihenfolge von Elementen in
  * Arrays und Collections.
  * <p>
- * Permutationen können kombiniert werden und zu jeder Permutation
+ * Permutationen kï¿½nnen kombiniert werden und zu jeder Permutation
  * kann die Umkehrpermutation gebildet werden.
  */
 public class Permutation
 implements Cloneable,java.io.Serializable
 {
   /**
-   * Dieses einzige Element repräsentiert die Permutation.
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Dieses einzige Element reprï¿½sentiert die Permutation.
    *
    * @see #set(int[] array)
    */
@@ -30,7 +35,7 @@ implements Cloneable,java.io.Serializable
   /**
    * Erzeugt Permutation mit gegebenen Array.
    *
-   * @param array Repräsentant der Permutation
+   * @param array Reprï¿½sentant der Permutation
    * @see #set(int[] array)
    */
   public Permutation(int[] array) {
@@ -45,13 +50,13 @@ implements Cloneable,java.io.Serializable
   /**
    * Setzen der Permutation.
    * <p>
-   * Diese Methode prüft das Array. Das Array darf nicht <tt>null</tt>
-   * sein, alle Elemente müssen größer oder gleich 0, kleiner als die
-   * Größe des Arrays und voneinander verschieden sein.
+   * Diese Methode prï¿½ft das Array. Das Array darf nicht <tt>null</tt>
+   * sein, alle Elemente mï¿½ssen grï¿½ï¿½er oder gleich 0, kleiner als die
+   * Grï¿½ï¿½e des Arrays und voneinander verschieden sein.
    *
-   * @param array Repräsentant der Permutation
+   * @param array Reprï¿½sentant der Permutation
    * @exception IllegalArgumentException, falls obige Bedingungen
-   * nicht erfüllt sind.
+   * nicht erfï¿½llt sind.
    */
   public void set(int[] array) {
     if ( array == null )
@@ -103,7 +108,7 @@ implements Cloneable,java.io.Serializable
   }
 
   /**
-   * Erzeugt Hintereinanderausführung von Permutationen.
+   * Erzeugt Hintereinanderausfï¿½hrung von Permutationen.
    * <p>
    * Die neue Permutation entsteht durch Anwendung der Permutation
    * <tt>p</tt> auf die des aktuellen Objekts.
@@ -124,9 +129,9 @@ implements Cloneable,java.io.Serializable
   /**
    * Anwendung der Permutation auf ein <tt>byte</tt>-Array.
    * <p>
-   * Die Größe des Arrays darf größer als die der Permutation sein.
+   * Die Grï¿½ï¿½e des Arrays darf grï¿½ï¿½er als die der Permutation sein.
    * In diesem Fall wird die Reihenfolge der verbleibenden Elemente
-   * nicht geändert.
+   * nicht geï¿½ndert.
    *
    * @param src Quell-Array
    * @return neues umgeordnetes Array.
@@ -140,9 +145,9 @@ implements Cloneable,java.io.Serializable
    * Anwendung der Permutation ab bestimmter Position auf ein
    * <tt>byte</tt>-Array.
    * <p>
-   * Die Größe des Arrays darf größer als die der Permutation sein.
+   * Die Grï¿½ï¿½e des Arrays darf grï¿½ï¿½er als die der Permutation sein.
    * In diesem Fall wird die Reihenfolge der verbleibenden Elemente
-   * nicht geändert.
+   * nicht geï¿½ndert.
    *
    * @param src Quell-Array
    * @param start Position, ab der die Umordnung wirken soll.
@@ -319,7 +324,6 @@ implements Cloneable,java.io.Serializable
    */
   public StringBuffer map(StringBuffer src,int start) {
     int n = array.length;
-    int m = src.length();
 
     StringBuffer sb = new StringBuffer( src.toString() );
     for ( int i=start; i<n+start; i++ )
@@ -331,18 +335,18 @@ implements Cloneable,java.io.Serializable
   /**
    * @see #map(byte[])
    */
-  public Object[] map(Object[] src) {
+  public <E> E[] map(E[] src) {
     return map( src, 0 );
   }
 
   /**
    * @see #map(byte[],int)
    */
-  public Object[] map(Object[] src,int start) {
+  public <E> E[] map(E[] src,int start) {
     int n = array.length;
     int m = src.length;
 
-    Object[] dest = (Object[])
+    E[] dest = (E[])
       java.lang.reflect.Array.
       newInstance( src.getClass().getComponentType(), m );
 
@@ -355,11 +359,32 @@ implements Cloneable,java.io.Serializable
 
   /**
    * @see #map(byte[])
+   */
+  public <E> Vector<E> map(Vector<E> src) {
+    return map( src, 0 );
+  }
+
+  /**
+   * @see #map(byte[],int)
+   */
+  public <E> Vector<E> map(Vector<E> src,int start) {
+    int n = array.length;
+    
+    Vector<E> dest = new Vector<E>(src);
+
+    for ( int i=start; i<n+start; i++ )
+      dest.set(i, src.get(array[i-start]+start));
+
+    return dest;
+  }
+
+  /**
+   * @see #map(byte[])
    *
    * <b>Die Collection muss eine Instanz der implmentierenden Klassen
    * aus dem Pakte <tt>java.util</tt> sein.</b>
    */
-  public Collection map(Collection src) {
+  public <E> Collection<E> map(Collection<E> src) {
     return map( src, 0 );
   }
 
@@ -369,27 +394,28 @@ implements Cloneable,java.io.Serializable
    * <b>Die Collection muss eine Instanz der implmentierenden Klassen
    * aus dem Pakte <tt>java.util</tt> sein.</b>
    */
-  public Collection map(Collection src,int start) {
-    Object[] tmp = map( src.toArray(), start );
-    Collection dest;
+  public <E> Collection<E> map(Collection<E> src,int start) {
+    Vector<E> tmp = map( new Vector<E>(src), start );
+    Collection<E> dest;
 
+    // FIXME: This depends on the types of the Collection and does different
+    // things for different collections.
     if ( src instanceof LinkedList )
-      dest = new LinkedList();
+      dest = new LinkedList<E>();
     else if ( src instanceof ArrayList )
-      dest = new ArrayList();
+      dest = new ArrayList<E>();
     else if ( src instanceof Vector ) {
-      dest = (Vector)((Vector)src).clone();
-      dest.clear();
+      return tmp;
     }
     else if ( src instanceof HashSet )
-      dest = new HashSet();
+      dest = new HashSet<E>();
     else if ( src instanceof TreeSet )
-      dest = new TreeSet();
+      dest = new TreeSet<E>();
     else
       throw new IllegalArgumentException();
 
-    for ( int i=0; i<tmp.length; i++ )
-      dest.add( tmp[i] );
+    for ( int i=0; i<tmp.size(); i++ )
+      dest.add( tmp.get(i) );
 
     return dest;
   }
@@ -552,7 +578,7 @@ implements Cloneable,java.io.Serializable
    * Durch simple Sortierung von Mappings kann z.B. die Inverse einer
    * Permutation berechnet werden.
    */
-  protected static class MapEntry implements Comparable
+  protected static class MapEntry implements Comparable<MapEntry>
   {
     int from;
     int to;
@@ -562,8 +588,8 @@ implements Cloneable,java.io.Serializable
       this.to = to;
     }
 
-    public int compareTo(Object o) {
-      return to - ((MapEntry)o).to;
+    public int compareTo(MapEntry o) {
+      return to - o.to;
     }
   }
 }
