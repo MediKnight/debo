@@ -9,24 +9,26 @@ import javax.swing.plaf.basic.*;
 
 import java.util.*;
 
-public class BoundedComboBox extends JComboBox
+public class BoundedComboBox<E> extends JComboBox<E>
 {
+  private static final long serialVersionUID = 1L;
+
   public BoundedComboBox(int cols,int bound) {
     super();
     initEditor(cols,bound);
   }
 
-  public BoundedComboBox(ComboBoxModel aModel,int cols,int bound) {
+  public BoundedComboBox(ComboBoxModel<E> aModel,int cols,int bound) {
     super(aModel);
     initEditor(cols,bound);
   }
 
-  public BoundedComboBox(Object[] items,int cols,int bound) {
+  public BoundedComboBox(E[] items,int cols,int bound) {
     super(items);
     initEditor(cols,bound);
   }
 
-  public BoundedComboBox(Vector items,int cols,int bound) {
+  public BoundedComboBox(Vector<E> items,int cols,int bound) {
     super(items);
     initEditor(cols,bound);
   }

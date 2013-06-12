@@ -53,7 +53,7 @@ import java.util.*;
  *
  * @see Comparator
  */
-public abstract class AbstractComparator implements Comparator
+public abstract class AbstractComparator<O> implements Comparator<O>
 {
   /**
    * "normalized" permutation.
@@ -120,13 +120,12 @@ public abstract class AbstractComparator implements Comparator
    * This method is public by the interface specification.
    * Do not use it directly.
    */
-  public int compare(Object o1, Object o2) {
+  public int compare(O o1, O o2) {
     int n = permutation.length;
     for ( int i=0; i<n; i++ ) {
       int k = permutation[i];
-      Comparable c1 = getComparable( k, o1 );
-      Comparable c2 = getComparable( k, o2 );
-      int c = c1.compareTo( c2 );
+      Comparable<O> c1 = getComparable( k, o1 );
+      int c = c1.compareTo( o2 );
       if ( c != 0 )
 	return ascend[i] ? c : -c;
     }
@@ -142,5 +141,5 @@ public abstract class AbstractComparator implements Comparator
    * @param o the object which should be compared
    * @return the comparable element
    */
-  public abstract Comparable getComparable(int index,Object o);
+  public abstract Comparable<O> getComparable(int index, O o);
 }

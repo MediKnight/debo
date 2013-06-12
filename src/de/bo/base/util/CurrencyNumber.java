@@ -7,82 +7,84 @@ import java.util.Locale;
 import java.util.StringTokenizer;
 
 /**
- * Euro-Währungsklasse.
+ * Euro-Wï¿½hrungsklasse.
  *
- * Instanzen dieser Klasse sind Währungsbeträge in Euro oder in anderen
- * noch gültigen Währungen mit konstantem Umrechnungskurs zum Euro.
+ * Instanzen dieser Klasse sind Wï¿½hrungsbetrï¿½ge in Euro oder in anderen
+ * noch gï¿½ltigen Wï¿½hrungen mit konstantem Umrechnungskurs zum Euro.
  * <p>
  * Der Betrag wird durch den Datentyp <code>long</code> bis auf ein
- * hundertstel Cent dargestellt. Dies ermöglicht immerhin die Darstellung
- * von über einer Billiarde (10^15) Euro.
+ * hundertstel Cent dargestellt. Dies ermï¿½glicht immerhin die Darstellung
+ * von ï¿½ber einer Billiarde (10^15) Euro.
  * <p>
- * Für Objekte dieser Klasse stehen die vier Grundrechnungsarten sowie
+ * Fï¿½r Objekte dieser Klasse stehen die vier Grundrechnungsarten sowie
  * diverse Umrechnungsfunktionen bereit.
  */
 
-public class CurrencyNumber extends Number implements Cloneable, Comparable {
+public class CurrencyNumber extends Number implements Cloneable, Comparable<CurrencyNumber> {
+    private static final long serialVersionUID = 1L;
+
     /**
-     * Währung in Euro (default).
+     * Wï¿½hrung in Euro (default).
      */
     public final static int EUR = 0;
 
     /**
-     * Währung in DM.
+     * Wï¿½hrung in DM.
      */
     public final static int DM = 1;
 
     /**
-     * Währung in DEM.
+     * Wï¿½hrung in DEM.
      */
     public final static int DEM = 1;
 
     /**
-     * Währung in Belgische Franken.
+     * Wï¿½hrung in Belgische Franken.
      */
     public final static int BEF = 2;
 
     /**
-     * Währung in Finnmark.
+     * Wï¿½hrung in Finnmark.
      */
     public final static int FIM = 3;
 
     /**
-     * Währung in Französiche Franken.
+     * Wï¿½hrung in Franzï¿½siche Franken.
      */
     public final static int FRF = 4;
 
     /**
-     * Währung in Irische Pfund.
+     * Wï¿½hrung in Irische Pfund.
      */
     public final static int IEP = 5;
 
     /**
-     * Währung in Italienische Lira.
+     * Wï¿½hrung in Italienische Lira.
      */
     public final static int ITL = 6;
 
     /**
-     * Währung in Luxemburgische Franc.
+     * Wï¿½hrung in Luxemburgische Franc.
      */
     public final static int LUF = 7;
 
     /**
-     * Währung in Niederländische Gulden.
+     * Wï¿½hrung in Niederlï¿½ndische Gulden.
      */
     public final static int NLG = 8;
 
     /**
-     * Währung in Östereichische Schilling.
+     * Wï¿½hrung in ï¿½stereichische Schilling.
      */
     public final static int ATS = 9;
 
     /**
-     * Währung in Portugisiche Escudo.
+     * Wï¿½hrung in Portugisiche Escudo.
      */
     public final static int PTE = 10;
 
     /**
-     * Währung in Spanische Peseta.
+     * Wï¿½hrung in Spanische Peseta.
      */
     public final static int ESP = 11;
 
@@ -93,11 +95,11 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
             "BEF BFRS BF BFR",
             "FIM FM FMK",
             "FRF F FF",
-            "IEP IR£ IR IRP",
+            "IEP IRï¿½ IR IRP",
             "ITL L LIT",
             "LUF LFRS LFR LF",
             "NLG HFL FL",
-            "ATS ÖS S",
+            "ATS ï¿½S S",
             "PTE ESC",
             "ESP PTS" };
 
@@ -135,7 +137,7 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     private int currency;
 
     /**
-     * Erzeugt Währungsbetrag von 0 in Euro.
+     * Erzeugt Wï¿½hrungsbetrag von 0 in Euro.
      */
     public CurrencyNumber() {
         value = 0L;
@@ -143,9 +145,9 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Erzeugt Währungsbetrag von 0 in gegebener Währung.
+     * Erzeugt Wï¿½hrungsbetrag von 0 in gegebener Wï¿½hrung.
      *
-     * @param currency Währung
+     * @param currency Wï¿½hrung
      */
     public CurrencyNumber(int currency) {
         value = 0L;
@@ -153,7 +155,7 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Erzeugt Währungsbetrag interner Darstellung in Euro.
+     * Erzeugt Wï¿½hrungsbetrag interner Darstellung in Euro.
      *
      * @param value neuer Betrag (interne Darstellung)
      */
@@ -163,10 +165,10 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Erzeugt Währungsbetrag interner Darstellung in gegebener Währung.
+     * Erzeugt Wï¿½hrungsbetrag interner Darstellung in gegebener Wï¿½hrung.
      *
      * @param value neuer Betrag (interne Darstellung)
-     * @param currency Währung
+     * @param currency Wï¿½hrung
      */
     public CurrencyNumber(long value, int currency) {
         this.value = value;
@@ -174,7 +176,7 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Erzeugt Währungsbetrag in Euro.
+     * Erzeugt Wï¿½hrungsbetrag in Euro.
      *
      * @param v neuer Betrag
      */
@@ -183,10 +185,10 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Erzeugt Währungsbetrag in gegebener Währung.
+     * Erzeugt Wï¿½hrungsbetrag in gegebener Wï¿½hrung.
      *
      * @param v neuer Betrag
-     * @param currency Währung
+     * @param currency Wï¿½hrung
      */
     public CurrencyNumber(double v, int currency) {
 	    value = (long) (v * 10000.0 + (v > 0 ? 0.5 : -0.5));
@@ -194,7 +196,7 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Erzeugt Währungsbetrag in Euro.
+     * Erzeugt Wï¿½hrungsbetrag in Euro.
      *
      * @param f neuer Betrag
      */
@@ -203,10 +205,10 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Erzeugt Währungsbetrag in gegebener Währung.
+     * Erzeugt Wï¿½hrungsbetrag in gegebener Wï¿½hrung.
      *
      * @param f neuer Betrag
-     * @param currency Währung
+     * @param currency Wï¿½hrung
      */
     public CurrencyNumber(float f, int currency) {
         this((double) f, currency);
@@ -220,7 +222,7 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Währungsbeträge können kopiert werden.
+     * Wï¿½hrungsbetrï¿½ge kï¿½nnen kopiert werden.
      *
      * @return identische Kopie des Objekts
      */
@@ -247,16 +249,16 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Konvertiert nach Euro und liefert neues Objekt zurück.
+     * Konvertiert nach Euro und liefert neues Objekt zurï¿½ck.
      *
-     * @return äquivalenter Währungsbetrag in Euro
+     * @return ï¿½quivalenter Wï¿½hrungsbetrag in Euro
      */
     public CurrencyNumber toEuro() {
         return new CurrencyNumber((long) ((double) value / cfactor[currency] + (value > 0 ? 0.5 : -0.5)));
     }
 
     /**
-     * Konvertiert Objekt nach Euro und ändert das Objekt.
+     * Konvertiert Objekt nach Euro und ï¿½ndert das Objekt.
      *
      * @return <code>this</code>
      */
@@ -268,10 +270,10 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Konvertiert in gegebene Währung und liefert neues Objekt zurück.
+     * Konvertiert in gegebene Wï¿½hrung und liefert neues Objekt zurï¿½ck.
      *
-     * @param gegebene Währung
-     * @return äquivalenter Währungsbetrag in gegebener Währung
+     * @param gegebene Wï¿½hrung
+     * @return ï¿½quivalenter Wï¿½hrungsbetrag in gegebener Wï¿½hrung
      */
     public CurrencyNumber toCurrency(int newCurrency) {
         double f =
@@ -283,9 +285,9 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Liefert negiertes Objekt zurück (läßt Objekt unverändert).
+     * Liefert negiertes Objekt zurï¿½ck (lï¿½ï¿½t Objekt unverï¿½ndert).
      *
-     * @return negativer Währungsbetrag
+     * @return negativer Wï¿½hrungsbetrag
      */
     public CurrencyNumber neg() {
         return new CurrencyNumber(-value, currency);
@@ -302,9 +304,9 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Addiert gegebenen Währungsbetrag zum Objekt.
+     * Addiert gegebenen Wï¿½hrungsbetrag zum Objekt.
      *
-     * @param cn Währungsbetrag
+     * @param cn Wï¿½hrungsbetrag
      * @return <code>this</code>
      */
     public CurrencyNumber add(CurrencyNumber cn) {
@@ -321,9 +323,9 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Subtrahiert gegebenen Währungsbetrag vom Objekt.
+     * Subtrahiert gegebenen Wï¿½hrungsbetrag vom Objekt.
      *
-     * @param cn Währungsbetrag
+     * @param cn Wï¿½hrungsbetrag
      * @return <code>this</code>
      */
     public CurrencyNumber sub(CurrencyNumber cn) {
@@ -442,9 +444,9 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
      *
      * @see Comparable
      */
-    public int compareTo(Object o) {
+    public int compareTo(CurrencyNumber o) {
         long v1 = toEuro().value;
-        long v2 = ((CurrencyNumber) o).toEuro().value;
+        long v2 = o.toEuro().value;
 
         if (v1 == v2)
             return 0;
@@ -465,12 +467,12 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * String-Darstellung des Währungsbetrags.
+     * String-Darstellung des Wï¿½hrungsbetrags.
      *
-     * Der Währungsbetrag wird bzgl. des Landes der zugrundeliegenden Währung
+     * Der Wï¿½hrungsbetrag wird bzgl. des Landes der zugrundeliegenden Wï¿½hrung
      * dargestellt.
      *
-     * @return String-Darstellung des Währungsbetrags inklusive Währungssymbol
+     * @return String-Darstellung des Wï¿½hrungsbetrags inklusive Wï¿½hrungssymbol
      *
      * @see #toString(Locale,boolean)
      */
@@ -479,13 +481,13 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * String-Darstellung des Währungsbetrags.
+     * String-Darstellung des Wï¿½hrungsbetrags.
      *
-     * Der Währungsbetrag wird bzgl. des gegebenen <code>locale</code> Objekts
+     * Der Wï¿½hrungsbetrag wird bzgl. des gegebenen <code>locale</code> Objekts
      * dargestellt.
      *
      * @param locale angewendetes <code>locale</code> Objekt
-     * @return String-Darstellung des Währungsbetrags inklusive Währungssymbol
+     * @return String-Darstellung des Wï¿½hrungsbetrags inklusive Wï¿½hrungssymbol
      *
      * @see #toString(Locale,boolean)
      */
@@ -494,15 +496,15 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * String-Darstellung des Währungsbetrags.
+     * String-Darstellung des Wï¿½hrungsbetrags.
      *
-     * Der Währungsbetrag wird bzgl. des gegebenen <code>locale</code> Objekts
+     * Der Wï¿½hrungsbetrag wird bzgl. des gegebenen <code>locale</code> Objekts
      * dargestellt.
      *
      * @param locale angewendetes <code>locale</code> Objekt
-     * @param showCurrencySymbol bestimmt, ob Währungssymbol angefügt
+     * @param showCurrencySymbol bestimmt, ob Wï¿½hrungssymbol angefï¿½gt
      * werden soll
-     * @return String-Darstellung des Währungsbetrags
+     * @return String-Darstellung des Wï¿½hrungsbetrags
      */
     public String toString(Locale locale, boolean showCurrencySymbol) {
         DecimalFormat form =
@@ -517,19 +519,19 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Liefert Währungssymbol zur Währung des Objekts.
+     * Liefert Wï¿½hrungssymbol zur Wï¿½hrung des Objekts.
      *
-     * @return Währungssymbol
+     * @return Wï¿½hrungssymbol
      */
     public String getCurrencySymbol() {
         return getCurrencySymbol(currency);
     }
 
     /**
-     * Liefert Währungssymbol zur angegebenen Währung.
+     * Liefert Wï¿½hrungssymbol zur angegebenen Wï¿½hrung.
      *
-     * @param currency angegebene Währung
-     * @return Währungssymbol
+     * @param currency angegebene Wï¿½hrung
+     * @return Wï¿½hrungssymbol
      */
     public static String getCurrencySymbol(int currency) {
         StringTokenizer st = new StringTokenizer(csymbols[currency]);
@@ -537,13 +539,13 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Parsen des gegebenen Strings auf einen Währungsbetrag.
+     * Parsen des gegebenen Strings auf einen Wï¿½hrungsbetrag.
      *
-     * Falls kein Währungssymbol dem Betrag angehängt ist, wird Euro
+     * Falls kein Wï¿½hrungssymbol dem Betrag angehï¿½ngt ist, wird Euro
      * als Default genommen.
      *
      * @param s Betrag in String-Darstellung
-     * @return Währungsbetrag
+     * @return Wï¿½hrungsbetrag
      * @exception IllegalArgumentException, wenn Eingabe nicht geparst
      * werden kann.
      */
@@ -552,17 +554,17 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Parsen des gegebenen Strings auf einen Währungsbetrag.
+     * Parsen des gegebenen Strings auf einen Wï¿½hrungsbetrag.
      *
      * @param s Betrag in String-Darstellung
-     * @param defaultCurreny Default-Währung, falls kein Währungssymbol
-     * dem Betrag angehängt ist
-     * @return Währungsbetrag
+     * @param defaultCurreny Default-Wï¿½hrung, falls kein Wï¿½hrungssymbol
+     * dem Betrag angehï¿½ngt ist
+     * @return Wï¿½hrungsbetrag
      * @exception IllegalArgumentException, wenn Eingabe nicht geparst
      * werden kann.
      */
     public static CurrencyNumber parse(String s, int defaultCurrency) {
-        // finde Position des Währungssymbols:
+        // finde Position des Wï¿½hrungssymbols:
         int n = s.length();
         int cp = -1;
         for (int i = 0; i < n; i++) {
@@ -573,7 +575,7 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
             }
         }
 
-        // Wenn String mit Währungssymbol beginnt, ist Eingabe ungültig
+        // Wenn String mit Wï¿½hrungssymbol beginnt, ist Eingabe ungï¿½ltig
         if (cp == 0)
             throw new IllegalArgumentException("invalid currency position");
 
@@ -628,9 +630,9 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Liefert Anzahl der berücksichtigten Währungen inklusive Euro.
+     * Liefert Anzahl der berï¿½cksichtigten Wï¿½hrungen inklusive Euro.
      *
-     * @return Anzahl der Währungen
+     * @return Anzahl der Wï¿½hrungen
      */
     public static int getCurrencies() {
         return cfactor.length;
@@ -645,7 +647,7 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     }
 
     /**
-     * Liefert interne Darstellung, d.h. nicht ausschließlich den ganzzahligen
+     * Liefert interne Darstellung, d.h. nicht ausschlieï¿½lich den ganzzahligen
      * Anteil, sondern den gesamten Betrag.
      */
     public long longValue() {
@@ -655,7 +657,7 @@ public class CurrencyNumber extends Number implements Cloneable, Comparable {
     /**
      * Genaueste Betragsdarstellung.
      *
-     * Zum rechnen mit Währungen sollten jedoch die Funktionen
+     * Zum rechnen mit Wï¿½hrungen sollten jedoch die Funktionen
      * <code>add,sub,div,mul,neg</code> verwendet werden.
      *
      * @return <code>(double)value/10000.0</code>
