@@ -3,7 +3,7 @@ package de.bo.base.store.sql;
 import de.bo.base.store.*;
 import java.sql.*;
 
-public abstract class Database implements StoreKeeper
+public abstract class Database<E extends Storable> implements StoreKeeper<E>
 {
   protected static Connection defaultConnection;
   protected static SQLToolkit defaultToolkit;

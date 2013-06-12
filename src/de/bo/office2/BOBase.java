@@ -14,11 +14,11 @@ import de.bo.base.store.sql.SQLRuntimeException;
 import de.bo.base.store.sql.SQLToolkit;
 
 /**
- * Implementierung einer Datenbank-Klasse, optimiert für die
+ * Implementierung einer Datenbank-Klasse, optimiert fï¿½r die
  * Baltic-Online Datenbank.
  */
 
-public class BOBase extends Database
+public class BOBase extends Database<Bobo>
   implements Debugable
 {
 
@@ -77,9 +77,9 @@ public class BOBase extends Database
    * Erzeugen eines SQL-Query-Strings ohne Sortierung.
    *
    * @param bobo Datenbank-Objekt (Datensatz)
-   * @param keyName Name des Schlüssels, nach dem selektiert werden soll
+   * @param keyName Name des Schlï¿½ssels, nach dem selektiert werden soll
    * (kann <code>null</code> sein, dann keine Selektierung).
-   * @param key Selektierschlüssel (darf nur <code>null</code> sein,
+   * @param key Selektierschlï¿½ssel (darf nur <code>null</code> sein,
    * wenn <code>keyName null</code> ist.
    *
    * @return SQL-Query-String
@@ -92,12 +92,12 @@ public class BOBase extends Database
    * Erzeugen eines SQL-Query-Strings.
    *
    * @param bobo Datenbank-Objekt (Datensatz)
-   * @param keyName Name des Schlüssels, nach dem selektiert werden soll
+   * @param keyName Name des Schlï¿½ssels, nach dem selektiert werden soll
    * (kann <code>null</code> sein, dann keine Selektierung).
-   * @param key Selektierschlüssel (darf nur <code>null</code> sein,
+   * @param key Selektierschlï¿½ssel (darf nur <code>null</code> sein,
    * wenn <code>keyName null</code> ist.
    * @param useOrder wenn <code>true</code>, dann wird Order-Klausel
-   * (Sortierung) hinzugefügt.
+   * (Sortierung) hinzugefï¿½gt.
    *
    * @return SQL-Query-String
    */
@@ -125,7 +125,7 @@ public class BOBase extends Database
       // absteigende Sortierung angenommen.
       boolean descend = false;
 
-      // Ist Ordnung für diese Objekte überhaupt vorgesehen?
+      // Ist Ordnung fï¿½r diese Objekte ï¿½berhaupt vorgesehen?
       int[] order = bobo.getOrderIndexes();
       if ( order != null ) {
 
@@ -152,11 +152,11 @@ public class BOBase extends Database
   }
 
   /**
-   * Objekt aus Datenbank zum passenden Schlüssel einlesen.
+   * Objekt aus Datenbank zum passenden Schlï¿½ssel einlesen.
    *
    * @param object Quell-Objekt (dient nur zur Identifizierung)
    * @param data Ziel-Array
-   * @param key Passender Schlüssel
+   * @param key Passender Schlï¿½ssel
    * @return <code>true</code> bei Erfolg
    */
   public boolean retrieve(Storable object,Object[] data,Object key) {
@@ -319,18 +319,18 @@ public class BOBase extends Database
     return true;
   }
 
-  public Enumeration getEnumeration(Storable object,
+  public Enumeration<Bobo> getEnumeration(Bobo object,
 				    String identifier,
 				    Object key,
 				    boolean order) {
-    return new BOEnumeration( (Bobo)object,
+    return new BOEnumeration( object,
 			      new DefaultSelection(toolkit,identifier,key),
 			      order );
   }
-  public Enumeration getEnumeration(Storable object,
+  public Enumeration<Bobo> getEnumeration(Bobo object,
 				    Selection selection,
 				    boolean order) {
-    return new BOEnumeration( (Bobo)object, selection, order );
+    return new BOEnumeration( object, selection, order );
   }
 
   public void debugMsg(String msg) {
@@ -338,7 +338,7 @@ public class BOBase extends Database
       System.err.println( getClass().getName()+" >> "+msg );
   }
 
-  protected class BOEnumeration implements Enumeration
+  protected class BOEnumeration implements Enumeration<Bobo>
   {
     boolean state;
     Statement sm;
@@ -375,7 +375,7 @@ public class BOBase extends Database
 
       return state;
     }
-    public Object nextElement() {
+    public Bobo nextElement() {
       if ( !state ) return null;
 
       Bobo bobo2;

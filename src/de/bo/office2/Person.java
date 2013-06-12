@@ -3,9 +3,9 @@ package de.bo.office2;
 import de.bo.base.store.StoreKeeper;
 
 /**
- * Baltic-Online Geschäftsobjekt <b>Person</b>.
+ * Baltic-Online Geschï¿½ftsobjekt <b>Person</b>.
  * <p>
- * Eine Person enthält mehrere Adressen und mehrere Mitarbeiter-Einträge und
+ * Eine Person enthï¿½lt mehrere Adressen und mehrere Mitarbeiter-Eintrï¿½ge und
  * ist daher ein <code>EmployeeContainer</code>.
  * <p>
  * Eine Person kann wie eine Firma Kunde, Lieferant oder Partner sein
@@ -28,7 +28,7 @@ public class Person extends EmployeeContainer implements BusinessRelation {
      *
      * @param storeKeeper verwendetes Datensystem
      */
-    public Person(StoreKeeper storeKeeper) {
+    public Person(StoreKeeper<Bobo> storeKeeper) {
         super(storeKeeper);
     }
 
@@ -58,7 +58,7 @@ public class Person extends EmployeeContainer implements BusinessRelation {
     }
 
     /**
-     * Liefert "Eltern"-Schlüssel zum gegebenen Index (im Bereich von
+     * Liefert "Eltern"-Schlï¿½ssel zum gegebenen Index (im Bereich von
      * <code>getParentCount()</code>).
      *
      * Eine Person hat keine "Eltern" im Sinne der BO-Hierarchie und
@@ -85,7 +85,7 @@ public class Person extends EmployeeContainer implements BusinessRelation {
     }
 
     /**
-     * Liefert vollständigen Namen der Person.
+     * Liefert vollstï¿½ndigen Namen der Person.
      */
     public String getFullName() {
         String firstName = getFirstName();
@@ -128,7 +128,7 @@ public class Person extends EmployeeContainer implements BusinessRelation {
     }
 
     /**
-     * Liefert zusätzliche Info zur Person.
+     * Liefert zusï¿½tzliche Info zur Person.
      */
     public String getRemark() {
         return getStoreToolkit().objectToString(data[9]);
@@ -138,7 +138,7 @@ public class Person extends EmployeeContainer implements BusinessRelation {
      * Setzen von Name und Vorname der Person.
      *
      * Alle anderen Daten dieser Person werden mit neutralen Werten
-     * überschrieben.
+     * ï¿½berschrieben.
      */
     public void set(String name, String firstName) {
         set(name, firstName, "", "", "", false, false, false, "");
@@ -232,9 +232,9 @@ public class Person extends EmployeeContainer implements BusinessRelation {
     }
 
     /**
-     * Liefert Namen des Primärschlüssels "Person".
+     * Liefert Namen des Primï¿½rschlï¿½ssels "Person".
      *
-     * (i.A. Spaltenattribute des Primärschlüssels)
+     * (i.A. Spaltenattribute des Primï¿½rschlï¿½ssels)
      *
      * @return <code>"pid"</code>
      */
@@ -269,7 +269,7 @@ public class Person extends EmployeeContainer implements BusinessRelation {
     }
 
     /**
-     * Liefert alle primären Daten zur Person (ohne Zusatzinfo).
+     * Liefert alle primï¿½ren Daten zur Person (ohne Zusatzinfo).
      */
     public String toString() {
         String s;

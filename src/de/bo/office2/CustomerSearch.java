@@ -16,7 +16,7 @@ public class CustomerSearch
   protected boolean ignoreCase;
   protected int tableFlag;
 
-  protected StoreKeeper storeKeeper;
+  protected StoreKeeper<Bobo> storeKeeper;
 
   public CustomerSearch(String searchString) {
     this( searchString, true, ALL );
@@ -40,12 +40,12 @@ public class CustomerSearch
       throw new IllegalArgumentException();
   }
 
-  public void setStoreKeeper(StoreKeeper storeKeeper) {
+  public void setStoreKeeper(StoreKeeper<Bobo> storeKeeper) {
     this.storeKeeper = storeKeeper;
   }
 
-  public List search() {
-    LinkedList l = new LinkedList();
+  public List<Bobo> search() {
+    LinkedList<Bobo> l = new LinkedList<Bobo>();
     String[] attribute;
 
     if ( (tableFlag&COMPANY) != 0 ) {
@@ -73,7 +73,7 @@ public class CustomerSearch
     return l;
   }
 
-  protected void search(String[] attribute,LinkedList list,Bobo bobo) {
+  protected void search(String[] attribute,LinkedList<Bobo> list,Bobo bobo) {
     StoreToolkit tk = bobo.getStoreKeeper().getStoreToolkit();
     char mmc = ((SQLToolkit)tk).getMultiMatchingChar();
     String ss = mmc + searchString + mmc;
@@ -84,7 +84,7 @@ public class CustomerSearch
 					     attribute[i], ss,
 					     SQLToolkit.LIKE, ignoreCase )
 		       );
-    Enumeration e = bobo.getEnumeration( os );
+    Enumeration<Bobo> e = bobo.getEnumeration( os );
     while ( e.hasMoreElements() )
       list.add( e.nextElement() );
   }

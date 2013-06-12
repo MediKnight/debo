@@ -3,14 +3,14 @@ package de.bo.office2;
 import de.bo.base.store.StoreKeeper;
 
 /**
- * Baltic-Online Geschäftsobjekt <b>Mitarbeiter</b>.
+ * Baltic-Online Geschï¿½ftsobjekt <b>Mitarbeiter</b>.
  * <p>
  * Mitarbeiter sind konkret, aber semantisch abstrakt.
  * Ein Mitarbeiter ist semantisch eine Person, aber eine Person kann
  * Mitarbeiter von verschiedenen Standorten sein.
  * <p>
  * Daher besitzt ein Mitarbeiter genau zwei Eltern-Objekte
- * (Person und Standort) von denen beide existieren müssen.
+ * (Person und Standort) von denen beide existieren mï¿½ssen.
  *
  * @see Company
  * @see Employee
@@ -30,19 +30,19 @@ public class Employee extends AddressContainer
   /**
    * Erzeugt Mitarbeiter mit gegebenen Storekeeper.
    */
-  public Employee(StoreKeeper storeKeeper) {
+  public Employee(StoreKeeper<Employee> storeKeeper) {
     super( storeKeeper );
   }
 
   /**
-   * Liefert zugehörige Person.
+   * Liefert zugehï¿½rige Person.
    */
   public Person getPerson() {
     return (Person)getParent( 0 );
   }
 
   /**
-   * Liefert zugehörigen Standort.
+   * Liefert zugehï¿½rigen Standort.
    */
   public Location getLocation() {
     return (Location)getParent( 1 );
@@ -70,7 +70,7 @@ public class Employee extends AddressContainer
   }
 
   /**
-   * Liefert "Eltern"-Schlüssel zum gegebenen Index (im Bereich von
+   * Liefert "Eltern"-Schlï¿½ssel zum gegebenen Index (im Bereich von
    * <code>getParentCount()</code>).
    */
   protected Object getParentKey(int index) {

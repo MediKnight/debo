@@ -3,9 +3,9 @@ package de.bo.office2;
 import de.bo.base.store.StoreKeeper;
 
 /**
- * Darstellung einer Adresse im üblichen Sinne.
+ * Darstellung einer Adresse im ï¿½blichen Sinne.
  * <p>
- * Diese Klasse behandelt nur die Primärdaten dieser Adresse und muss
+ * Diese Klasse behandelt nur die Primï¿½rdaten dieser Adresse und muss
  * deshalb nicht weiter kommentiert werden.
  *
  * @see AddressRecord
@@ -17,7 +17,7 @@ public class Address extends AddressRecord
   public Address() {
     super();
   }
-  public Address(StoreKeeper storeKeeper) {
+  public Address(StoreKeeper<Bobo> storeKeeper) {
     super( storeKeeper );
   }
 

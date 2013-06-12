@@ -3,7 +3,7 @@ package de.bo.office2;
 import de.bo.base.store.StoreKeeper;
 
 /**
- * Adressen im üblichen Sinne, Telefonnummern, EMails, etc. sind Adressen.
+ * Adressen im ï¿½blichen Sinne, Telefonnummern, EMails, etc. sind Adressen.
  * <p>
  * In der BO-Datenbank bezieht sich jede Adresse entweder auf eine
  * Person, einen Mitarbeiter oder einen Standort (ausschliesslich).
@@ -25,14 +25,14 @@ public abstract class AddressRecord extends Bobo
    *
    * @param storeKeeper verwendetes Datensystem
    */
-  protected AddressRecord(StoreKeeper storeKeeper) {
+  protected AddressRecord(StoreKeeper<Bobo> storeKeeper) {
     super( storeKeeper );
   }
 
   /**
-   * Liefert Namen des Primärschlüssels der Adresse.
+   * Liefert Namen des Primï¿½rschlï¿½ssels der Adresse.
    *
-   * (i.A. Spaltenattribute des Primärschlüssels)
+   * (i.A. Spaltenattribute des Primï¿½rschlï¿½ssels)
    *
    * @return <code>"id"</code>
    */
@@ -50,24 +50,24 @@ public abstract class AddressRecord extends Bobo
   }
 
   /**
-   * Liefert zugehörigen Mitarbeiter oder <code>null</code>, wenn
-   * Adresse zu keinem Mitarbeiter gehört.
+   * Liefert zugehï¿½rigen Mitarbeiter oder <code>null</code>, wenn
+   * Adresse zu keinem Mitarbeiter gehï¿½rt.
    */
   public Employee getEmployee() {
     return (Employee)getParent( 0 );
   }
 
   /**
-   * Liefert zugehörige Person oder <code>null</code>, wenn
-   * Adresse zu keiner Person gehört.
+   * Liefert zugehï¿½rige Person oder <code>null</code>, wenn
+   * Adresse zu keiner Person gehï¿½rt.
    */
   public Person getPerson() {
     return (Person)getParent( 1 );
   }
 
   /**
-   * Liefert zugehörigen Standort oder <code>null</code>, wenn
-   * Adresse zu keinem Standort gehört.
+   * Liefert zugehï¿½rigen Standort oder <code>null</code>, wenn
+   * Adresse zu keinem Standort gehï¿½rt.
    */
   public Location getLocation() {
     return (Location)getParent( 2 );
@@ -98,7 +98,7 @@ public abstract class AddressRecord extends Bobo
   }
 
   /**
-   * Liefert "Eltern"-Schlüssel zum gegebenen Index (im Bereich von
+   * Liefert "Eltern"-Schlï¿½ssel zum gegebenen Index (im Bereich von
    * <code>getParentCount()</code>).
    */
   protected Object getParentKey(int index) {

@@ -19,7 +19,7 @@ import java.util.*;
  * @see Storable
  */
 
-public interface StoreKeeper
+public interface StoreKeeper<E extends Storable>
 {
   /**
    * <code>StoreToolkit</code> f�r diesen "Keeper" festlegen.
@@ -98,7 +98,7 @@ public interface StoreKeeper
    * @param key Schl�sselwert, der �bereinstimmen muss
    * @param order wenn <code>true</code>, wird Enumeration sortiert.
    */
-  public <E extends Storable> Enumeration<E> getEnumeration(E object,
+  public Enumeration<E> getEnumeration(E object,
 				    String identifier,
 				    Object key,
 				    boolean order);
@@ -114,7 +114,7 @@ public interface StoreKeeper
    *
    * @see Selection
    */
-  public <E extends Storable> Enumeration<E> getEnumeration(E object,
+  public Enumeration<E> getEnumeration(E object,
 				    Selection selection,
 				    boolean order);
 }

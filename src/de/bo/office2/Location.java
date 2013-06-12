@@ -3,9 +3,9 @@ package de.bo.office2;
 import de.bo.base.store.StoreKeeper;
 
 /**
- * Baltic-Online Geschäftsobjekt <b>Standort</b>.
+ * Baltic-Online Geschï¿½ftsobjekt <b>Standort</b>.
  * <p>
- * Da ein Standort ein konkretes Objekt ist, dass Mitarbeiter enthält,
+ * Da ein Standort ein konkretes Objekt ist, dass Mitarbeiter enthï¿½lt,
  * werden fast alle Funktionen von <code>EmployeeContainer</code> geerbt.
  *
  * @see Company
@@ -25,12 +25,12 @@ public class Location extends EmployeeContainer {
     /**
      * Erzeugt Standort mit gegebenen Storekeeper.
      */
-    public Location(StoreKeeper storeKeeper) {
+    public Location(StoreKeeper<Bobo> storeKeeper) {
         super(storeKeeper);
     }
 
     /**
-     * Liefert zugehörige Firma (lädt sie bei Bedarf).
+     * Liefert zugehï¿½rige Firma (lï¿½dt sie bei Bedarf).
      */
     public Company getCompany() {
         return (Company) getParent(0);
@@ -40,7 +40,7 @@ public class Location extends EmployeeContainer {
      * Erzeugt Eltern-Objekt zum gegebenen Index (im Bereich von
      * <code>getParentCount()</code>).
      *
-     * Hier ist nur 0 als Index gültig, d.h. die Funktion erzeugt eine Firma.
+     * Hier ist nur 0 als Index gï¿½ltig, d.h. die Funktion erzeugt eine Firma.
      */
     protected Bobo createParent(int index) {
         Bobo record = null;
@@ -52,10 +52,10 @@ public class Location extends EmployeeContainer {
     }
 
     /**
-     * Liefert "Eltern"-Schlüssel zum gegebenen Index (im Bereich von
+     * Liefert "Eltern"-Schlï¿½ssel zum gegebenen Index (im Bereich von
      * <code>getParentCount()</code>).
      *
-     * Hier ist nur 0 als Index gültig, d.h. die Funktion liefert den Schlüssel
+     * Hier ist nur 0 als Index gï¿½ltig, d.h. die Funktion liefert den Schlï¿½ssel
      * der Firma.
      */
     protected Object getParentKey(int index) {
@@ -79,7 +79,7 @@ public class Location extends EmployeeContainer {
     }
 
     /**
-     * Liefert zusätzliche Info zum Standort.
+     * Liefert zusï¿½tzliche Info zum Standort.
      */
     public String getRemark() {
         return getStoreToolkit().objectToString(data[3]);
@@ -126,9 +126,9 @@ public class Location extends EmployeeContainer {
     }
 
     /**
-     * Liefert Namen des Primärschlüssels "Standort".
+     * Liefert Namen des Primï¿½rschlï¿½ssels "Standort".
      *
-     * (i.A. Spaltenattribute des Primärschlüssels)
+     * (i.A. Spaltenattribute des Primï¿½rschlï¿½ssels)
      *
      * @return <code>"sid"</code>
      */

@@ -8,8 +8,8 @@ import de.bo.base.store.StoreKeeper;
  * Instanzen von Ableitungen dieser Klasse enthalten Mitarbeiter
  * (Eltern von Mitarbeiter).
  * <p>
- * Diese Klasse ist auch im semantischen Sinne abstrakt und enthält
- * keine Primärdaten.
+ * Diese Klasse ist auch im semantischen Sinne abstrakt und enthï¿½lt
+ * keine Primï¿½rdaten.
  */
 
 public abstract class EmployeeContainer extends AddressContainer
@@ -33,7 +33,7 @@ public abstract class EmployeeContainer extends AddressContainer
    *
    * @param storeKeeper verwendetes Datensystem
    */
-  protected EmployeeContainer(StoreKeeper storeKeeper) {
+  protected EmployeeContainer(StoreKeeper<Bobo> storeKeeper) {
     super( storeKeeper );
 
     employeeData = null;
@@ -68,7 +68,7 @@ public abstract class EmployeeContainer extends AddressContainer
   }
 
   /**
-   * Laden aller zum Container zugehörigen Mitarbeiter.
+   * Laden aller zum Container zugehï¿½rigen Mitarbeiter.
    *
    * @return <code>true</code> bei Erfolg
    */

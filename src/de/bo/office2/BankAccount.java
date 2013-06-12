@@ -5,7 +5,7 @@ import de.bo.base.store.StoreKeeper;
 /**
  * Darstellung einer Bankverbindung.
  * <p>
- * Diese Klasse behandelt nur die Primärdaten dieser Adresse und muss
+ * Diese Klasse behandelt nur die Primï¿½rdaten dieser Adresse und muss
  * deshalb nicht weiter kommentiert werden.
  *
  * @see AddressRecord
@@ -17,7 +17,7 @@ public class BankAccount extends AddressRecord
   public BankAccount() {
     super();
   }
-  public BankAccount(StoreKeeper storeKeeper) {
+  public BankAccount(StoreKeeper<Bobo> storeKeeper) {
     super( storeKeeper );
   }
 

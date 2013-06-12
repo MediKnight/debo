@@ -5,7 +5,7 @@ import de.bo.base.store.StoreKeeper;
 /**
  * Darstellung einer Web-Adresse..
  * <p>
- * Diese Klasse behandelt nur die Primärdaten dieser Adresse und muss
+ * Diese Klasse behandelt nur die Primï¿½rdaten dieser Adresse und muss
  * deshalb nicht weiter kommentiert werden.
  *
  * @see AddressRecord
@@ -17,7 +17,7 @@ public class WWW extends AddressRecord
   public WWW() {
     super();
   }
-  public WWW(StoreKeeper storeKeeper) {
+  public WWW(StoreKeeper<Bobo> storeKeeper) {
     super( storeKeeper );
   }
 

@@ -3,10 +3,10 @@ package de.bo.base.store;
 public abstract class AbstractStorable
   implements Storable
 {
-  protected static StoreKeeper defaultStoreKeeper;
+  protected static StoreKeeper<?> defaultStoreKeeper;
 
   protected Object[] data;
-  protected StoreKeeper storeKeeper;
+  protected StoreKeeper<? extends Storable> storeKeeper;
 
   /**
    * Erzeugung-Zustand des Objekts.
@@ -22,12 +22,12 @@ public abstract class AbstractStorable
    * created | deleted | Bedeutung
    * -----------------------------
    *  false  |  false  | Trifft zu, wenn ein vorausgegangendes "retrieve"
-   *         |         | erfolgreich war. Objekt ist "gültig".
+   *         |         | erfolgreich war. Objekt ist "gï¿½ltig".
    *  false  |  true   | Dies ist der Initialisierungszustand. Er tritt auch
    *         |         | ein, wenn ein ein vorausgegangendes "delete"
-   *         |         | erfolgreich war. Objekt ist "ungültig".
+   *         |         | erfolgreich war. Objekt ist "ungï¿½ltig".
    *  true   |  false  | Trifft zu, wenn ein vorausgegangendes "create"
-   *         |         | erfolgreich war. Objekt ist "gültig".
+   *         |         | erfolgreich war. Objekt ist "gï¿½ltig".
    *  true   |  true   | Dieser Zustand darf gar nicht auftreten.
    * </pre>
    *
@@ -38,15 +38,15 @@ public abstract class AbstractStorable
   protected boolean created;
 
   /**
-   * Lösch-Zustand des Objekts.
+   * Lï¿½sch-Zustand des Objekts.
    *
-   * Ein Objekt ist "deleted", wenn er ungültig ist.
-   * Ein Objekt wird ungültig, wenn er mit der Funktion
-   * <code>delete</code> erfolgreich gelöscht wurde.
+   * Ein Objekt ist "deleted", wenn er ungï¿½ltig ist.
+   * Ein Objekt wird ungï¿½ltig, wenn er mit der Funktion
+   * <code>delete</code> erfolgreich gelï¿½scht wurde.
    * Ein Objekt ist solange "deleted", bis er mit der Funktion
-   * <code>retrieve</code> einen gültigen Zustand erhält.
+   * <code>retrieve</code> einen gï¿½ltigen Zustand erhï¿½lt.
    *
-   * Per Default ist ein Objekt ungültig, d.h. "deleted".
+   * Per Default ist ein Objekt ungï¿½ltig, d.h. "deleted".
    *
    * @see #delete
    * @see #created
@@ -57,14 +57,14 @@ public abstract class AbstractStorable
   /**
    * Setzen des Default-Storekeepers.
    */
-  public static void setDefaultStoreKeeper(StoreKeeper storeKeeper) {
+  public static void setDefaultStoreKeeper(StoreKeeper<? extends Storable> storeKeeper) {
     defaultStoreKeeper = storeKeeper;
   }
 
   /**
    * Liefert Default-Storekeeper.
    */
-  public static StoreKeeper getDefaultStoreKeeper() {
+  public static StoreKeeper<? extends Storable> getDefaultStoreKeeper() {
     return defaultStoreKeeper;
   }
 
@@ -79,7 +79,7 @@ public abstract class AbstractStorable
   /**
    * Erzeugt Storable mit gegebenen Storekeeper.
    */
-  public AbstractStorable(StoreKeeper storeKeeper) {
+  public AbstractStorable(StoreKeeper<? extends Storable> storeKeeper) {
     this.storeKeeper = (storeKeeper==null) ?
       defaultStoreKeeper : storeKeeper;
 
@@ -91,14 +91,14 @@ public abstract class AbstractStorable
   /**
    * Setzen des aktuellen Storekeepers.
    */
-  public void setStoreKeeper(StoreKeeper storeKeeper) {
+  public void setStoreKeeper(StoreKeeper<? extends Storable> storeKeeper) {
     this.storeKeeper = storeKeeper;
   }
 
   /**
    * Liefert aktuellen Storekeeper.
    */
-  public StoreKeeper getStoreKeeper() {
+  public StoreKeeper<? extends Storable> getStoreKeeper() {
     return storeKeeper;
   }
 
@@ -110,7 +110,7 @@ public abstract class AbstractStorable
   }
 
   /**
-   * Erzeugt neuen Schlüssel für das Objekt.
+   * Erzeugt neuen Schlï¿½ssel fï¿½r das Objekt.
    *
    * @return <code>true</code> bei Erfolg
    */
@@ -124,7 +124,7 @@ public abstract class AbstractStorable
   }
 
   /**
-   * Erzeugt neues Objekt im Storekeeper mit neuem Schlüssel.
+   * Erzeugt neues Objekt im Storekeeper mit neuem Schlï¿½ssel.
    *
    * @return <code>true</code> bei Erfolg
    */
@@ -139,7 +139,7 @@ public abstract class AbstractStorable
   }
 
   /**
-   * Laden des Objekts mit den Daten, die zum gegebenen Schlüssel passen.
+   * Laden des Objekts mit den Daten, die zum gegebenen Schlï¿½ssel passen.
    *
    * @return <code>true</code> bei Erfolg
    */
@@ -164,7 +164,7 @@ public abstract class AbstractStorable
    * @return <code>true</code> bei Erfolg
    */
   public boolean store() {
-    // gelöschte Objekte können nicht gespeichert werden!
+    // gelï¿½schte Objekte kï¿½nnen nicht gespeichert werden!
     if ( deleted ) return false;
 
     Object key = getKey();
@@ -189,7 +189,7 @@ public abstract class AbstractStorable
    * @return <code>true</code> bei Erfolg
    */
   public boolean delete() {
-    // gelöschte Objekte können nicht noch einmal gelöscht werden!
+    // gelï¿½schte Objekte kï¿½nnen nicht noch einmal gelï¿½scht werden!
     if ( deleted ) return false;
 
     if ( created || storeKeeper.delete( this, getKey() ) ) {
@@ -203,12 +203,12 @@ public abstract class AbstractStorable
   }
 
   /**
-   * Setzen des Primärschlüssels.
+   * Setzen des Primï¿½rschlï¿½ssels.
    */
   protected abstract void setKey(Object priKey);
 
   /**
-   * Liefert Schlüssel des Objekts oder <code>null</code> bei Misserfolg.
+   * Liefert Schlï¿½ssel des Objekts oder <code>null</code> bei Misserfolg.
    */
   public abstract Object getKey();
 

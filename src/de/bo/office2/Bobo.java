@@ -29,7 +29,7 @@ public abstract class Bobo extends AbstractStorable
 	parent = null;
     }
 
-    protected Bobo(StoreKeeper storeKeeper) {
+    protected Bobo(StoreKeeper<? extends Bobo> storeKeeper) {
 	super(storeKeeper);
 
 	orderIndexes = null;
@@ -116,7 +116,7 @@ public abstract class Bobo extends AbstractStorable
      *
      * Diese Enumeration liefert alle Objekte und ohne Sortierung.
      */
-    public Enumeration getEnumeration() {
+    public Enumeration<Bobo> getEnumeration() {
 	return getEnumeration(null,null,false);
     }
 
@@ -127,7 +127,7 @@ public abstract class Bobo extends AbstractStorable
      *
      * @param order <code>true</code> bei Sortierung
      */
-    public Enumeration getEnumeration(boolean order) {
+    public Enumeration<Bobo> getEnumeration(boolean order) {
 	return getEnumeration(null,null,order);
     }
 
@@ -138,7 +138,7 @@ public abstract class Bobo extends AbstractStorable
      * @param keyIdentifier Key-Attribut
      * @param key passender Key
      */
-    public Enumeration getEnumeration(String keyIdentifier,
+    public Enumeration<Bobo> getEnumeration(String keyIdentifier,
 				      Object key) {
 	return getEnumeration(keyIdentifier,key,false);
     }
@@ -149,7 +149,7 @@ public abstract class Bobo extends AbstractStorable
      *
      * @param sel Auswahl
      */
-    public Enumeration getEnumeration(Selection sel) {
+    public Enumeration<Bobo> getEnumeration(Selection sel) {
 	return getEnumeration(sel,false);
     }
 
@@ -159,8 +159,8 @@ public abstract class Bobo extends AbstractStorable
      * @param sel Auswahl
      * @param order <code>true</code> bei Sortierung
      */
-    public Enumeration getEnumeration(Selection sel,boolean order) {
-	return storeKeeper.getEnumeration(this,sel,order);
+    public Enumeration<Bobo> getEnumeration(Selection sel,boolean order) {
+	return ((StoreKeeper<Bobo>) storeKeeper).getEnumeration(this,sel,order);
     }
 
     /**
@@ -173,7 +173,7 @@ public abstract class Bobo extends AbstractStorable
     public Enumeration<Bobo> getEnumeration(String keyIdentifier,
 				      Object key,
 				      boolean order) {
-	return storeKeeper.getEnumeration(this,keyIdentifier,key,order);
+	return ((StoreKeeper<Bobo>) storeKeeper).getEnumeration(this,keyIdentifier,key,order);
     }
 
     /**

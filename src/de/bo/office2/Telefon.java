@@ -5,7 +5,7 @@ import de.bo.base.store.StoreKeeper;
 /**
  * Darstellung einer Telefonnummer.
  * <p>
- * Diese Klasse behandelt nur die Primärdaten dieser Adresse und muss
+ * Diese Klasse behandelt nur die Primï¿½rdaten dieser Adresse und muss
  * deshalb nicht weiter kommentiert werden.
  *
  * @see AddressRecord
@@ -17,7 +17,7 @@ public class Telefon extends AddressRecord
   public Telefon() {
     super();
   }
-  public Telefon(StoreKeeper storeKeeper) {
+  public Telefon(StoreKeeper<Bobo> storeKeeper) {
     super( storeKeeper );
   }
 

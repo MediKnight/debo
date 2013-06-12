@@ -4,7 +4,7 @@ package de.bo.base.store;
  * Ein Storeable Objekt ist ein Objekt, das durch einen StoreKeeper
  * verwaltet wird.
  * <p>
- * Gewöhnlicherweise ist ein Storable ein Datensatz einer Datenbank-Tabelle
+ * Gewï¿½hnlicherweise ist ein Storable ein Datensatz einer Datenbank-Tabelle
  * oder ein Objekt aus einem Space.
  *
  * @see StoreKeeper
@@ -15,27 +15,27 @@ public interface Storable
   /**
    * Setzen des aktuellen Storekeepers.
    */
-  public void setStoreKeeper(StoreKeeper storeKeeper);
+  public void setStoreKeeper(StoreKeeper<? extends Storable> storeKeeper);
 
   /**
    * Liefert aktuellen Storekeeper.
    */
-  public StoreKeeper getStoreKeeper();
+  public StoreKeeper<? extends Storable> getStoreKeeper();
 
   /**
-   * Liefert Schlüssel des Objekts oder <code>null</code> bei Misserfolg.
+   * Liefert Schlï¿½ssel des Objekts oder <code>null</code> bei Misserfolg.
    */
   public Object getKey();
 
   /**
-   * Erzeugt neues Objekt im Storekeeper mit neuem Schlüssel.
+   * Erzeugt neues Objekt im Storekeeper mit neuem Schlï¿½ssel.
    *
    * @return <code>true</code> bei Erfolg
    */
   public boolean create();
 
   /**
-   * Laden des Objekts mit den Daten, die zum gegebenen Schlüssel passen.
+   * Laden des Objekts mit den Daten, die zum gegebenen Schlï¿½ssel passen.
    *
    * @return <code>true</code> bei Erfolg
    */

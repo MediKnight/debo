@@ -42,7 +42,7 @@ public abstract class AddressContainer extends Bobo
    *
    * @param storeKeeper verwendetes Datensystem
    */
-  protected AddressContainer(StoreKeeper storeKeeper) {
+  protected AddressContainer(StoreKeeper<? extends Bobo> storeKeeper) {
     super( storeKeeper );
 
     addressData = null;
