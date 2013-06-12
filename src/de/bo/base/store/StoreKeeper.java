@@ -6,14 +6,14 @@ import java.util.*;
  * Ein StoreKeeper ("Lagerhalter") ist ein Objekt, das andere Objekte
  * lagern und liefern kann.
  * <p>
- * Ein StoreKeeper kann aber keine Objekte erzeugen (das müssen die
+ * Ein StoreKeeper kann aber keine Objekte erzeugen (das mï¿½ssen die
  * Objekte schon selbst tun), sondern kann neuen Objekten nur
- * einen Schlüssel liefern.
+ * einen Schlï¿½ssel liefern.
  * <p>
- * Typische Beispiele für einen "StoreKeeper" ist eine Tabelle einer
+ * Typische Beispiele fï¿½r einen "StoreKeeper" ist eine Tabelle einer
  * Datenbank, eine Datenbank selbst oder ein "Java-Space".
  * <p>
- * Objekte, die von einem StoreKeeper verwaltet werden sollen, müssen
+ * Objekte, die von einem StoreKeeper verwaltet werden sollen, mï¿½ssen
  * das Interface <code>Storable</code> implementieren.
  *
  * @see Storable
@@ -22,7 +22,7 @@ import java.util.*;
 public interface StoreKeeper
 {
   /**
-   * <code>StoreToolkit</code> für diesen "Keeper" festlegen.
+   * <code>StoreToolkit</code> fï¿½r diesen "Keeper" festlegen.
    */
   public void setStoreToolkit(StoreToolkit storeToolkit);
 
@@ -32,12 +32,12 @@ public interface StoreKeeper
   public StoreToolkit getStoreToolkit();
 
   /**
-   * Eindeutigen Schlüssel für ein Objekt erzeugen.
+   * Eindeutigen Schlï¿½ssel fï¿½r ein Objekt erzeugen.
    *
-   * @param object das Objekt, für den der Schlüssel erzeugt werden soll
+   * @param object das Objekt, fï¿½r den der Schlï¿½ssel erzeugt werden soll
    * (meistens <code>this</code>)
    *
-   * @return Schlüssel
+   * @return Schlï¿½ssel
    */
   public Object createKey(Storable object);
 
@@ -47,19 +47,19 @@ public interface StoreKeeper
    * @param object das Objekt, das die Daten erhalten soll
    * (meistens <code>this</code>)
    * @param data Ziel-Array
-   * @param key Passender Schlüssel
+   * @param key Passender Schlï¿½ssel
    *
    * @return <code>true</code> bei Erfolg
    */
   public boolean retrieve(Storable object,Object[] data,Object key);
 
   /**
-   * Daten dem StoreKeeper hinzufügen.
+   * Daten dem StoreKeeper hinzufï¿½gen.
    * 
    * @param object das Objekt, das die Daten liefern soll
    * (meistens <code>this</code>)
    * @param data Quell-Array
-   * @param key Passender Schlüssel
+   * @param key Passender Schlï¿½ssel
    *
    * @return <code>true</code> bei Erfolg
    */
@@ -71,7 +71,7 @@ public interface StoreKeeper
    * @param object das Objekt, das die Daten liefern soll
    * (meistens <code>this</code>)
    * @param data Quell-Array
-   * @param key Passender Schlüssel
+   * @param key Passender Schlï¿½ssel
    *
    * @return <code>true</code> bei Erfolg
    */
@@ -80,9 +80,9 @@ public interface StoreKeeper
   /**
    * Daten aus dem StoreKeeper entfernen.
    * 
-   * @param object das Objekt, das gelöscht werden soll
+   * @param object das Objekt, das gelï¿½scht werden soll
    * (meistens <code>this</code>)
-   * @param key Passender Schlüssel
+   * @param key Passender Schlï¿½ssel
    *
    * @return <code>true</code> bei Erfolg
    */
@@ -90,15 +90,15 @@ public interface StoreKeeper
 
   /**
    * Liefert Enumeration aller Objekte vom Typ der Klasse des Objekts
-   * <code>object</code>, deren Schlüssel <code>identifier</code> mit
-   * dem gegebenen Schlüssel übereinstimmt.
+   * <code>object</code>, deren Schlï¿½ssel <code>identifier</code> mit
+   * dem gegebenen Schlï¿½ssel ï¿½bereinstimmt.
    *
    * @param object Quell-Objekttyp
-   * @param identifier Name des Schlüssels
-   * @param key Schlüsselwert, der übereinstimmen muss
+   * @param identifier Name des Schlï¿½ssels
+   * @param key Schlï¿½sselwert, der ï¿½bereinstimmen muss
    * @param order wenn <code>true</code>, wird Enumeration sortiert.
    */
-  public Enumeration getEnumeration(Storable object,
+  public <E extends Storable> Enumeration<E> getEnumeration(E object,
 				    String identifier,
 				    Object key,
 				    boolean order);
@@ -106,7 +106,7 @@ public interface StoreKeeper
   /**
    * Liefert Enumeration aller Objekte vom Typ der Klasse des Objekts
    * <code>object</code>, die die Bedingungen der gegeben Selektion
-   * erfüllen.
+   * erfï¿½llen.
    *
    * @param object Quell-Objekttyp
    * @param selection Selektion
@@ -114,7 +114,7 @@ public interface StoreKeeper
    *
    * @see Selection
    */
-  public Enumeration getEnumeration(Storable object,
+  public <E extends Storable> Enumeration<E> getEnumeration(E object,
 				    Selection selection,
 				    boolean order);
 }

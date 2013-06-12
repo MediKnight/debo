@@ -4,9 +4,9 @@ import de.bo.base.store.*;
 import java.util.*;
 
 /**
- * Basis-Klasse für Baltic-Online Business-Objects (BOBO).
+ * Basis-Klasse fï¿½r Baltic-Online Business-Objects (BOBO).
  * <p>
- * Diese Klasse hat keine Kenntnisse über die verwendete Datenverwaltung.
+ * Diese Klasse hat keine Kenntnisse ï¿½ber die verwendete Datenverwaltung.
  */
 
 public abstract class Bobo extends AbstractStorable
@@ -62,13 +62,13 @@ public abstract class Bobo extends AbstractStorable
 	return p.retrieve(getParentKey(index));
     }
 
-    // Paket-interne Funktion: Empfängt Daten vom Objekt
+    // Paket-interne Funktion: Empfï¿½ngt Daten vom Objekt
     void get(Object[] data) {
 	for ( int i=0; i<this.data.length; i++ )
 	    data[i] = this.data[i];
     }
 
-    // Paket-interne Funktion: Überträgt Daten zum Objekt
+    // Paket-interne Funktion: ï¿½bertrï¿½gt Daten zum Objekt
     void put(Object[] data) {
 	prepare();
 
@@ -132,7 +132,7 @@ public abstract class Bobo extends AbstractStorable
     }
 
     /**
-     * Liefert unsortierte Enumeration von ausgewählten Objekten
+     * Liefert unsortierte Enumeration von ausgewï¿½hlten Objekten
      * dieser Klasse.
      *
      * @param keyIdentifier Key-Attribut
@@ -144,7 +144,7 @@ public abstract class Bobo extends AbstractStorable
     }
 
     /**
-     * Liefert unsortierte Enumeration von ausgewählten Objekten
+     * Liefert unsortierte Enumeration von ausgewï¿½hlten Objekten
      * dieser Klasse.
      *
      * @param sel Auswahl
@@ -154,7 +154,7 @@ public abstract class Bobo extends AbstractStorable
     }
 
     /**
-     * Liefert Enumeration von ausgewählten Objekten dieser Klasse.
+     * Liefert Enumeration von ausgewï¿½hlten Objekten dieser Klasse.
      *
      * @param sel Auswahl
      * @param order <code>true</code> bei Sortierung
@@ -164,13 +164,13 @@ public abstract class Bobo extends AbstractStorable
     }
 
     /**
-     * Liefert Enumeration von ausgewählten Objekten dieser Klasse.
+     * Liefert Enumeration von ausgewï¿½hlten Objekten dieser Klasse.
      *
      * @param keyIdentifier Key-Attribut
      * @param key passender Key
      * @param order <code>true</code> bei Sortierung
      */
-    public Enumeration getEnumeration(String keyIdentifier,
+    public Enumeration<Bobo> getEnumeration(String keyIdentifier,
 				      Object key,
 				      boolean order) {
 	return storeKeeper.getEnumeration(this,keyIdentifier,key,order);
@@ -201,7 +201,7 @@ public abstract class Bobo extends AbstractStorable
     public abstract String getIdentifier();
 
     /**
-     * Liefert Schlüssel-Attribut.
+     * Liefert Schlï¿½ssel-Attribut.
      */
     public abstract String getKeyIdentifier();
 

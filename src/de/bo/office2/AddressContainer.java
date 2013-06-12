@@ -10,8 +10,8 @@ import de.bo.base.store.*;
  * Adressen sind in diesem Sinne auch Telefonnummern und/oder
  * EMails, Web-Pages u.a.
  * <p>
- * Diese Klasse ist auch im semantischen Sinne abstrakt und enthält
- * keine Primärdaten.
+ * Diese Klasse ist auch im semantischen Sinne abstrakt und enthï¿½lt
+ * keine Primï¿½rdaten.
  *
  * @see AddressRecord
  */
@@ -26,7 +26,7 @@ public abstract class AddressContainer extends Bobo
   /**
    * Listen der Adressen.
    */
-  protected LinkedList[] addressData;
+  protected ArrayList<LinkedList<Bobo>> addressData;
 
   /**
    * Erzeugt Container mit Default-Storekeeper
@@ -55,20 +55,20 @@ public abstract class AddressContainer extends Bobo
    * Alle Listen werden bei Bedarf (d.h. wenn
    * <code>addressData == null</code> gilt) geladen.
    */
-  public List getAddresses(int index) {
+  public List<Bobo> getAddresses(int index) {
     if ( addressData == null ) {
-      addressData = new LinkedList[ADDRESSTYPES];
+      addressData = new ArrayList<LinkedList<Bobo>>(ADDRESSTYPES);
       for ( int i=0; i<ADDRESSTYPES; i++ )
-	addressData[i] = null;
+	addressData.set(i, null);
     }
-    if ( addressData[index] == null ) {
+    if ( addressData.get(index) == null ) {
       if ( retrieveAddresses(index) )
-	return addressData[index];
+	return addressData.get(index);
       else
 	return null;
     }
 
-    return addressData[index];
+    return addressData.get(index);
   }
 
   /**
@@ -79,37 +79,37 @@ public abstract class AddressContainer extends Bobo
   }
 
   /**
-   * Liefert Adressen im üblichen Sinne.
+   * Liefert Adressen im ï¿½blichen Sinne.
    */
-  public List getAddresses() {
+  public List<Bobo> getAddresses() {
     return getAddresses( 0 );
   }
 
   /**
    * Liefert Telefonnummern.
    */
-  public List getPhones() {
+  public List<Bobo> getPhones() {
     return getAddresses( 1 );
   }
 
   /**
    * Liefert EMails.
    */
-  public List getEMails() {
+  public List<Bobo> getEMails() {
     return getAddresses( 2 );
   }
 
   /**
    * Liefert Web-Pages.
    */
-  public List getWWWs() {
+  public List<Bobo> getWWWs() {
     return getAddresses( 3 );
   }
 
   /**
    * Liefert Bankverbindungen.
    */
-  public List getBankAccounts() {
+  public List<Bobo> getBankAccounts() {
     return getAddresses( 4 );
   }
 
@@ -126,12 +126,12 @@ public abstract class AddressContainer extends Bobo
   }
 
   /**
-   * Laden aller zum Container zugehörigen Adressen.
+   * Laden aller zum Container zugehï¿½rigen Adressen.
    *
    * @return <code>true</code> bei Erfolg
    */
   protected boolean retrieveAddresses() {
-    addressData = new LinkedList[ADDRESSTYPES];
+    addressData = new ArrayList<LinkedList<Bobo>>(ADDRESSTYPES);
 
     for ( int i=0; i<ADDRESSTYPES; i++ )
       if ( !retrieveAddresses( i ) )
@@ -142,7 +142,7 @@ public abstract class AddressContainer extends Bobo
 
 
   /**
-   * Laden der zum Index zugehörigen Adressen.
+   * Laden der zum Index zugehï¿½rigen Adressen.
    *
    * @return <code>true</code> bei Erfolg
    */
@@ -151,15 +151,15 @@ public abstract class AddressContainer extends Bobo
     if ( address != null )
       address.setStoreKeeper( getStoreKeeper() );
 
-    addressData[index] = new LinkedList();
+    addressData.set(index, new LinkedList<Bobo>());
 
-    Enumeration e =
+    Enumeration<Bobo> e =
       address.getEnumeration( getKeyIdentifier(), getKey(), true );
     if ( e == null )
       return false;
 
     while ( e.hasMoreElements() )
-      addressData[index].add( e.nextElement() );
+      addressData.get(index).add( e.nextElement() );
 
     return true;
   }
