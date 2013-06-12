@@ -68,6 +68,7 @@ import javax.swing.*;
 
 public class NavControl extends JPanel implements ActionListener {
 
+    private static final long serialVersionUID = 1L;
     private static final Insets defaultInsets = new Insets(-2, 1, -2, 1);
     private static final Font plainFont = new Font("dialog", Font.PLAIN, 12);
     private static final Font boldFont = new Font("dialog", Font.BOLD, 12);
@@ -209,6 +210,8 @@ public class NavControl extends JPanel implements ActionListener {
       * instead of JButton itself, because we want to suppress focus
       * traversal. */
     private class NavButton extends JButton implements ItemListener {
+
+      private static final long serialVersionUID = 1L;
 
         /** Creates new NavButton */
         public NavButton(JLabel label) {

@@ -17,7 +17,7 @@ public abstract class EmployeeContainer extends AddressContainer
   /**
    * Liste der Mitarbeiter.
    */
-  protected LinkedList employeeData;
+  protected LinkedList<Employee> employeeData;
 
   /**
    * Erzeugt Container mit Default-Storekeeper
@@ -57,7 +57,7 @@ public abstract class EmployeeContainer extends AddressContainer
    * Diese Liste wird bei Bedarf (d.h. wenn
    * <code>employeeData == null</code> gilt) geladen.
    */
-  public List getEmployees() {
+  public List<Employee> getEmployees() {
     if ( employeeData == null ) {
       if ( retrieveEmployees() )
 	return employeeData;
@@ -73,9 +73,9 @@ public abstract class EmployeeContainer extends AddressContainer
    * @return <code>true</code> bei Erfolg
    */
   protected synchronized boolean retrieveEmployees() {
-    employeeData = new LinkedList();
+    employeeData = new LinkedList<Employee>();
     Employee employee = new Employee();
-    Enumeration e =
+    Enumeration<Bobo> e =
       employee.getEnumeration( getKeyIdentifier(), getKey(), true );
     if ( e == null )
       return false;

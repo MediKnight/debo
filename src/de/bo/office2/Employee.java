@@ -30,7 +30,7 @@ public class Employee extends AddressContainer
   /**
    * Erzeugt Mitarbeiter mit gegebenen Storekeeper.
    */
-  public Employee(StoreKeeper<Employee> storeKeeper) {
+  public Employee(StoreKeeper<Bobo> storeKeeper) {
     super( storeKeeper );
   }
 

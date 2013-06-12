@@ -98,7 +98,7 @@ public interface StoreKeeper<E extends Storable>
    * @param key Schl�sselwert, der �bereinstimmen muss
    * @param order wenn <code>true</code>, wird Enumeration sortiert.
    */
-  public Enumeration<E> getEnumeration(E object,
+  public <F extends E> Enumeration<F> getEnumeration(F object,
 				    String identifier,
 				    Object key,
 				    boolean order);
@@ -114,7 +114,7 @@ public interface StoreKeeper<E extends Storable>
    *
    * @see Selection
    */
-  public Enumeration<E> getEnumeration(E object,
+  public <F extends E> Enumeration<F> getEnumeration(F object,
 				    Selection selection,
 				    boolean order);
 }

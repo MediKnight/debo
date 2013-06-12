@@ -23,7 +23,7 @@ public class Company extends Bobo
   /**
    * Liste der Standorte.
    */
-  protected LinkedList locationData;
+  protected LinkedList<Location> locationData;
 
   /**
    * Erzeugt Firma mit Default-Storekeeper
@@ -99,7 +99,7 @@ public class Company extends Bobo
    * Diese Liste wird bei Bedarf (d.h. wenn
    * <code>locationData == null</code> gilt) geladen.
    */
-  public List getLocations() {
+  public List<Location> getLocations() {
     if ( locationData == null ) {
       if ( retrieveLocations() )
 	return locationData;
@@ -115,15 +115,15 @@ public class Company extends Bobo
    * @return <code>true</code> bei Erfolg
    */
   protected synchronized boolean retrieveLocations() {
-    locationData = new LinkedList();
+    locationData = new LinkedList<Location>();
     Location location = new Location();
-    Enumeration e =
+    Enumeration<Bobo> e =
       location.getEnumeration( getKeyIdentifier(), getKey(), true );
     if ( e == null )
       return false;
 
     while ( e.hasMoreElements() ) {
-      location = (Location)e.nextElement();
+      location = (Location) e.nextElement();
       location.setParent( 0, this );
       locationData.add( location );
     }
