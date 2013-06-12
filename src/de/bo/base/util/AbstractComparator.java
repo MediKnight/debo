@@ -107,11 +107,11 @@ public abstract class AbstractComparator<O> implements Comparator<O>
       ascend[i] = x > 0;
       x = Math.abs( x );
       if ( x < 1 || x > n )
-	throw new IllegalArgumentException();
+        throw new IllegalArgumentException();
       x--;
       for ( int j=0; j<i; j++ )
-	if ( x == permutation[j] )
-	  throw new IllegalArgumentException();
+        if ( x == permutation[j] )
+          throw new IllegalArgumentException();
       permutation[i] = x;
     }
   }
@@ -127,7 +127,7 @@ public abstract class AbstractComparator<O> implements Comparator<O>
       Comparable<O> c1 = getComparable( k, o1 );
       int c = c1.compareTo( o2 );
       if ( c != 0 )
-	return ascend[i] ? c : -c;
+        return ascend[i] ? c : -c;
     }
     return 0;
   }
