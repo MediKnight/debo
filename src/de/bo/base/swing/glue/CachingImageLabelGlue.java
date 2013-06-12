@@ -1,6 +1,7 @@
 package de.bo.base.swing.glue;
 
 import java.awt.*;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import de.bo.base.memento.StringMemento;
@@ -21,18 +22,18 @@ import java.util.Hashtable;
  **/
 
 public class CachingImageLabelGlue extends ImageLabelGlue {
-	protected Hashtable	sizeCache				= new Hashtable();
-	protected Hashtable	imageIconCache	= new Hashtable();
+	protected Hashtable<String, Dimension>	sizeCache      = new Hashtable<String, Dimension>();
+	protected Hashtable<String, ImageIcon>	imageIconCache = new Hashtable<String, ImageIcon>();
 
 	protected	ImageIcon	getImageIcon() {
 		Dimension		size			= label.getBounds().getSize();
 		String			name			= fileName.getStringValue();
 		if( name == null ) { return null; }
 
-		Dimension	cachedSize = (Dimension) sizeCache.get( name );
+		Dimension	cachedSize = sizeCache.get( name );
 		if( cachedSize != null ) {
 			if( cachedSize.equals( size ) ) {
-				return (ImageIcon) imageIconCache.get( name );
+				return imageIconCache.get( name );
 			}
 		}
 

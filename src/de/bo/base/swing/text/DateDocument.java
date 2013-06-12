@@ -42,7 +42,7 @@ public class DateDocument extends PlainDocument {
     /**
      *
      */
-    protected ListModel listModel;
+    protected ListModel<Object> listModel;
 
     /**
      *
@@ -84,14 +84,14 @@ public class DateDocument extends PlainDocument {
     /**
      *
      */
-    public void setListModel( ListModel model ) {
+    public void setListModel( ListModel<Object> model ) {
 	listModel = model;
     }
 
     /**
      *
      */
-    public ListModel getListModel() {
+    public ListModel<Object> getListModel() {
 	return listModel;
     }
 

@@ -5,9 +5,9 @@ import javax.swing.text.*;
 
 /**
  * Diese Klasse stellt ein <CODE>Document</CODE> dar, was an eine
- * editierbare <CODE>DocumentComboBox</CODE> gehängt werden kann und dann alle
+ * editierbare <CODE>DocumentComboBox</CODE> gehï¿½ngt werden kann und dann alle
  * Eingaben in dem Textfeld der ComboBox entsprechend den
- * Listeneinträgen in der <CODE>DocumentComboBox</CODE> vervollständigt.
+ * Listeneintrï¿½gen in der <CODE>DocumentComboBox</CODE> vervollstï¿½ndigt.
  *
  * Anwendung:
  * <PRE>
@@ -28,16 +28,16 @@ public class ListAutoCompleteDecorator extends AutoCompleteDocumentDecorator {
 
     public static final String CLASSNAME = "ListAutoCompleteDecorator";
 
-    protected ListModel model;
+    protected ListModel<Object> model;
 
     /**
      * Dieser Konstruktor bekommt als Parameter eine DocumenetComboBox, deren
-     * Text vervollständigt werden soll.
-     * @param documentComboBox Die DocumentComboBox, deren Text vervollständigt
+     * Text vervollstï¿½ndigt werden soll.
+     * @param documentComboBox Die DocumentComboBox, deren Text vervollstï¿½ndigt
      *  werden soll.
      */
     public ListAutoCompleteDecorator(
-        ListModel model,
+        ListModel<Object> model,
         JTextComponent textComponent) {
         super(textComponent);
 
@@ -45,13 +45,13 @@ public class ListAutoCompleteDecorator extends AutoCompleteDocumentDecorator {
     }
 
     /**
-     * Diese Methode liefert eine <CODE>Enumeration</CODE> mit den möglichen
-     * Vervollständigungen. Da die Vervollständigungen für alle Prefixe gleich
+     * Diese Methode liefert eine <CODE>Enumeration</CODE> mit den mï¿½glichen
+     * Vervollstï¿½ndigungen. Da die Vervollstï¿½ndigungen fï¿½r alle Prefixe gleich
      * sind, werden die Parameter hier ignoriert.
-     * @param beforeText Der Text vor der einzufügenden Stelle.
-     * @param str Der einzufügende Text.
+     * @param beforeText Der Text vor der einzufï¿½genden Stelle.
+     * @param str Der einzufï¿½gende Text.
      * @return Eine <CODE>Enumeration</CODE> von <CODE>String</CODE> die
-     *  die möglichen Vervollständigungen angibt.
+     *  die mï¿½glichen Vervollstï¿½ndigungen angibt.
      */
     public String getCompletion(String s) {
         String element = null;

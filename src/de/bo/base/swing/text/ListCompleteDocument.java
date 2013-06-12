@@ -16,7 +16,7 @@ public class ListCompleteDocument extends PlainDocument {
     /**
      *
      */
-    protected ListModel listModel;
+    protected ListModel<Object> listModel;
 
     /**
      *
@@ -33,7 +33,7 @@ public class ListCompleteDocument extends PlainDocument {
      */
     public ListCompleteDocument(
         JTextComponent textComponent,
-        ListModel model) {
+        ListModel<Object> model) {
         super();
 
         this.textComponent = textComponent;
@@ -44,14 +44,14 @@ public class ListCompleteDocument extends PlainDocument {
     /**
      *
      */
-    public void setListModel(ListModel model) {
+    public void setListModel(ListModel<Object> model) {
         listModel = model;
     }
 
     /**
      *
      */
-    public ListModel getListModel() {
+    public ListModel<Object> getListModel() {
         return listModel;
     }
 

@@ -6,8 +6,8 @@ import javax.swing.JComboBox;
 import de.bo.base.memento.Glue;
 import de.bo.base.memento.StringMemento;
 
-public class ComboBoxGlue implements Glue {
-	protected	JComboBox			comboBox;
+public class ComboBoxGlue<E> implements Glue {
+	protected	JComboBox<E>			comboBox;
 	protected	StringMemento stringMemento;
   protected boolean       loadInProgress;
 
@@ -21,7 +21,7 @@ public class ComboBoxGlue implements Glue {
  		stringMemento.setStringValue( (String) comboBox.getSelectedItem() );
 	}
 
-	public	ComboBoxGlue( JComboBox comboBox, StringMemento stringMemento ) {
+	public	ComboBoxGlue( JComboBox<E> comboBox, StringMemento stringMemento ) {
 		this.comboBox				= comboBox;
 		this.stringMemento	= stringMemento;
 		load();

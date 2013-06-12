@@ -94,7 +94,7 @@ public class Tracer
   /**
    * A list of known trace classes.
    */
-  protected static List traceClasses;
+  protected static List<String> traceClasses;
 
   /**
    * Trace destination writer.
@@ -111,7 +111,7 @@ public class Tracer
   /**
    * A list of enabled trace classes by this tracer.
    */
-  protected List enabledClasses;
+  protected List<String> enabledClasses;
 
   /**
    * Trace info mask.
@@ -148,7 +148,7 @@ public class Tracer
   static {
     // create list for known trace classes and
     // add "*" (trace everything) to the list.
-    traceClasses = new LinkedList();
+    traceClasses = new LinkedList<String>();
     addTraceClass( "*" );
 
     defaultTracer = new DefaultTracer();
@@ -170,7 +170,7 @@ public class Tracer
     int n = traceClasses.size();
     String[] sa = new String[n];
     for ( int i=0; i<n; i++ )
-      sa[i] = (String)traceClasses.get( i );
+      sa[i] = traceClasses.get( i );
     return sa;
   }
 
@@ -242,7 +242,7 @@ public class Tracer
     prefix = "";
     infix  = "";
     suffix = "";
-    enabledClasses = new LinkedList();
+    enabledClasses = new LinkedList<String>();
     
     teePaths = new ArrayList<String>();
     teeWriters = new ArrayList<PrintWriter>();
@@ -346,7 +346,7 @@ public class Tracer
 
     if ( tc.equals("*") ) {
       // enable or disable all known classes
-      enabledClasses = new LinkedList();
+      enabledClasses = new LinkedList<String>();
       if ( set ) 
 	for ( int i=0; i<traceClasses.size(); i++ )
 	  enabledClasses.add( traceClasses.get(i) );

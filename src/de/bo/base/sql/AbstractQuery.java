@@ -5,7 +5,7 @@ import java.util.Vector;
 
 public abstract class AbstractQuery
 {
-  protected Vector inputData;
+  protected Vector<QueryInputData> inputData;
 
   public AbstractQuery(TableCache cache)
   {
@@ -13,7 +13,7 @@ public abstract class AbstractQuery
   }
   public AbstractQuery(TableCache cache,TableAttribute[] ta)
   {
-    inputData = new Vector( 20, 10 );
+    inputData = new Vector<QueryInputData>( 20, 10 );
     addInputData( cache, ta );
   }
 
@@ -26,8 +26,8 @@ public abstract class AbstractQuery
   public QueryOutputData[] runQuery()
     throws SQLException
   {
-    Vector qo = new Vector( 100, 20 );
-    QueryInputData top = (QueryInputData)inputData.elementAt( 0 );
+    Vector<QueryOutputData> qo = new Vector<QueryOutputData>( 100, 20 );
+    QueryInputData top = inputData.elementAt( 0 );
 
     runQuery( qo, top );
 
@@ -37,23 +37,23 @@ public abstract class AbstractQuery
     }
     return null;
   }
-  protected void runQuery(Vector qo,QueryInputData qi)
+  protected void runQuery(Vector<QueryOutputData> qo,QueryInputData qi)
     throws SQLException
   {
     TableCache tc = qi.getTableCache();
     int n = tc.getRecords();
     int onr = tc.getRecordIndex();
 
-    // Iteriere über alle Datensätze ...
+    // Iteriere ï¿½ber alle Datensï¿½tze ...
     for ( int i=0; i<n; i++ ) {
 
       // Lade Zeile an Position i ...
       tc.goToRecord( i );
       Object[] oa = tc.getCurrentData();
 
-      // Iteriere nun über alle Attribute in der Zeile i.
+      // Iteriere nun ï¿½ber alle Attribute in der Zeile i.
       // Die Position 0 wird ausgelassen, da das die
-      // Schlüsselposition ist.
+      // Schlï¿½sselposition ist.
       for ( int j=1; j<oa.length; j++ ) {
 
 	// Von der Tabelle gesetzten Attribute:
@@ -61,13 +61,13 @@ public abstract class AbstractQuery
 
 	// Existiert ein Attribut-Array in den Eingabe-Daten?
 	if ( qi.getAttribute(0) == null ) {
-	  // Wenn nicht, dann berücksichtigen wir alle Felder in der Suche.
+	  // Wenn nicht, dann berï¿½cksichtigen wir alle Felder in der Suche.
 	  if ( find( oa[j] ) )
 	    qo.addElement( new QueryOutputData( tc, oa[0], ta ) );
 	}
 	else {
-	  // Andernfalls prüfen wir, ob das vorhende Attribut zu den
-	  // geforderten Attributen gehört.
+	  // Andernfalls prï¿½fen wir, ob das vorhende Attribut zu den
+	  // geforderten Attributen gehï¿½rt.
 	  int ac = qi.getAttributeCount();
 	  for ( int k=0; k<ac; k++ )
 	    if ( ta.equals( qi.getAttribute(k) ) ) {
@@ -79,7 +79,7 @@ public abstract class AbstractQuery
       }  // endfor j
     } // endfor i
 
-    // Ursprüngliche Datensatz-Position wiederherstellen.
+    // Ursprï¿½ngliche Datensatz-Position wiederherstellen.
     tc.goToRecord( onr );
   }
 

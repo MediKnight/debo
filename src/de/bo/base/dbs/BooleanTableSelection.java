@@ -3,12 +3,12 @@ package de.bo.base.dbs;
 import java.util.*;
 
 /**
- * Eine Instanz dieser Klasse ermöglicht eine Selektion von Tabellen
- * gemäß der <code>or</code> oder <code>and</code>-Verknüpfung.
+ * Eine Instanz dieser Klasse ermï¿½glicht eine Selektion von Tabellen
+ * gemï¿½ï¿½ der <code>or</code> oder <code>and</code>-Verknï¿½pfung.
  * <p>
  * Eine Instanz dieser Klasse beinhaltet mehrere
  * <code>TableSelection</code>-Objekte, die dann in der String-Darstellung
- * mit <code>or</code> oder <code>and</code> verknüpft werden.
+ * mit <code>or</code> oder <code>and</code> verknï¿½pft werden.
  *
  * @see TableOrSelection
  * @see TableAndSelection
@@ -20,7 +20,7 @@ public abstract class BooleanTableSelection extends TableSelection
   /**
    * Vektor von <code>TableSelection</code>-Objekten.
    */
-  protected Stack selection;
+  protected Stack<TableSelection> selection;
 
   /**
    * Erzeugt leeres Objekt.
@@ -29,13 +29,13 @@ public abstract class BooleanTableSelection extends TableSelection
    * <code>TableSelection.FALSE</code>.
    */
   public BooleanTableSelection() {
-    selection = new Stack();
+    selection = new Stack<TableSelection>();
   }
 
   /**
    * Erzeugt Objekt mit initialer Gleichheits-Selektion.
    *
-   * Führt <code>this( attribute, value, DBUtilities.EQUALS );</code>
+   * Fï¿½hrt <code>this( attribute, value, DBUtilities.EQUALS );</code>
    * aus.
    *
    * @param attribute Attribut der initialen Bedingung
@@ -50,29 +50,29 @@ public abstract class BooleanTableSelection extends TableSelection
    *
    * @param attribute Attribut der initialen Bedingung
    * @param value Wert der initialen Bedingung
-   * @param operator Operator-Konstante gemäß <code>DBUtilities</code>
+   * @param operator Operator-Konstante gemï¿½ï¿½ <code>DBUtilities</code>
    * der initialen Bedingung
    */
   public BooleanTableSelection(String attribute,Object value,int operator) {
-    selection = new Stack();
+    selection = new Stack<TableSelection>();
     addSelection( new TableSelection( attribute, value, operator ) );
   }
 
   /**
-   * Hinzufügen einer Selektion.
+   * Hinzufï¿½gen einer Selektion.
    *
-   * @param sel Selektion, die hinzugefügt werden soll
+   * @param sel Selektion, die hinzugefï¿½gt werden soll
    */
   public void addSelection(TableSelection sel) {
     selection.push( sel );
   }
 
   /**
-   * Hinzufügen einer Selektion.
+   * Hinzufï¿½gen einer Selektion.
    *
    * @param attribute Attribut der Bedingung
    * @param value Wert der Bedingung
-   * @param operator Operator-Konstante gemäß <code>DBUtilities</code>
+   * @param operator Operator-Konstante gemï¿½ï¿½ <code>DBUtilities</code>
    */
   public void addSelection(String attribute,Object value,int operator) {
     addSelection( new TableSelection(attribute,value,operator) );
@@ -86,7 +86,7 @@ public abstract class BooleanTableSelection extends TableSelection
    */
   public TableSelection removeSelection() {
     if ( !selection.isEmpty() )
-      return (TableSelection)selection.pop();
+      return selection.pop();
     return null;
   }
 
@@ -103,7 +103,7 @@ public abstract class BooleanTableSelection extends TableSelection
   /**
    * String-Darstellung.
    *
-   * Der zurückgelieferte String ist eine geklammerte Hintereinanderausführung
+   * Der zurï¿½ckgelieferte String ist eine geklammerte Hintereinanderausfï¿½hrung
    * von <code>and/or</code>-Operatoren bzgl. der enthaltenen
    * <code>TableSelection</code>-Objekte.
    *

@@ -1,22 +1,23 @@
 package de.bo.base.store.sql;
 
 import de.bo.base.store.*;
+
 import java.util.*;
 
 public abstract class SelectionContainer extends DefaultSelection
 {
-  protected Stack stack;
+  protected Stack<Selection> stack;
 
   public SelectionContainer(StoreToolkit toolkit) {
     super( toolkit );
 
-    stack = new Stack();
+    stack = new Stack<Selection>();
   }
 
   /**
-   * Hinzufügen einer Selektion.
+   * Hinzufï¿½gen einer Selektion.
    *
-   * @param selection Selektion, die hinzugefügt werden soll
+   * @param selection Selektion, die hinzugefï¿½gt werden soll
    */
   public void addSelection(Selection selection) {
     stack.push( selection );
@@ -30,7 +31,7 @@ public abstract class SelectionContainer extends DefaultSelection
    */
   public Selection removeSelection() {
     if ( !stack.isEmpty() )
-      return (Selection)stack.pop();
+      return stack.pop();
     return null;
   }
 
