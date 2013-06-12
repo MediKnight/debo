@@ -24,7 +24,7 @@ import java.io.*;
 public class CommandLineProperties extends Properties
 {
   private String[] args;
-  private List validArgs;
+  private List<CommandLineArgument> validArgs;
 
   private boolean acceptAllPropertyTypes;
 
@@ -136,9 +136,9 @@ public class CommandLineProperties extends Properties
   protected CommandLineArgument checkOption(CommandLineArgument option)
     throws IllegalArgumentException {
 
-    Iterator it = validArgs.iterator();
+    Iterator<CommandLineArgument> it = validArgs.iterator();
     while ( it.hasNext() ) {
-      CommandLineArgument arg = (CommandLineArgument)it.next();
+      CommandLineArgument arg = it.next();
       if ( arg.equals(option) )
 	return arg;
     }
@@ -160,10 +160,10 @@ public class CommandLineProperties extends Properties
     throws IllegalArgumentException {
 
     // Leichter mit Iterator zu behandlen.
-    Iterator it = Arrays.asList(args).iterator();
+    Iterator<String> it = Arrays.asList(args).iterator();
 
-    // Rückgabe: Liste der Argumente, die keine Optionen sind.
-    List noOptions = new LinkedList();
+    // Rï¿½ckgabe: Liste der Argumente, die keine Optionen sind.
+    List<String> noOptions = new LinkedList<String>();
 
     // Ist true, wenn "--" passiert wurde.
     boolean noMoreOptions = false;
@@ -171,9 +171,9 @@ public class CommandLineProperties extends Properties
     while ( it.hasNext() ) {
 
       // Die erwartete Option:
-      String s = it.next().toString();
+      String s = it.next();
 
-      // Leere Optionen (welche in Quotes auftauchen können)
+      // Leere Optionen (welche in Quotes auftauchen kï¿½nnen)
       // werden ignoriert.
       if ( s.length() == 0 ) continue;
 
@@ -202,7 +202,7 @@ public class CommandLineProperties extends Properties
 	noOptions.add(s);
     }
 
-    // Argumente, die keine Optionen sind, zurückliefern:
+    // Argumente, die keine Optionen sind, zurï¿½ckliefern:
     return (String[])noOptions.toArray(new String[0]);
   }
 
@@ -232,14 +232,14 @@ public class CommandLineProperties extends Properties
     }
   }
 
-  private void readOption(Iterator it,String key)
+  private void readOption(Iterator<String> it,String key)
     throws IllegalArgumentException {
 
     CommandLineArgument arg =
       checkOption(new CommandLineArgument(key,
 					  CommandLineArgument.OPTION_TYPE));
     try {
-      String value = arg.isValueRequired() ? it.next().toString() : "";
+      String value = arg.isValueRequired() ? it.next() : "";
       setProperty(arg.getKey(),value);
     }
     catch (NoSuchElementException nsex) {

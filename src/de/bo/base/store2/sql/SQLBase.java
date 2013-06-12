@@ -97,7 +97,7 @@ public abstract class SQLBase implements StoreKeeper, TraceConstants {
 
 		try {
 			if (selection != null)
-				for (Iterator it = selection.getValues().iterator();
+				for (Iterator<Object> it = selection.getValues().iterator();
 					it.hasNext();
 					) {
 					Object value = it.next();

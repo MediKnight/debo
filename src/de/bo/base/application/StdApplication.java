@@ -613,9 +613,9 @@ implements TraceConstants
 
     // mix config and options
     workingProperties = new Properties();
-    Enumeration e = configProperties.propertyNames();
+    Enumeration<?> e = configProperties.propertyNames();
     while ( e.hasMoreElements() ) {
-      String key = (String)e.nextElement();
+      String key = e.nextElement().toString();
       String s = optionProperties.getProperty( key );
       if ( s != null )
 	workingProperties.put( key, s );
@@ -687,9 +687,9 @@ implements TraceConstants
       fis.close();
       int confCount = conf.size();
 
-      Enumeration e = tmp.propertyNames();
+      Enumeration<?> e = tmp.propertyNames();
       while ( e.hasMoreElements() ) {
-	String key = (String)e.nextElement();
+	String key = e.nextElement().toString();
 	String s = conf.getProperty( key );
 	if ( s == null )
 	  conf.put( key, tmp.getProperty(key) );

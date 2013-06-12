@@ -104,7 +104,9 @@ public class Tracer
   /**
    * A list of teed output objects used by this tracer.
    */
-  protected List teeList;
+  protected List<String> teePaths;
+  protected List<PrintWriter> teeWriters;
+  protected List<OutputStream> teeStreams;
 
   /**
    * A list of enabled trace classes by this tracer.
@@ -241,7 +243,10 @@ public class Tracer
     infix  = "";
     suffix = "";
     enabledClasses = new LinkedList();
-    teeList = new LinkedList();
+    
+    teePaths = new ArrayList<String>();
+    teeWriters = new ArrayList<PrintWriter>();
+    teeStreams = new ArrayList<OutputStream>();
   }
 
   /**
@@ -267,10 +272,20 @@ public class Tracer
 
   /**
    * This function is used by the <code>addTee()</code> functions.
-   */
-  protected void addTeeObject(Object o) {
-    if ( !teeList.contains( o ) )
-      teeList.add( o );
+   */  
+  protected void addTeeObject(String teePath) {
+    if ( !teePaths.contains( teePath ) ) 
+      teePaths.add(teePath);
+  }
+
+  protected void addTeeObject(PrintWriter teeWriter) {
+    if ( !teeWriters.contains( teeWriter ) )
+      teeWriters.add(teeWriter);
+  }
+
+  protected void addTeeObject(OutputStream teeStream) {
+    if ( !teeStreams.contains( teeStream ) )
+      teeStreams.add(teeStream);
   }
 
   /**
@@ -298,16 +313,21 @@ public class Tracer
    * Untees all output objects from the current writer.
    */
   public void removeTees() {
-    int n = teeList.size();
-    for ( int i=n-1; i>=0; i-- )
-      teeList.remove( i );
+    teePaths.clear();
+    teeWriters.clear();
+    teeStreams.clear();
+  }
+  
+  protected void removeTeeObject(String teePath) {
+    teePaths.remove( teePath );
+  }
+  
+  protected void removeTeeObject(PrintWriter teeWriter) {
+    teeWriters.remove( teeWriter );
   }
 
-  /**
-   * This function is used by the <code>removeTee()</code> functions.
-   */
-  protected void removeTeeObject(Object o) {
-    teeList.remove( o );
+  protected void removeTeeObject(OutputStream teeStream) {
+    teeStreams.remove( teeStream );
   }
 
   /**
@@ -469,30 +489,28 @@ public class Tracer
     writer.println( s );
     writer.flush();
 
-    Iterator it = teeList.iterator();
-    while ( it.hasNext() ) {
-      Object o = it.next();
-      if ( o instanceof PrintWriter ) {
-	PrintWriter pw = (PrintWriter)o;
-	pw.println( s );
-	pw.flush();
+    for(String teePath : teePaths) {
+      try {
+        FileOutputStream fos = new FileOutputStream( teePath, true );
+        PrintWriter pw = new PrintWriter( fos );
+        pw.println( s );
+        pw.flush();
+        fos.close();
       }
-      if ( o instanceof OutputStream ) {
-	PrintWriter pw = new PrintWriter( (OutputStream)o );
-	pw.println( s );
-	pw.flush();
+      catch ( IOException ioe ) {
       }
-      if ( o instanceof String ) {
-	try {
-	  FileOutputStream fos = new FileOutputStream( o.toString(), true );
-	  PrintWriter pw = new PrintWriter( fos );
-	  pw.println( s );
-	  pw.flush();
-	  fos.close();
-	}
-	catch ( IOException ioe ) {
-	}
-      }
+    }
+    
+    for(PrintWriter teeWriter : teeWriters) {
+      PrintWriter pw = teeWriter;
+      pw.println( s );
+      pw.flush();
+    }
+    
+    for(OutputStream teeStream : teeStreams) {
+      PrintWriter pw = new PrintWriter( teeStream );
+      pw.println( s );
+      pw.flush();
     }
   }
 
@@ -530,7 +548,7 @@ public class Tracer
     // data with no chance to change this behavior.
     int n = p.size();
     String[] pna = new String[n];
-    Enumeration e = p.propertyNames();
+    Enumeration<?> e = p.propertyNames();
     for ( int i=0; i<n; i++ )
       pna[i] = e.nextElement().toString();
 

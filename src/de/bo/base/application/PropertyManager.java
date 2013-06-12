@@ -27,7 +27,7 @@ public class PropertyManager
 					     Properties lower) {
 	Properties props = (Properties)higher.clone();
 
-	for ( Enumeration e=lower.keys(); e.hasMoreElements(); ) {
+	for ( Enumeration<Object> e=lower.keys(); e.hasMoreElements(); ) {
 	    String key = e.nextElement().toString();
 	    if ( props.getProperty(key) == null )
 		props.setProperty(key,lower.getProperty(key));
