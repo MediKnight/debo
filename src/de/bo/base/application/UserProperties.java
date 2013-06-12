@@ -3,6 +3,7 @@ package de.bo.base.application;
 import java.io.*;
 
 public class UserProperties extends FiledProperties {
+    private static final long serialVersionUID = 1L;
 	public UserProperties(String path) {
 		super(path);
 	}

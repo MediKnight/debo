@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 
 /**
  * Diese Klasse implementiert ein JLabel, welches bei dem Setzen eines
- * Textes mittels 'setText' keine Geometrieänderung des Layouts der
+ * Textes mittels 'setText' keine Geometrieï¿½nderung des Layouts der
  * Root-Komponente verursacht.
  *
  * @version 0.01 1.8.1999
@@ -13,6 +13,8 @@ import javax.swing.JLabel;
  **/
 
 public class NonResizingLabel extends JLabel {
+    private static final long serialVersionUID = 1L;
+  
 	protected	boolean	setting = false;	// true gdw. im Closure setText aufgerufen worden ist
 
   /** Konstruktor @see JLabel **/
@@ -34,14 +36,14 @@ public class NonResizingLabel extends JLabel {
 	public NonResizingLabel()																										{ super(); }
 
   /**
-   * Diese Methode setzt den Text des JLabels auf den übergebenen Parameter,
-   * wobei keine Geometrieänderung stattfindet.
+   * Diese Methode setzt den Text des JLabels auf den ï¿½bergebenen Parameter,
+   * wobei keine Geometrieï¿½nderung stattfindet.
    * @param s Der Text, auf den das JLabel gesetzt werden soll.
    **/
 	public void setText( String s ) {
   	// -- Hinweis zur Implementierung
     // Da in JLabel this.text nur in setText gesetzt wird, this.text aber
-    // private in JLabel ist, muß das revalidate über Zunstandsvariable
+    // private in JLabel ist, muï¿½ das revalidate ï¿½ber Zunstandsvariable
     // abgefangen werden.
 		setting = true;
 		super.setText( s );   // Da sind leider zu viele Sachen 'private'
@@ -49,7 +51,7 @@ public class NonResizingLabel extends JLabel {
 	}
 
 	public void revalidate() {
-  	// Wenn gerade ein setText läuft, kein revalidate ausführen
+  	// Wenn gerade ein setText lï¿½uft, kein revalidate ausfï¿½hren
 		if( setting ) {
 			return;
 		}

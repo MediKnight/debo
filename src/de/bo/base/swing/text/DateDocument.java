@@ -20,6 +20,12 @@ import de.bo.base.util.DateFormatChecker;
  */
 public class DateDocument extends PlainDocument {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+
     public static final String CLASSNAME = "DateDocument";
 
 
@@ -175,7 +181,7 @@ public class DateDocument extends PlainDocument {
 	}
 
 	//
-	// Vervollständigungen aus der Liste nur erlauben, wenn die Eingabe am Ende
+	// Vervollstï¿½ndigungen aus der Liste nur erlauben, wenn die Eingabe am Ende
 	// erfolgt.
 	//
 	if( listModel != null && completeFromList && offset == s.length() ) {

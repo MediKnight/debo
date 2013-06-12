@@ -16,6 +16,8 @@ import javax.swing.event.EventListenerList;
  */
 public abstract class AbstractBillAmountModel implements BillAmountModel, Serializable {
 
+    private static final long serialVersionUID = 1L;
+  
     protected EventListenerList listenerList = new EventListenerList();
 
 

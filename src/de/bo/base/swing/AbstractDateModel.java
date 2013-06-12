@@ -17,6 +17,8 @@ import de.bo.base.swing.event.*;
  */
 public abstract class AbstractDateModel implements DateModel, Serializable {
 
+    private static final long serialVersionUID = 1L;
+  
     protected EventListenerList listenerList = new EventListenerList();
 
 

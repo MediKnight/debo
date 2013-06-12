@@ -8,6 +8,11 @@ import javax.swing.text.*;
  */
 public class ListCompleteDocument extends PlainDocument {
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+
     /**
      *
      */
@@ -104,7 +109,7 @@ public class ListCompleteDocument extends PlainDocument {
         }
 
         //
-        // Vervollständigungen aus der Liste nur erlauben, wenn die Eingabe am Ende
+        // Vervollstï¿½ndigungen aus der Liste nur erlauben, wenn die Eingabe am Ende
         // erfolgt.
         //
         if (listModel != null && enabled && offset == s.length()) {

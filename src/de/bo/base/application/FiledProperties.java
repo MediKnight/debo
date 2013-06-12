@@ -5,6 +5,7 @@ import java.io.*;
 
 public abstract class FiledProperties extends Properties
 {
+    private static final long serialVersionUID = 1L;
     private String path;
     private String header;
 

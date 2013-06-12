@@ -4,6 +4,7 @@ import java.sql.*;
 
 public class SQLRuntimeException extends RuntimeException
 {
+  private static final long serialVersionUID = 1L;
   protected String sqlState;
   protected int errorCode;
 

@@ -7,6 +7,8 @@ import java.io.InputStream;
 
 public class ApplicationProperties extends FiledProperties
 {
+    private static final long serialVersionUID = 1L;
+
     public ApplicationProperties(String path) {
 	super(path);
     }

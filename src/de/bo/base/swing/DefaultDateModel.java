@@ -12,6 +12,7 @@ import java.util.*;
  */
 public class DefaultDateModel extends AbstractDateModel {
 
+    private static final long serialVersionUID = 1L;
     Calendar date;
 
 

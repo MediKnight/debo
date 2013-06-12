@@ -5,15 +5,15 @@ import java.util.Stack;
 import java.util.Vector;
 
 /**
- * Instanzen von Ableitungen dieser Klasse repräsentieren Tabellen
- * einer Datenbank. Einzelne Datensätze werden durch Objekte der
+ * Instanzen von Ableitungen dieser Klasse reprï¿½sentieren Tabellen
+ * einer Datenbank. Einzelne Datensï¿½tze werden durch Objekte der
  * Klasse AbstractRecord dargestellt.
  *
  * Tabellen, die durch diese Klasse dargestellt werden sollen,
- * <b>müssen</b> einen Primärschlüssel besitzen.
+ * <b>mï¿½ssen</b> einen Primï¿½rschlï¿½ssel besitzen.
  *
  * @see AbstractRecord
- * @author Sönke Müller-Lund
+ * @author Sï¿½nke Mï¿½ller-Lund
  */
 
 public abstract class AbstractTable
@@ -46,24 +46,24 @@ public abstract class AbstractTable
 
   /**
    * Instanzen dieser Klasse speichern nicht die gesamte Tabelle,
-   * sondern nur die Werte der Primärschlüssel.
+   * sondern nur die Werte der Primï¿½rschlï¿½ssel.
    *
    * @see #getKey
    */
-  protected Vector keyTable;
+  protected Vector<Object> keyTable;
 
   /*
-   * Cache für Zeilen der Tabelle.
+   * Cache fï¿½r Zeilen der Tabelle.
    */
   // protected Vector cache;
 
   /**
-   * Stack für angewandte Selektionen auf die Tabelle. Selektionen
+   * Stack fï¿½r angewandte Selektionen auf die Tabelle. Selektionen
    * nehmen Einfluss auf die Funktion <code>getWhereClause</code>.
    *
    * @see #getWhereClause
    */
-  protected Stack selection;
+  protected Stack<TableSelection> selection;
 
   /**
    * Attribut-Namen der Tabelle.
@@ -71,7 +71,7 @@ public abstract class AbstractTable
   protected String[] attribute;
 
   /**
-   * Gültigkeits-Flag der Tabelle.
+   * Gï¿½ltigkeits-Flag der Tabelle.
    *
    * Dieses Flag kennzeichnet, ob die Tabelle (bzgl. der Selektionen)
    * neu ausgelesen werden muss.
@@ -82,7 +82,7 @@ public abstract class AbstractTable
   protected boolean valid;
 
   /**
-   * Anzahl der Datensätze in der Tabelle bezüglich Selektionen.
+   * Anzahl der Datensï¿½tze in der Tabelle bezï¿½glich Selektionen.
    */
   protected int records;
 
@@ -97,7 +97,7 @@ public abstract class AbstractTable
   protected int columns;
 
   /**
-   * Spaltenposition des Primärschlüssels.
+   * Spaltenposition des Primï¿½rschlï¿½ssels.
    */
   protected int keyColumn;
 
@@ -111,7 +111,7 @@ public abstract class AbstractTable
   /**
    * Erzeugen eines Tabellen-Objekts mit Default-Verbindung.
    *
-   * Nach dem Erzeugen ist die Tabelle "ungültig".
+   * Nach dem Erzeugen ist die Tabelle "ungï¿½ltig".
    *
    * @see #valid
    * @see #invalidate
@@ -124,7 +124,7 @@ public abstract class AbstractTable
   /**
    * Erzeugen eines Tabellen-Objekts mit gegebener Verbindung.
    *
-   * Nach dem Erzeugen ist die Tabelle "ungültig".
+   * Nach dem Erzeugen ist die Tabelle "ungï¿½ltig".
    *
    * @see #valid
    * @see #invalidate
@@ -140,49 +140,49 @@ public abstract class AbstractTable
     records = position = columns = 0;
     keyColumn = -1;
 
-    selection = new Stack();
+    selection = new Stack<TableSelection>();
 
     attribute = null;
   }
 
   /**
-   * Liefert die initiale Größe des Schlüssel-Vektors (2048).
+   * Liefert die initiale Grï¿½ï¿½e des Schlï¿½ssel-Vektors (2048).
    *
-   * @return initiale Größe des Schlüssel-Vektors
+   * @return initiale Grï¿½ï¿½e des Schlï¿½ssel-Vektors
    */
   protected int getInitKeyTableSize() {
     return 2048;
   }
 
   /**
-   * Liefert die inkrementelle Größe des Schlüssel-Vektors (1024).
+   * Liefert die inkrementelle Grï¿½ï¿½e des Schlï¿½ssel-Vektors (1024).
    *
-   * @return inkrementelle Größe des Schlüssel-Vektors
+   * @return inkrementelle Grï¿½ï¿½e des Schlï¿½ssel-Vektors
    */
   protected int getIncrementKeyTableSize() {
     return 1024;
   }
 
   /**
-   * Liefert die Größe des Zeilen-Cache (256).
+   * Liefert die Grï¿½ï¿½e des Zeilen-Cache (256).
    *
-   * @return Größe des Zeilen-Cache
+   * @return Grï¿½ï¿½e des Zeilen-Cache
    */
   protected int getCacheSize() {
     return 256;
   }
 
   /**
-   * Instanzierbare Klassen müssen den Namen der Tabelle zurückgeben.
+   * Instanzierbare Klassen mï¿½ssen den Namen der Tabelle zurï¿½ckgeben.
    *
    * @return Tabellen-Name
    */
   public abstract String getIdentifier();
 
   /**
-   * Instanzierbare Klassen müssen den Namen des Primärschlüssels zurückgeben.
+   * Instanzierbare Klassen mï¿½ssen den Namen des Primï¿½rschlï¿½ssels zurï¿½ckgeben.
    *
-   * @return Name des Primärschlüssels
+   * @return Name des Primï¿½rschlï¿½ssels
    */
   public String getKeyIdentifier() {
     return "id";
@@ -210,9 +210,9 @@ public abstract class AbstractTable
   }
 
   /**
-   * Auslesen des Inhalts der Tabelle, wenn diese "ungültig" ist.
+   * Auslesen des Inhalts der Tabelle, wenn diese "ungï¿½ltig" ist.
    *
-   * Ist die Tabelle hingegen gültig, wird sofort zurückgekehrt.
+   * Ist die Tabelle hingegen gï¿½ltig, wird sofort zurï¿½ckgekehrt.
    *
    * @exception SQLException wenn betreffende Datenbank einen Fehler
    * erzeugt
@@ -229,11 +229,11 @@ public abstract class AbstractTable
   /**
    * Wird von <code>validate</code> oder von <code>consume</code> aufgerufen.
    * 
-   * Die Funktion liest den Inhalt der Tabelle gemäß der angewandten
-   * Selektionen aus und speichert die Schlüsselspalte.
+   * Die Funktion liest den Inhalt der Tabelle gemï¿½ï¿½ der angewandten
+   * Selektionen aus und speichert die Schlï¿½sselspalte.
    *
-   * Ein Consumer kann in die Einlese-Schleife eingehängt werden, so dass
-   * die Zeilen der Tabelle direkt und schnell verwertet werden können.
+   * Ein Consumer kann in die Einlese-Schleife eingehï¿½ngt werden, so dass
+   * die Zeilen der Tabelle direkt und schnell verwertet werden kï¿½nnen.
    *
    * @param tc Consumer
    *
@@ -246,8 +246,8 @@ public abstract class AbstractTable
     // nothing to do if valid
     if ( valid ) return;
 
-    // neuen Schlüsssel-Vektor
-    keyTable = new Vector( getInitKeyTableSize(),
+    // neuen Schlï¿½sssel-Vektor
+    keyTable = new Vector<Object>( getInitKeyTableSize(),
 			   getIncrementKeyTableSize() );
 
     // und neuen Cache erzeugen
@@ -260,10 +260,10 @@ public abstract class AbstractTable
     ResultSet rset = sm.executeQuery( qs );
     ResultSetMetaData rsmd = rset.getMetaData();
 
-    // Anzahl der Datensätze und aktuelle Position zurücksetzen ...
+    // Anzahl der Datensï¿½tze und aktuelle Position zurï¿½cksetzen ...
     records = position = 0;
 
-    // Anzahl der Spalten (inkl. Schlüssel) ermitteln ...
+    // Anzahl der Spalten (inkl. Schlï¿½ssel) ermitteln ...
     columns = rsmd.getColumnCount();
 
     // Attribute speichern
@@ -272,7 +272,7 @@ public abstract class AbstractTable
       attribute[i] = rsmd.getColumnName( i+1 );
     }
 
-    // Spaltenposition des Primärschlüssels suchen ...
+    // Spaltenposition des Primï¿½rschlï¿½ssels suchen ...
     keyColumn = -1;
     for ( int i=0; i<columns; i++ )
       if ( attribute[i].equalsIgnoreCase( getKeyIdentifier() ) ) {
@@ -280,11 +280,11 @@ public abstract class AbstractTable
 	break;
       }
 
-    // No chance, wenn Primärschlüssel nicht existiert!
+    // No chance, wenn Primï¿½rschlï¿½ssel nicht existiert!
     if ( keyColumn < 0 )
       throw new SQLException( "No primary key in table" );
 
-    // Abfrageergebnisse Zeile für Zeile holen und Schlüssel speichern ...
+    // Abfrageergebnisse Zeile fï¿½r Zeile holen und Schlï¿½ssel speichern ...
     // int cs = getCacheSize();
     int cs = 0;
 
@@ -308,7 +308,7 @@ public abstract class AbstractTable
 	records++;
     }
 
-    // SQL-Statements abschließen
+    // SQL-Statements abschlieï¿½en
     // (records ist nun richtig gesetzt).
     rset.close();
     sm.close();
@@ -316,7 +316,7 @@ public abstract class AbstractTable
     if ( tc != null )
       tc.endConsume();
 
-    // Tabelle ist nun gültig
+    // Tabelle ist nun gï¿½ltig
     valid = true;
   }
 
@@ -338,7 +338,7 @@ public abstract class AbstractTable
   }
 
   /**
-   * Liefert den String des SQL "select"-Kommandos, der für die Auswahl
+   * Liefert den String des SQL "select"-Kommandos, der fï¿½r die Auswahl
    * von Zeilen in <code>validate</code> und
    * <code>retrieve</code> verwendet wird.
    *
@@ -370,7 +370,7 @@ public abstract class AbstractTable
   /**
    * Liefert "where"-Klausel im "select"-String.
    *
-   * Das Ergebnis ist ein jeweils mit "and" verknüpfter String alle
+   * Das Ergebnis ist ein jeweils mit "and" verknï¿½pfter String alle
    * verwendeten Selektionen.
    *
    * @return "where"-Klausel im "select"-String
@@ -384,7 +384,7 @@ public abstract class AbstractTable
     String and = DBUtilities.getOperatorString(DBUtilities.AND);
     StringBuffer sb = new StringBuffer();
     for ( int i=0; i<selection.size(); i++ ) {
-      TableSelection sel = (TableSelection)selection.elementAt( i );
+      TableSelection sel = selection.elementAt( i );
       if ( i > 0 ) sb.append( " "+and+" " );
       sb.append( sel.toString() );
     }
@@ -405,11 +405,11 @@ public abstract class AbstractTable
   }
 
   /**
-   * Liefert die Anzahl der Datensätze in der Tabelle.
+   * Liefert die Anzahl der Datensï¿½tze in der Tabelle.
    *
    * Diese Funktion ruft <code>validate</code> auf.
    *
-   * @return Anzahl der Datensätze in der Tabelle
+   * @return Anzahl der Datensï¿½tze in der Tabelle
    *
    * @exception SQLException wenn betreffende Datenbank einen Fehler
    * erzeugt
@@ -426,7 +426,7 @@ public abstract class AbstractTable
    * Liefert den "end of data" Zustand in der Tabelle.
    *
    * Der "end of data" Zustand ist erreicht, wenn die aktuelle
-   * Datensatzposition größer oder gleich der Anzahl der Datensätze ist.
+   * Datensatzposition grï¿½ï¿½er oder gleich der Anzahl der Datensï¿½tze ist.
    *
    * Diese Funktion ruft <code>validate</code> auf.
    *
@@ -475,7 +475,7 @@ public abstract class AbstractTable
    * von der aktuellen verschieden ist.
    *
    * @exception IndexOutOfBoundsException wenn <code>position</code>
-   * negativ oder echt größer als die Anzahl der Datensätze ist
+   * negativ oder echt grï¿½ï¿½er als die Anzahl der Datensï¿½tze ist
    * @exception SQLException wenn betreffende Datenbank einen Fehler
    * erzeugt
    *
@@ -540,7 +540,7 @@ public abstract class AbstractTable
   }
 
   /**
-   * Liefert Wert des Primärschlüssels in Abhängigkeit der aktuellen
+   * Liefert Wert des Primï¿½rschlï¿½ssels in Abhï¿½ngigkeit der aktuellen
    * Datensatz-Position.
    *
    * Diese Funktion ruft <code>validate</code> auf.
@@ -563,17 +563,17 @@ public abstract class AbstractTable
   }
 
   /**
-   * Liefert <code>true</code>, falls der gegebene Schlüssel im
-   * Schlüssel-Vektor enthalten ist.
+   * Liefert <code>true</code>, falls der gegebene Schlï¿½ssel im
+   * Schlï¿½ssel-Vektor enthalten ist.
    *
-   * Da Schlüssel potentiell von verschiedenen Klassen sein können,
-   * wird beim Test ein String-Vergleich durchgeführt.
+   * Da Schlï¿½ssel potentiell von verschiedenen Klassen sein kï¿½nnen,
+   * wird beim Test ein String-Vergleich durchgefï¿½hrt.
    *
    * Diese Funktion ruft <code>validate</code> auf.
    *
-   * @param key zu suchender Schlüssel
+   * @param key zu suchender Schlï¿½ssel
    *
-   * @return <code>true</code>, falls Schlüssel vorhanden ist
+   * @return <code>true</code>, falls Schlï¿½ssel vorhanden ist
    *
    * @exception SQLException wenn betreffende Datenbank einen Fehler
    * erzeugt
@@ -593,11 +593,11 @@ public abstract class AbstractTable
   }
 
   /**
-   * Liefert Spalte des Primärschlüssels.
+   * Liefert Spalte des Primï¿½rschlï¿½ssels.
    *
    * Diese Funktion ruft <code>validate</code> auf.
    *
-   * @return Spalte des Primärschlüssels
+   * @return Spalte des Primï¿½rschlï¿½ssels
    *
    * @exception SQLException wenn betreffende Datenbank einen Fehler
    * erzeugt
@@ -657,7 +657,7 @@ public abstract class AbstractTable
    * Erzeugt ein leeres Object-Array.
    *
    * Diese Funktion wird von korrespondierenden Record-Objekten
-   * benötigt.
+   * benï¿½tigt.
    *
    * Diese Funktion ruft <code>validate</code> auf.
    *
@@ -679,7 +679,7 @@ public abstract class AbstractTable
    * Lesen des aktuellen Datensatzes.
    *
    * Diese Funktion wird von korrespondierenden Record-Objekten
-   * benötigt.
+   * benï¿½tigt.
    * Sie ruft <code>retrieve( getKey() )</code> auf und liefert
    * somit den Record an der aktuellen Datensatz-Position.
    *
@@ -702,18 +702,18 @@ public abstract class AbstractTable
   }
 
   /**
-   * Lesen des zum gegebenen Schlüssels zugehörigen Datensatzes.
+   * Lesen des zum gegebenen Schlï¿½ssels zugehï¿½rigen Datensatzes.
    *
    * Diese Funktion wird von korrespondierenden Record-Objekten
-   * benötigt.
-   * Sie sucht den zum Schlüssel zugehörigen Datensatz zunächst im
-   * Cache und wenn dort nicht vorhanden im Schlüssel-Vektor.
-   * Sie liefert den zugehörigen Datensatz oder <code>null</code>,
-   * falls der Schlüssel nicht vorhanden ist.
+   * benï¿½tigt.
+   * Sie sucht den zum Schlï¿½ssel zugehï¿½rigen Datensatz zunï¿½chst im
+   * Cache und wenn dort nicht vorhanden im Schlï¿½ssel-Vektor.
+   * Sie liefert den zugehï¿½rigen Datensatz oder <code>null</code>,
+   * falls der Schlï¿½ssel nicht vorhanden ist.
    *
    * Diese Funktion ruft <code>validate</code> auf.
    *
-   * @return zugehöriger Datensatz
+   * @return zugehï¿½riger Datensatz
    *
    * @exception SQLException wenn betreffende Datenbank einen Fehler
    * erzeugt
@@ -726,7 +726,7 @@ public abstract class AbstractTable
 
     validate();
 
-    // taugt der Schlüssel?
+    // taugt der Schlï¿½ssel?
     if ( key == null )
       return null;
 
@@ -736,13 +736,13 @@ public abstract class AbstractTable
 // 	return rc.data;
 //     }
 
-    // Unnötige Einschränkung, deshalb entfernt.
+    // Unnï¿½tige Einschrï¿½nkung, deshalb entfernt.
     //      if ( !hasKey( key ) )
     //        return null;
 
     TableSelection oldsel = removeSelection();
 
-    // Diese Selektion liefert genau den zum Schlüssel passenden Datensatz
+    // Diese Selektion liefert genau den zum Schlï¿½ssel passenden Datensatz
     addSelection( new TableSelection( getKeyIdentifier(), key ) );
 
     // JDBC-Part ...
@@ -771,18 +771,18 @@ public abstract class AbstractTable
   }
 
   /**
-   * Ändert gegebenen Datensatz zum passenden Schlüssel in der Tabelle.
+   * ï¿½ndert gegebenen Datensatz zum passenden Schlï¿½ssel in der Tabelle.
    *
    * Diese Funktion wird von korrespondierenden Record-Objekten
-   * benötigt.
+   * benï¿½tigt.
    *
    * Diese Funktion ruft <code>validate</code> auf.
    *
-   * <b>Nach erfolgreicher Durchführung geht eine evtl. Sortierung
-   * möglicherweise verloren! Um die richtige Sortierung wieder herzustellen,
+   * <b>Nach erfolgreicher Durchfï¿½hrung geht eine evtl. Sortierung
+   * mï¿½glicherweise verloren! Um die richtige Sortierung wieder herzustellen,
    * muss <code>invalidate</code> aufgerufen werden.</b>
    *
-   * @param key Schlüssel des zu ändernen Datensatzes
+   * @param key Schlï¿½ssel des zu ï¿½ndernen Datensatzes
    * @param record der Datensatz
    *
    * @return <code>true</code> bei Erfolg, sonst <code>false</code>
@@ -850,21 +850,21 @@ public abstract class AbstractTable
   }
 
   /**
-   * Fügt neuen Datensatz mit neuen Schlüssel in die Tabelle ein.
+   * Fï¿½gt neuen Datensatz mit neuen Schlï¿½ssel in die Tabelle ein.
    *
    * Diese Funktion wird von korrespondierenden Record-Objekten
-   * benötigt.
+   * benï¿½tigt.
    *
    * Diese Funktion ruft <code>validate</code> auf.
    *
-   * <b>Nach erfolgreicher Durchführung geht eine evtl. Sortierung
-   * möglicherweise verloren! Um die richtige Sortierung wieder herzustellen,
+   * <b>Nach erfolgreicher Durchfï¿½hrung geht eine evtl. Sortierung
+   * mï¿½glicherweise verloren! Um die richtige Sortierung wieder herzustellen,
    * muss <code>invalidate</code> aufgerufen werden.</b>
    *
-   * Bei Erfolg wird der Schlüssel-Vektor ergänzt und <code>record</code>
-   * um 1 erhöht.
+   * Bei Erfolg wird der Schlï¿½ssel-Vektor ergï¿½nzt und <code>record</code>
+   * um 1 erhï¿½ht.
    *
-   * @param newKey neuer Schlüssel
+   * @param newKey neuer Schlï¿½ssel
    * @param record Datensatz
    *
    * @return <code>true</code> bei Erfolg, sonst <code>false</code>
@@ -898,9 +898,9 @@ public abstract class AbstractTable
   }
 
   /**
-   * Liefert SQL-"insert"-String zum passenden Schlüssel und Datensatz.
+   * Liefert SQL-"insert"-String zum passenden Schlï¿½ssel und Datensatz.
    *
-   * @param newKey neuer Schlüssel
+   * @param newKey neuer Schlï¿½ssel
    * @param record Datensatz
    *
    * @return SQL-"insert"-String
@@ -944,10 +944,10 @@ public abstract class AbstractTable
    * Diese Funktion wird von <code>update</code> und
    * <code>insert</code> aufgerufen.
    *
-   * Vor der Justierung wird ein Neuladen der Schlüsseltabelle
-   * erzwungen, damit bei Änderungen die Sortierung erhalten bleibt.
+   * Vor der Justierung wird ein Neuladen der Schlï¿½sseltabelle
+   * erzwungen, damit bei ï¿½nderungen die Sortierung erhalten bleibt.
    *
-   * @param key der Schlüssel, auf den <code>position</code> zeigen
+   * @param key der Schlï¿½ssel, auf den <code>position</code> zeigen
    * soll.
    *
    * @see #validate
@@ -1019,7 +1019,7 @@ public abstract class AbstractTable
   }
   public TableSelection removeSelection() {
     if ( !selection.isEmpty() )
-      return (TableSelection)selection.pop();
+      return selection.pop();
     return null;
   }
   public void removeSelections() {

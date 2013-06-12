@@ -15,6 +15,8 @@ import javax.swing.*;
  */
 public class LookAndFeelPanel extends JPanel {
 
+    private static final long serialVersionUID = 1L;
+
     LookAndFeelType metal, motif, windows, mywindows;
 
     Frame frame;

@@ -12,6 +12,8 @@ import java.util.*;
  */
 public class DateSelectedEvent extends EventObject {
 
+    private static final long serialVersionUID = 1L;
+
     Calendar selectedDate;
 
 

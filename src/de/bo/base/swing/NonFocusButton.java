@@ -7,11 +7,13 @@ import javax.swing.*;
 /**
  * Instanzen dieser Button-Klasse erhalten niemals den Fokus.
  *
- * @author Sönke Müller-Lund
+ * @author Sï¿½nke Mï¿½ller-Lund
  */
 
 public class NonFocusButton extends JButton
 {
+  private static final long serialVersionUID = 1L;
+
   public NonFocusButton() {
     super();
   }
@@ -33,7 +35,7 @@ public class NonFocusButton extends JButton
 
   /**
    * Liefert stets <code>false</code>, damit der Schalter niemals
-   * den Fokus erhält.
+   * den Fokus erhï¿½lt.
    *
    * @return <code>false</code>
    */

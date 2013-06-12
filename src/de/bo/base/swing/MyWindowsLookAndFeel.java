@@ -7,6 +7,8 @@ import com.sun.java.swing.plaf.windows.*;
  */
 public class MyWindowsLookAndFeel extends WindowsLookAndFeel {
 
+    private static final long serialVersionUID = 1L;
+
 	/**
 	 *
 	 */

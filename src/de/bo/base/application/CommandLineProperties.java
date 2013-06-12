@@ -23,6 +23,7 @@ import java.io.*;
  */
 public class CommandLineProperties extends Properties
 {
+  private static final long serialVersionUID = 1L;
   private String[] args;
   private List<CommandLineArgument> validArgs;
 
@@ -68,12 +69,12 @@ public class CommandLineProperties extends Properties
    * @see #retrieve()
    */
   public CommandLineProperties(String[] args,
-			       List validArgs) {
+			       List<CommandLineArgument> validArgs) {
     this(args,validArgs,false);
   }
 
   public CommandLineProperties(String[] args,
-			       List validArgs,
+			       List<CommandLineArgument> validArgs,
 			       boolean acceptAllPropertyTypes) {
     this.args = args;
     this.validArgs = validArgs;

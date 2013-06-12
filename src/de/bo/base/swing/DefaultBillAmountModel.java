@@ -13,6 +13,8 @@ import de.bo.base.util.*;
  */
 public class DefaultBillAmountModel extends AbstractBillAmountModel {
 
+    private static final long serialVersionUID = 1L;
+
     public static final String CLASSNAME = "DefaultBillAmountModel";
 
     /**

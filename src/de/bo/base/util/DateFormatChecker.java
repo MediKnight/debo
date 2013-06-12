@@ -158,7 +158,7 @@ public class DateFormatChecker {
     protected String[] splitDateString( String dateString ) {
 	StringTokenizer tokenizer = new StringTokenizer( dateString, separators );
 	String token = null;
-	Vector elements = new Vector();
+	Vector<String> elements = new Vector<String>();
 
 	while( tokenizer.hasMoreTokens() ) {
 	    token = tokenizer.nextToken();

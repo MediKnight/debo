@@ -5,7 +5,7 @@ import javax.swing.*;
 
 /**
  * Diese Klasse implementiert eine Fortschrittsanzeige in einem Fenster.
- * Sie ist geeignet, wenn das Aufbauen der GUI-Komponenten eine längere
+ * Sie ist geeignet, wenn das Aufbauen der GUI-Komponenten eine lï¿½ngere
  * Zeit erfordert.
  * Anwendung:<PRE>
  * ProgressPanel pProgress = new ProgressPanel( 1, 2 );
@@ -23,14 +23,16 @@ import javax.swing.*;
  **/
 
 public class ProgressPanel extends JPanel {
+    private static final long serialVersionUID = 1L;
+
 	protected	JLabel				lProgress;
 	protected	JProgressBar	pbProgress;
 
   /**
-   * Konstruktor, der die untere und obere Grenze für die Darstellung von
-   * dem Fortschritt entsprechenden Werten übergeben bekommt.
-   * @param low Die untere Grenze für Werte der Fortschrittsanzeige
-   * @param high Die obere Grenze für Werte der Fortschrittsanzeige
+   * Konstruktor, der die untere und obere Grenze fï¿½r die Darstellung von
+   * dem Fortschritt entsprechenden Werten ï¿½bergeben bekommt.
+   * @param low Die untere Grenze fï¿½r Werte der Fortschrittsanzeige
+   * @param high Die obere Grenze fï¿½r Werte der Fortschrittsanzeige
    **/
 	public ProgressPanel( int low, int high ) {
 		setLayout( new BoxLayout( this, BoxLayout.Y_AXIS ) );
@@ -50,8 +52,8 @@ public class ProgressPanel extends JPanel {
 
   /**
    * Diese Methode setzt den Fortschrittsanzeiger auf den als Parameter
-   * übergebenen Wert, der zwischen den im Konstruktor übergebenen Werten
-   * low und high liegen muß.
+   * ï¿½bergebenen Wert, der zwischen den im Konstruktor ï¿½bergebenen Werten
+   * low und high liegen muï¿½.
    * @param i Der Wert, auf den die Fortschrittsanzeige gesetzt werden soll.
    **/
 	public	void	setValue( int i ) {

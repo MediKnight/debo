@@ -6,8 +6,8 @@ import de.bo.base.memento.StringMemento;
 
 /**
  * Diese Klasse stellt ein JPanel dar, in dem Statusmeldungen angezeigt
- * werden können und die nach einer definierten Zeit automatisch wieder
- * gelöscht werden. Das setzen des angezeigten Textes geschieht über
+ * werden kï¿½nnen und die nach einer definierten Zeit automatisch wieder
+ * gelï¿½scht werden. Das setzen des angezeigten Textes geschieht ï¿½ber
  * ein StringMemento.
  *
  * @version 0.01 1.8.1999
@@ -15,7 +15,8 @@ import de.bo.base.memento.StringMemento;
  **/
 
 public class StatusPanel extends JPanel {
-	private		long		timeToClear = 3000;	// Zeit bis zum löschen des Statustextes in Millisekunden
+    private static final long serialVersionUID = 1L;
+	private		long		timeToClear = 3000;	// Zeit bis zum lï¿½schen des Statustextes in Millisekunden
 	private		long		lastUpdated;				// Zeitpunkt des letzten Setzen eines Statustextes
 	protected	JLabel	statusLabel;
 	protected	Thread	clearStatusThread;
@@ -25,9 +26,9 @@ public class StatusPanel extends JPanel {
 	}
 
   /**
-   * Diese Methode setzt die Zeit, die bis zum löschen des angezeigten Textes
-   * in der Statusbar vergehen muß.
-   * @param timeToClear Zeit in Millisekunden bis zum löschen des Textes
+   * Diese Methode setzt die Zeit, die bis zum lï¿½schen des angezeigten Textes
+   * in der Statusbar vergehen muï¿½.
+   * @param timeToClear Zeit in Millisekunden bis zum lï¿½schen des Textes
    *		in der Statusbar.
    **/
 	public	synchronized	void	setTimeToClear( long timeToClear ) {
@@ -35,9 +36,9 @@ public class StatusPanel extends JPanel {
 	}
 
   /**
-   * Diese Methode liefert als Ergebnis die Zeit, die bis zum Löschen von
+   * Diese Methode liefert als Ergebnis die Zeit, die bis zum Lï¿½schen von
    * Meldungen vergeht in Millisekunden.
-   * @return Zeit bis zum Löschen von Meldungen in Millisekunden.
+   * @return Zeit bis zum Lï¿½schen von Meldungen in Millisekunden.
    **/
   public	synchronized	long	getTimeToClear() {
   	return timeToClear;
@@ -58,7 +59,7 @@ public class StatusPanel extends JPanel {
 	}
 
   /**
-   * Diese Methode liefert die Zeit zurück, an dem zuletzt eine Meldung
+   * Diese Methode liefert die Zeit zurï¿½ck, an dem zuletzt eine Meldung
    * angezeigt worden ist.
    * @return Der Zeitpunkt, an dem zuletzt eine Meldung angezeigt worden ist.
    **/
@@ -67,25 +68,25 @@ public class StatusPanel extends JPanel {
   }
 
   /**
-   * Diese Methode setzt den Text der Statuszeile auf den übergebenen
+   * Diese Methode setzt den Text der Statuszeile auf den ï¿½bergebenen
    * Parameter.
    * @param s Der Text, der in die Statuszeile geschrieben werden soll.
    **/
 	protected synchronized void setText( String s ) {
 	  // -- Hinweise zur Implementierung
-		// Das Löschen des Statustextes nach einer gewissen Zeitspanne geschieht
-    // in einem extra Thread (nämlich clearStatusThread). Wird der Text
+		// Das Lï¿½schen des Statustextes nach einer gewissen Zeitspanne geschieht
+    // in einem extra Thread (nï¿½mlich clearStatusThread). Wird der Text
     // gesetzt und existiert noch kein claerStatusThread, so wird ein neuer
     // Thread erzeugt. Dieser legt sich schlafen bis zu dem Zeitpunkt, wo der
-    // Text in der Statusbar gelöscht werden soll. Falls aber in der
+    // Text in der Statusbar gelï¿½scht werden soll. Falls aber in der
     // Zwischenzeit der Text der Statusbar neu gesetzt worden ist, so soll
     // der neue Text wiederum nach Ablauf der Zeit ab dem Setzen des neuen
-    // Textes gelöscht werden. Es muß in diesem Fall also erneut gewartet
+    // Textes gelï¿½scht werden. Es muï¿½ in diesem Fall also erneut gewartet
     // werden, bis die Zeit nach dem letzten Setzen abgelaufen ist. Dieses
     // leistet die while-Schleife.
     // Der nachfolgende synchronized-Block auf das StatusPanel-Objekt ist
     // notwendig, da dort claerStatusThread umgesetzt wird, was in einem
-    // anderen Thread bei setText auch gerade neu gesetzt werden könnte.
+    // anderen Thread bei setText auch gerade neu gesetzt werden kï¿½nnte.
 		statusLabel.setText( s );
 		lastUpdated = getTime();
 		if( clearStatusThread == null ) {
@@ -111,9 +112,9 @@ public class StatusPanel extends JPanel {
 
   /**
    * Diese Methode liefert als Resultat den aktuellen Text der Statuszeile
-   * zurück.
-   * Achtung: Der Text wird automatisch zurückgesetzt, so daß hier nicht
-   * unbedingt der Text des letzten setText zurückgeliefert wird.
+   * zurï¿½ck.
+   * Achtung: Der Text wird automatisch zurï¿½ckgesetzt, so daï¿½ hier nicht
+   * unbedingt der Text des letzten setText zurï¿½ckgeliefert wird.
    * @return Der aktuelle Text der Statuszeile
    **/
 	protected synchronized String getText() {

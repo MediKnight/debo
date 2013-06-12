@@ -4,13 +4,14 @@ import java.util.*;
 
 public class OptionProperties extends Properties
 {
-  protected Vector knownOption;
+  private static final long serialVersionUID = 1L;
+  protected Vector<OptionType> knownOption;
   protected String args[];
 
   public OptionProperties(String args[]) {
     this.args = args;
 
-    knownOption = new Vector( 30, 10 );
+    knownOption = new Vector<OptionType>( 30, 10 );
 
     // trace level
     defineOption( 't', true );
@@ -70,7 +71,7 @@ public class OptionProperties extends Properties
       boolean param = false;
 
       for ( int j=0; j<knownOption.size(); j++ ) {
-	OptionType ot = (OptionType)knownOption.elementAt(j);
+	OptionType ot = knownOption.elementAt(j);
 	if ( oc == ot.getOption() ) {
 	  valid = true;
 	  param = ot.isParamRequired();

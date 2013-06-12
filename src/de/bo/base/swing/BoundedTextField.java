@@ -13,10 +13,15 @@ import javax.swing.text.PlainDocument;
  * begrenzten Eingabe von Text, d.h. nur eine vorgegebene Anzahl von Zeichen
  * wird zugelassen.
  *
- * @author  Sönke Müller-Lund
+ * @author  Sï¿½nke Mï¿½ller-Lund
  */
 public class BoundedTextField extends JTextField
 {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 
   /**
    * Erzeugt ein leeres Textfeld mit einer Begrenzung von
@@ -51,7 +56,7 @@ public class BoundedTextField extends JTextField
 
   /**
    * Erzeugt ein Textfeld mit einer Begrenzung von
-   * <code>getDefaultBound()</code> Zeichen und füllt es mit dem
+   * <code>getDefaultBound()</code> Zeichen und fï¿½llt es mit dem
    * angegebenen Text auf.
    *
    * @param text Text des Eingabefeldes.
@@ -63,7 +68,7 @@ public class BoundedTextField extends JTextField
 
   /**
    * Erzeugt ein Textfeld mit der angegebenen Breite, die auch
-   * als Begrenzung dient und füllt es mit dem
+   * als Begrenzung dient und fï¿½llt es mit dem
    * angegebenen Text auf.
    *
    * @param text Text des Eingabefeldes.
@@ -76,7 +81,7 @@ public class BoundedTextField extends JTextField
 
   /**
    * Erzeugt ein Textfeld mit der angegebenen Breite und
-   * Begrenzung und füllt es mit dem
+   * Begrenzung und fï¿½llt es mit dem
    * angegebenen Text auf.
    *
    * @param text Text des Eingabefeldes.
@@ -103,12 +108,12 @@ public class BoundedTextField extends JTextField
   }
 
   /**
-   * Liefert die Mindestgröße der Komponente.
+   * Liefert die Mindestgrï¿½ï¿½e der Komponente.
    *
-   * Diese Funktion wurde überschrieben, um ein Zusammenfallen der Komponente
+   * Diese Funktion wurde ï¿½berschrieben, um ein Zusammenfallen der Komponente
    * zu verhindern, wenn der erforderliche Platz nicht vorhanden ist.
    *
-   * @return Mindestgröße der Komponente.
+   * @return Mindestgrï¿½ï¿½e der Komponente.
    */
   public Dimension getMinimumSize() {
     return getPreferredSize();
@@ -116,6 +121,7 @@ public class BoundedTextField extends JTextField
 
   protected class BoundedDocument extends PlainDocument
   {
+    private static final long serialVersionUID = 1L;
     int bound;
 
     BoundedDocument(int bound) {

@@ -7,6 +7,8 @@ import javax.swing.table.*;
 
 public class JustifiedTable extends JTable
 {
+  private static final long serialVersionUID = 1L;
+  
   protected TableJustifier justifier;
 
   public JustifiedTable(TableModel tm,TableJustifier justifier) {

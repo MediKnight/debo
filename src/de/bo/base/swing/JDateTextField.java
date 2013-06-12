@@ -10,6 +10,8 @@ import de.bo.base.swing.text.*;
 public class JDateTextField extends JTextField
                             implements ActionListener
 {
+  private static final long serialVersionUID = 1L;
+  
   private Date date;
 
   public JDateTextField() { this(new Date()); }
@@ -58,7 +60,7 @@ public class JDateTextField extends JTextField
     }
     catch (Exception ex)
     {
-      return "Es wurde ein ungültiges Datum eingegeben. Richtiges Format: dd.mm.yy";
+      return "Es wurde ein ungï¿½ltiges Datum eingegeben. Richtiges Format: dd.mm.yy";
     }
     return null;
   }
