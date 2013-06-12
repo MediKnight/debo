@@ -3,18 +3,18 @@ package de.bo.base.store2.sql;
 import java.util.*;
 
 public abstract class SelectionContainer extends SQLSelection {
-	protected Stack stack;
+	protected Stack<SQLSelection> stack;
 
 	public SelectionContainer(SQLToolkit toolkit) {
 		super(toolkit);
 
-		stack = new Stack();
+		stack = new Stack<SQLSelection>();
 	}
 
 	/**
-	 * Hinzufügen einer Selektion.
+	 * Hinzufï¿½gen einer Selektion.
 	 *
-	 * @param selection Selektion, die hinzugefügt werden soll
+	 * @param selection Selektion, die hinzugefï¿½gt werden soll
 	 */
 	public void addSelection(SQLSelection selection) {
 		stack.push(selection);
@@ -28,7 +28,7 @@ public abstract class SelectionContainer extends SQLSelection {
 	 */
 	public SQLSelection removeSelection() {
 		if (!stack.isEmpty())
-			return (SQLSelection) stack.pop();
+			return stack.pop();
 		return null;
 	}
 
@@ -74,16 +74,16 @@ public abstract class SelectionContainer extends SQLSelection {
 
 	/**
 	 * Liefert die Werte des Containers in der Reihenfolge der Bezeichner
-	 * aus <tt>toString()</tt> zurück.
+	 * aus <tt>toString()</tt> zurï¿½ck.
 	 *
 	 * @see #toString()
 	 */
-	public Collection getValues() {
-		Collection c = new LinkedList();
+	public Collection<Object> getValues() {
+		Collection<Object> c = new LinkedList<Object>();
 		int n = stack.size();
 
 		for (int i = 0; i < n; i++) {
-			SQLSelection sel = (SQLSelection) stack.elementAt(i);
+			SQLSelection sel = stack.elementAt(i);
 			c.addAll(sel.getValues());
 		}
 

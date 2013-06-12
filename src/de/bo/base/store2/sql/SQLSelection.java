@@ -8,7 +8,7 @@ public class SQLSelection
   implements Selection
 {
   /**
-   * Diese Instanz repräsentiert die niemals wahre Selektion.
+   * Diese Instanz reprï¿½sentiert die niemals wahre Selektion.
    *
    * Wird diese Instanz auf eine Tabelle angewandt, so ist die
    * Tabelle leer.
@@ -16,10 +16,10 @@ public class SQLSelection
   public final static SQLSelection FALSE = new FalseSelection();
 
   /**
-   * Diese Instanz repräsentiert die stets wahre Selektion.
+   * Diese Instanz reprï¿½sentiert die stets wahre Selektion.
    *
    * Wird diese Instanz auf eine Tabelle angewandt, so bleibt die
-   * Tabelle unverändert.
+   * Tabelle unverï¿½ndert.
    */
   public final static SQLSelection TRUE = new TrueSelection();
 
@@ -109,7 +109,7 @@ public class SQLSelection
     this.ignoreCase = ignoreCase && value != null &&
       value instanceof String;
 
-    // das müssen wir machen, denn sonst nützt ignoreCase gar nichts.
+    // das mï¿½ssen wir machen, denn sonst nï¿½tzt ignoreCase gar nichts.
     if ( this.ignoreCase )
       value = ((String)value).toLowerCase();
   }
@@ -152,8 +152,8 @@ public class SQLSelection
     return sb.toString();
   }
 
-  public Collection getValues() {
-    Collection c = new LinkedList();
+  public Collection<Object> getValues() {
+    Collection<Object> c = new LinkedList<Object>();
     c.add(value);
     return c;
   }
@@ -163,8 +163,8 @@ public class SQLSelection
     public String toString() {
       return "0=1";
     }
-    public Collection getValues() {
-      return new LinkedList();
+    public Collection<Object> getValues() {
+      return new LinkedList<Object>();
     }
   }
 
@@ -173,8 +173,8 @@ public class SQLSelection
     public String toString() {
       return "1=1";
     }
-    public Collection getValues() {
-      return new LinkedList();
+    public Collection<Object> getValues() {
+      return new LinkedList<Object>();
     }
   }
 }

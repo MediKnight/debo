@@ -6,10 +6,10 @@ import de.bo.base.store2.*;
 import de.bo.base.store2.sql.*;
 
 /**
- * Baltic-Online Geschäftsobjekt <b>Firma</b>.
+ * Baltic-Online Geschï¿½ftsobjekt <b>Firma</b>.
  * <p>
- * Eine Firma enthält bis auf Name und Rechtsform keine weiteren
- * primären Daten. Diese sind in den verschiedenen Standorten enthalten.
+ * Eine Firma enthï¿½lt bis auf Name und Rechtsform keine weiteren
+ * primï¿½ren Daten. Diese sind in den verschiedenen Standorten enthalten.
  * <p>
  * Eine Firma kann wie eine Person Kunde, Lieferant oder Partner sein
  * und ist deshalb eine <code>BusinessRelation</code>.
@@ -24,7 +24,7 @@ public class Company extends Bobo
   /**
    * Liste der Standorte.
    */
-  protected Collection locationData;
+  protected Collection<Location> locationData;
 
   /**
    * Erzeugt Firma mit Default-Storekeeper
@@ -70,7 +70,7 @@ public class Company extends Bobo
   }
 
   /**
-   * Liefert "Eltern"-Schlüssel zum gegebenen Index (im Bereich von
+   * Liefert "Eltern"-Schlï¿½ssel zum gegebenen Index (im Bereich von
    * <code>getParentCount()</code>).
    *
    * Eine Firma hat keine "Eltern" im Sinne der BO-Hierarchie und
@@ -114,7 +114,7 @@ public class Company extends Bobo
   }
 
   /**
-   * Laden aller zur Firma zugehörigen Standorte.
+   * Laden aller zur Firma zugehï¿½rigen Standorte.
    */
   protected void retrieveLocations()
     throws StoreException {
@@ -127,8 +127,8 @@ public class Company extends Bobo
 				     "fid",
 				     getKey());
     locationData = base.retrieve(location,sel);
-    for ( Iterator it=locationData.iterator(); it.hasNext(); ) {
-      location = (Location)it.next();
+    for ( Iterator<Location> it=locationData.iterator(); it.hasNext(); ) {
+      location = it.next();
       location.setParent(0,this);
     }
   }
@@ -191,7 +191,7 @@ public class Company extends Bobo
   }
 
   /**
-   * Liefert zusätzliche Info zur Firma.
+   * Liefert zusï¿½tzliche Info zur Firma.
    */
   public String getRemark() {
     return getString(6);
@@ -201,7 +201,7 @@ public class Company extends Bobo
    * Setzen des Namen der Firma.
    *
    * Alle anderen Daten dieser Firma werden mit neutralen Werten
-   * überschrieben.
+   * ï¿½berschrieben.
    */
   public void set(String name) {
     set(name,"",false,false,false,"");
@@ -211,7 +211,7 @@ public class Company extends Bobo
    * Setzen des Namen und der Rechtsform der Firma.
    *
    * Alle anderen Daten dieser Firma werden mit neutralen Werten
-   * überschrieben.
+   * ï¿½berschrieben.
    */
   public void set(String name,String legal) {
     set(name,legal,false,false,false,"");
@@ -276,9 +276,9 @@ public class Company extends Bobo
   }
 
   /**
-   * Liefert Namen des Primärschlüssels "Firma".
+   * Liefert Namen des Primï¿½rschlï¿½ssels "Firma".
    *
-   * (i.A. Spaltenattribute des Primärschlüssels)
+   * (i.A. Spaltenattribute des Primï¿½rschlï¿½ssels)
    *
    * @return <code>"fid"</code>
    */

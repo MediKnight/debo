@@ -44,9 +44,9 @@ public class CustomerSearch {
 		this.boBase = boBase;
 	}
 
-	public List search() throws StoreException {
+	public List<Bobo> search() throws StoreException {
 
-		LinkedList l = new LinkedList();
+		LinkedList<Bobo> l = new LinkedList<Bobo>();
 		String[] attribute;
 
 		if ((tableFlag & COMPANY) != 0) {
@@ -65,7 +65,7 @@ public class CustomerSearch {
 		return l;
 	}
 
-	protected void search(String[] attribute, LinkedList list, Bobo bobo)
+	protected void search(String[] attribute, LinkedList<Bobo> list, Bobo bobo)
 		throws StoreException {
 
 		SQLToolkit tk = boBase.getSQLToolkit();
@@ -82,8 +82,8 @@ public class CustomerSearch {
 					SQLToolkit.LIKE,
 					ignoreCase));
 
-		Collection c = boBase.retrieve(bobo, os);
-		for (Iterator i = c.iterator(); i.hasNext();)
+		Collection<Bobo> c = boBase.retrieve(bobo, os);
+		for (Iterator<Bobo> i = c.iterator(); i.hasNext();)
 			list.add(i.next());
 	}
 }

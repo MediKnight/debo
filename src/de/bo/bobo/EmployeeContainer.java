@@ -9,8 +9,8 @@ import de.bo.base.store2.sql.*;
  * Instanzen von Ableitungen dieser Klasse enthalten Mitarbeiter
  * (Eltern von Mitarbeiter).
  * <p>
- * Diese Klasse ist auch im semantischen Sinne abstrakt und enthält
- * keine Primärdaten.
+ * Diese Klasse ist auch im semantischen Sinne abstrakt und enthï¿½lt
+ * keine Primï¿½rdaten.
  */
 
 public abstract class EmployeeContainer extends AddressContainer
@@ -18,7 +18,7 @@ public abstract class EmployeeContainer extends AddressContainer
     /**
      * Liste der Mitarbeiter.
      */
-    protected Collection employeeData;
+    protected Collection<Employee> employeeData;
 
     /**
      * Erzeugt Container mit Default-Storekeeper
@@ -67,7 +67,7 @@ public abstract class EmployeeContainer extends AddressContainer
     }
 
     /**
-     * Laden aller zum Container zugehörigen Mitarbeiter.
+     * Laden aller zum Container zugehï¿½rigen Mitarbeiter.
      */
     protected void retrieveEmployees()
 	throws StoreException {
@@ -82,7 +82,7 @@ public abstract class EmployeeContainer extends AddressContainer
 
 	employeeData = base.retrieve(employee,sel);
 	
-	for ( Iterator it=employeeData.iterator(); it.hasNext(); ) {
+	for ( Iterator<Employee> it=employeeData.iterator(); it.hasNext(); ) {
 	    employee = (Employee)it.next();
 	    if ( this instanceof Person )
 		employee.setParent(0,this);
@@ -92,7 +92,7 @@ public abstract class EmployeeContainer extends AddressContainer
     }
 
     /**
-     * Einfügen eines neuen Mitarbeiters, ohne nachträgliches Speichern
+     * Einfï¿½gen eines neuen Mitarbeiters, ohne nachtrï¿½gliches Speichern
      * in der Datenbank.
      */
     void addEmployee(Employee employee)

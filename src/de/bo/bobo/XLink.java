@@ -66,8 +66,8 @@ public class XLink extends Bobo {
 
 		SQLSelection sel = new SQLSelection(boBase.getSQLToolkit(), "gid", gid);
 		XLink xlink = new XLink(boBase);
-		Collection coll = boBase.retrieve(xlink, sel);
-		for (Iterator i = coll.iterator(); i.hasNext();)
+		Collection<XLink> coll = boBase.retrieve(xlink, sel);
+		for (Iterator<XLink> i = coll.iterator(); i.hasNext();)
 			 ((Bobo) i.next()).delete();
 	}
 
