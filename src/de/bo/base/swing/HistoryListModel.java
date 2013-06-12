@@ -11,7 +11,7 @@ import javax.swing.MutableComboBoxModel;
  * @version $Id$
  * @author Jan Bernhardt
  */
-public interface HistoryListModel extends MutableComboBoxModel {
+public interface HistoryListModel<E> extends MutableComboBoxModel<E> {
 }
 
 

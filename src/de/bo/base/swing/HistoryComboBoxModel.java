@@ -18,7 +18,9 @@ import javax.swing.DefaultComboBoxModel;
  * @version $Id$
  * @author Jan Bernhardt
  */
-public class HistoryComboBoxModel extends DefaultComboBoxModel implements HistoryListModel {
+public class HistoryComboBoxModel<E> extends DefaultComboBoxModel<E> implements HistoryListModel<E> {
+
+    private static final long serialVersionUID = 1L;
 
     public static final String CLASSNAME = "HistoryComboBoxModel";
 
@@ -46,7 +48,7 @@ public class HistoryComboBoxModel extends DefaultComboBoxModel implements Histor
     /**
      * Erzeugt eine mit Objekten aus einem Array initialisierte History.
      */
-    public HistoryComboBoxModel( final Object items[] ) {
+    public HistoryComboBoxModel( final E items[] ) {
 	super( items );
 	init();
     }
@@ -55,7 +57,7 @@ public class HistoryComboBoxModel extends DefaultComboBoxModel implements Histor
     /**
      * Erzeugt eine mit Objekten aus einem Vector initialisierte History.
      */
-    public HistoryComboBoxModel( Vector v ) {
+    public HistoryComboBoxModel( Vector<E> v ) {
 	super( v );
 	init();
     }
@@ -110,7 +112,7 @@ public class HistoryComboBoxModel extends DefaultComboBoxModel implements Histor
      * 
      * @param item	Element, das in die History aufgenommen werden soll
      */
-    public void addElement( Object item ) {
+    public void addElement( E item ) {
 	if( historyFrozen || item == null ) {
 	    return;
 	}

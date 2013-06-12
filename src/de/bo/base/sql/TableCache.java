@@ -11,37 +11,37 @@ import java.util.Vector;
 /**
  * Diese Klasse bildet eine (Teil-)Tabelle im Speicher ab.
  * Alle Zugriffe auf eine Tabelle und deren Referenz-Tabellen
- * können somit über diese Klasse erfolgen.
+ * kï¿½nnen somit ï¿½ber diese Klasse erfolgen.
  * <p>
  * Jede Tabelle, die durch diese Klasse dargestellt werden soll,
- * muss einen Primärschlüssel besitzen, denn ohne Primärschlüssel
- * können einzelne Datensätze nicht eindeutig identifiziert werden.
+ * muss einen Primï¿½rschlï¿½ssel besitzen, denn ohne Primï¿½rschlï¿½ssel
+ * kï¿½nnen einzelne Datensï¿½tze nicht eindeutig identifiziert werden.
  * <p>
  * Bei Tabellen, die sich durch eine <code>1:n</code> Relation auf eine
- * (oder mehrere) übergeordnete Tabellen beziehen, wird angenommen, dass
- * der Name des Bezugsschlüssel dem Namen des Primärschlüssels der
- * aktuellen übergeordneten Tabelle entspricht. Übergeordnete Tabellen
- * müssen dann verschiedene Namen für den Primärschlüssel besitzen.
+ * (oder mehrere) ï¿½bergeordnete Tabellen beziehen, wird angenommen, dass
+ * der Name des Bezugsschlï¿½ssel dem Namen des Primï¿½rschlï¿½ssels der
+ * aktuellen ï¿½bergeordneten Tabelle entspricht. ï¿½bergeordnete Tabellen
+ * mï¿½ssen dann verschiedene Namen fï¿½r den Primï¿½rschlï¿½ssel besitzen.
  * <p>
- * Per Default ist <code>"id"</code> der Primärschlüssel. Die Funktion
- * <code>getKeyName</code> muss überschrieben werden, wenn ein anderer
- * Primärschlüssel verwendet werden soll.
+ * Per Default ist <code>"id"</code> der Primï¿½rschlï¿½ssel. Die Funktion
+ * <code>getKeyName</code> muss ï¿½berschrieben werden, wenn ein anderer
+ * Primï¿½rschlï¿½ssel verwendet werden soll.
  * <p>
  * <b>Beispiel:</b>
  * <p>
  * Gibt es Tabellen <i>Mitarbeiter</i> und <i>Standort</i>, die jeweils
- * der Tabelle <i>Telefon</i> übergeordnet sind, dann müssen diese Tabellen
- * ihren Primärschlüssel unterschiedlich benennen (z.B. <code>mid</code>
+ * der Tabelle <i>Telefon</i> ï¿½bergeordnet sind, dann mï¿½ssen diese Tabellen
+ * ihren Primï¿½rschlï¿½ssel unterschiedlich benennen (z.B. <code>mid</code>
  * und <code>sid</code>) und die Tabelle <i>Telefon</i> muss die Felder
- * (Bezugsschlüssel) <code>mid</code> und <code>sid</code> besitzen.
+ * (Bezugsschlï¿½ssel) <code>mid</code> und <code>sid</code> besitzen.
  * <p>
- * Die Beziehungen der einzelnen Tabellen müssen mit <code>
+ * Die Beziehungen der einzelnen Tabellen mï¿½ssen mit <code>
  * addReference</code> hergestellt werden.
  * <p>
- * Weder Primär- noch Bezugsschlüssel müssen durch die Attribute angegeben
+ * Weder Primï¿½r- noch Bezugsschlï¿½ssel mï¿½ssen durch die Attribute angegeben
  * werden.
  * <p>
- * Nahezu sämtliche Zugriffsfunktionen führen die Funktion
+ * Nahezu sï¿½mtliche Zugriffsfunktionen fï¿½hren die Funktion
  * <code>reload</code> aus (Neuladen, aber nur, wenn <code>useReload</code>
  * gesetzt ist) um abzusichern, dass der Inhalt des Cache stets auf dem
  * aktuellen Stand ist.
@@ -52,7 +52,7 @@ import java.util.Vector;
  * @see TableAttribute
  *
  * @version 0.9 09/27/99
- * @author Sönke Müller-Lund
+ * @author Sï¿½nke Mï¿½ller-Lund
  */
 
 public abstract class TableCache implements Observer
@@ -73,7 +73,7 @@ public abstract class TableCache implements Observer
   public final static int CURRENT = 0;
 
   /**
-   * Navigation zum nächsten Datensatz in der Tabelle.
+   * Navigation zum nï¿½chsten Datensatz in der Tabelle.
    */
   public final static int NEXT = 1;
 
@@ -110,7 +110,7 @@ public abstract class TableCache implements Observer
   /**
    * Inhalt des Cache.
    */
-  protected Vector data;
+  protected Vector<Object[]> data;
 
   /**
    * Gibt an, ob ein Neuladen der Tabelle notwendig ist.
@@ -118,12 +118,12 @@ public abstract class TableCache implements Observer
   protected boolean useReload;
 
   /**
-   * Name der zugehörigen SQL-Tabelle.
+   * Name der zugehï¿½rigen SQL-Tabelle.
    */
   protected String tableName;
 
   /**
-   * Anzahl der Datensätze in der Tabelle.
+   * Anzahl der Datensï¿½tze in der Tabelle.
    */
   protected int records;
 
@@ -139,17 +139,17 @@ public abstract class TableCache implements Observer
   protected int[] orderArray;
 
   /**
-   * Anfangsgröße des Daten-Vektors.
+   * Anfangsgrï¿½ï¿½e des Daten-Vektors.
    */
   protected int initialRecordBufferSize;
 
   /**
-   * Erweiterungsgröße des Daten-Vektors.
+   * Erweiterungsgrï¿½ï¿½e des Daten-Vektors.
    */
   protected int incrementRecordBufferSize;
 
   /**
-   * Anzahl der Spalten der zugehörigen Abfrage.
+   * Anzahl der Spalten der zugehï¿½rigen Abfrage.
    */
   protected int columns;
 
@@ -161,27 +161,27 @@ public abstract class TableCache implements Observer
   protected TableAttribute[] attribute;
 
   /**
-   * Mögliche abhängige Tabellen.
+   * Mï¿½gliche abhï¿½ngige Tabellen.
    */
-  protected Vector reference;
+  protected Vector<TableCache> reference;
 
   /**
-   * Mögliche übergeordnete Tabellen.
+   * Mï¿½gliche ï¿½bergeordnete Tabellen.
    */
-  protected Vector parent;
+  protected Vector<TableCache> parent;
 
   /**
-   * Wenn übergeordnete "Parent"-Tabellen gegeben sind, können diese
+   * Wenn ï¿½bergeordnete "Parent"-Tabellen gegeben sind, kï¿½nnen diese
    * als "schwach" deklariert werden. Weak Parents werden von der Selektion
    * ausgeschlossen.
    */
-  protected Vector weakParent;
+  protected Vector<TableCache> weakParent;
 
   /**
-   * Wert des Primärschlüssels.
+   * Wert des Primï¿½rschlï¿½ssels.
    *
-   * Dieser Wert wird nur temporär beim Erzeugen neuer Datensätze benötigt,
-   * da der Primärschlüssel sonst durch die Tabelle ermittelt wird.
+   * Dieser Wert wird nur temporï¿½r beim Erzeugen neuer Datensï¿½tze benï¿½tigt,
+   * da der Primï¿½rschlï¿½ssel sonst durch die Tabelle ermittelt wird.
    *
    * @see #getKeyName
    * @see #getKeyValue
@@ -189,10 +189,10 @@ public abstract class TableCache implements Observer
   protected Object keyValue;
 
   /**
-   * Ausdrucks-Vektor zur Einschränkung der Selektion
+   * Ausdrucks-Vektor zur Einschrï¿½nkung der Selektion
    * (Teil-Tabellen).
    */
-  protected Vector superSet;
+  protected Vector<Vector<SelectCondition>> superSet;
 
   static {
   }
@@ -279,7 +279,7 @@ public abstract class TableCache implements Observer
   }
 
   /**
-   * Erzeugt einen Tabellen-Cache, füllt ihn aber noch nicht mit Daten.
+   * Erzeugt einen Tabellen-Cache, fï¿½llt ihn aber noch nicht mit Daten.
    *
    * Der Konstruktor ruft die Funktionen <code>setSpace</code> und
    * <code>setAttributes</code> auf.
@@ -292,6 +292,7 @@ public abstract class TableCache implements Observer
    * @see #setAttributes
    * @see #reload
    */
+  @SuppressWarnings("unused")
   protected TableCache(String tableName)
   {
     debugLine( "creating table-cache for \""+tableName+"\"." );
@@ -303,11 +304,11 @@ public abstract class TableCache implements Observer
     columns = records = currentRecord = 0;
     data = null;
 
-    reference = new Vector( 10, 5 );
-    parent = new Vector( 4, 2 );
-    weakParent = new Vector( 4, 2 );
+    reference = new Vector<TableCache>( 10, 5 );
+    parent = new Vector<TableCache>( 4, 2 );
+    weakParent = new Vector<TableCache>( 4, 2 );
 
-    superSet = new Vector( 10, 5 );
+    superSet = new Vector<Vector<SelectCondition>>( 10, 5 );
 
     setSpace();
     setAttributes();
@@ -345,7 +346,7 @@ public abstract class TableCache implements Observer
    * Wird vom Konstruktor aufgerufen.
    *
    * Nach diesem Aufruf ist garantiert, dass das Array orderArray die
-   * Spalten enthält, die für eine Sortierung ausschlaggebend sind,
+   * Spalten enthï¿½lt, die fï¿½r eine Sortierung ausschlaggebend sind,
    * und zwar in der Reihenfolge der gegebenen Attribute.
    */
   private void createOrderArray()
@@ -396,11 +397,11 @@ public abstract class TableCache implements Observer
   }
 
   /**
-   * Hinzufügen der übergeordneten Tabelle.
+   * Hinzufï¿½gen der ï¿½bergeordneten Tabelle.
    *
    * Wird von <code>addReference</code> aufgerufen.
    *
-   * @param parentCache übergeordnete Tabelle
+   * @param parentCache ï¿½bergeordnete Tabelle
    *
    * @see #addReference
    */
@@ -450,7 +451,7 @@ public abstract class TableCache implements Observer
   {
     useReload = reference.size() > 0;
     for ( int i=0; i<reference.size(); i++ ) {
-      TableCache tc = (TableCache)reference.elementAt( i );
+      TableCache tc = reference.elementAt( i );
       tc.removeParent( this );
       tc.setWeakParent( this, false );
     }
@@ -477,10 +478,10 @@ public abstract class TableCache implements Observer
   }
 
   /**
-   * Findet den zu den angegebenen Namen zugehörigen
+   * Findet den zu den angegebenen Namen zugehï¿½rigen
    * Cache im Referenz-Baum.
    *
-   * @return Zugehöriger Cache oder <code>null</code>
+   * @return Zugehï¿½riger Cache oder <code>null</code>
    */
   public TableCache getReference(String name)
   {
@@ -488,7 +489,7 @@ public abstract class TableCache implements Observer
       return this;
 
     for ( int i=0; i<reference.size(); i++ ) {
-      TableCache tc = (TableCache)reference.elementAt(i);
+      TableCache tc = reference.elementAt(i);
       tc = tc.getReference( name );
       if ( tc != null )
 	return tc;
@@ -503,7 +504,7 @@ public abstract class TableCache implements Observer
       return this;
 
     for ( int i=0; i<parent.size(); i++ ) {
-      TableCache tc = (TableCache)parent.elementAt(i);
+      TableCache tc = parent.elementAt(i);
       tc = tc.getParent( name );
       if ( tc != null )
 	return tc;
@@ -531,8 +532,8 @@ public abstract class TableCache implements Observer
    * Tabellen-Objekte gelten als gleich, wenn sie auf die gleiche
    * Tabelle im DBMS abbilden.
    *
-   * @return <code>true</code>, wenn Tabellennamen ohne Berücksichtigung
-   * der Groß- und Kleinschreibung übereinstimmen.
+   * @return <code>true</code>, wenn Tabellennamen ohne Berï¿½cksichtigung
+   * der Groï¿½- und Kleinschreibung ï¿½bereinstimmen.
    */
   public boolean equals(Object o)
   {
@@ -542,9 +543,9 @@ public abstract class TableCache implements Observer
   }
 
   /**
-   * Liefert den Namen des Primärschlüssels.
+   * Liefert den Namen des Primï¿½rschlï¿½ssels.
    *
-   * @return Name des Primärschlüssels
+   * @return Name des Primï¿½rschlï¿½ssels
    */
   public String getKeyName()
   {
@@ -552,13 +553,13 @@ public abstract class TableCache implements Observer
   }
 
   /**
-   * Liefert den Wert des Primärschlüssels.
+   * Liefert den Wert des Primï¿½rschlï¿½ssels.
    *
    * Dieser Wert wird aus den Tabellen-Daten ermittelt, sofern
    * <code>keyValue==null</code> ist.
-   * Andernfalls wird <code>keyValue</code> zurückgegeben.
+   * Andernfalls wird <code>keyValue</code> zurï¿½ckgegeben.
    *
-   * @return Wert des Primärschlüssels
+   * @return Wert des Primï¿½rschlï¿½ssels
    *
    * @exception SQLException bei einem DBMS-Fehler
    */
@@ -581,9 +582,9 @@ public abstract class TableCache implements Observer
     reload();
 
     for ( int i=0; i<parent.size(); i++ ) {
-      TableCache p = (TableCache)parent.elementAt(i);
+      TableCache p = parent.elementAt(i);
       if ( p.tableName.equalsIgnoreCase( name ) ) {
-	Object[] oa = (Object[])data.elementAt( currentRecord );
+	Object[] oa = data.elementAt( currentRecord );
 	return oa[columns+i];
       }
     }
@@ -591,7 +592,7 @@ public abstract class TableCache implements Observer
   }
 
   /**
-   * Gibt Namen der Tabelle zurück.
+   * Gibt Namen der Tabelle zurï¿½ck.
    *
    * @return Tabellenname
    *
@@ -611,11 +612,11 @@ public abstract class TableCache implements Observer
   public String createQueryString()
     throws SQLException
   {
-    // Attribute müssen gesetzt sein!
+    // Attribute mï¿½ssen gesetzt sein!
     if ( attribute == null )
       throw new NullPointerException( "in createQueryString()" );
 
-    // Aus Performance-Gründen StringBuffer statt String benutzen.
+    // Aus Performance-Grï¿½nden StringBuffer statt String benutzen.
     StringBuffer sb = new StringBuffer();
 
     sb.append( "select " );
@@ -628,7 +629,7 @@ public abstract class TableCache implements Observer
       sb.append( ta.name );
     }
     for ( int i=0; i<parent.size(); i++ ) {
-      TableCache p = (TableCache)parent.elementAt( i );
+      TableCache p = parent.elementAt( i );
       sb.append( ',' );
       sb.append( p.getKeyName() );
     }
@@ -643,7 +644,7 @@ public abstract class TableCache implements Observer
     if ( parent.size() > 0 ) {
       boolean first = true;
       for ( int i=0; i<parent.size(); i++ ) {
-	TableCache p = (TableCache)parent.elementAt( i );
+	TableCache p = parent.elementAt( i );
 	if ( !isWeak(p) ) {
 	  String keyName = p.getKeyName();
 	  Object keyValue = p.getKeyValue();
@@ -673,10 +674,10 @@ public abstract class TableCache implements Observer
       for ( int i=0; i<superSet.size(); i++ ) {
 	if ( i > 0 )
 	  sb.append( " or " );
-	Vector subSet = (Vector)superSet.elementAt( i );
+	Vector<SelectCondition> subSet = superSet.elementAt( i );
 	sb.append( "(" );
 	for ( int j=0; j<subSet.size(); j++ ) {
-	  SelectCondition cond = (SelectCondition)subSet.elementAt( j );
+	  SelectCondition cond = subSet.elementAt( j );
 	  if ( j > 0 )
 	    sb.append( " and " );
 
@@ -690,13 +691,13 @@ public abstract class TableCache implements Observer
 	sb.append( ")" );
     }
 
-    // "order"-Klausel bei Bedarf hinzufügen ...
+    // "order"-Klausel bei Bedarf hinzufï¿½gen ...
     if ( orderArray != null ) {
-      // Wird für die ','-Setzung benötigt.
+      // Wird fï¿½r die ','-Setzung benï¿½tigt.
       boolean firstOrder = true;
       sb.append( " order by " );
       // Attribute, die in die Sortierung einbezogen werden, haben
-      // order>0. Sortierung primär nach order==1, dann order==2 usw.
+      // order>0. Sortierung primï¿½r nach order==1, dann order==2 usw.
 
       for ( int i=0; i<orderArray.length; i++ ) {
 	TableAttribute ta = attribute[orderArray[i]];
@@ -740,14 +741,14 @@ public abstract class TableCache implements Observer
    * Auslesen der Tabelle und aller untergeordneten Tabellen
    * (sofern angegeben).
    *
-   * Das Neuladen wird nur ausgeführt, wenn <code>useReload</code>
+   * Das Neuladen wird nur ausgefï¿½hrt, wenn <code>useReload</code>
    * gesetzt ist. In diesem Fall wird <code>currentRecord</code>
    * auf <code>0</code> gesetzt.
    *
    * @param loadReference gibt an, ob untergeordnete Tabellen
    * ebenfalls ausgelesen werden sollen.
    * @param keepRecord gibt an, ob <code>currentRecord</code>
-   * unverändert bleiben soll.
+   * unverï¿½ndert bleiben soll.
    *
    * @exception SQLException wenn im DBMS ein Fehler auftritt.
    *
@@ -760,32 +761,32 @@ public abstract class TableCache implements Observer
     if ( useReload ) {
       // Initialisieren des Datenbereichs ...
       if ( data == null )
-	data = new Vector( initialRecordBufferSize,
+	data = new Vector<Object[]>( initialRecordBufferSize,
 			   incrementRecordBufferSize );
       else
-	data = new Vector( data.size(),
+	data = new Vector<Object[]>( data.size(),
 			   incrementRecordBufferSize );
 
       String sqlQuery = createQueryString();
       debugLine( "executing query" );
       debugLine( ">> "+sqlQuery );
 
-      // SQL-Abfrage ausführen ...
+      // SQL-Abfrage ausfï¿½hren ...
       Statement sm = connection.createStatement();
       ResultSet rset = sm.executeQuery( sqlQuery );
       ResultSetMetaData rsmd = rset.getMetaData();
 
-      // Anzahl der Datensätze zurücksetzen ...
+      // Anzahl der Datensï¿½tze zurï¿½cksetzen ...
       records = 0;
       // ... und normalerweise auch die Datensatz-Position
       if ( !keepRecord ) currentRecord = 0;
 
-      // Anzahl der Spalten ermitteln (enthält PriKey) ...
+      // Anzahl der Spalten ermitteln (enthï¿½lt PriKey) ...
       columns = rsmd.getColumnCount() - parent.size();
 
       int allColumns = columns + parent.size();
 
-      // Abfrageergebnisse Zeile für Zeile holen
+      // Abfrageergebnisse Zeile fï¿½r Zeile holen
       // und speichern ...
       while ( rset.next() ) {
 	Object[] oa = new Object[allColumns];
@@ -796,7 +797,7 @@ public abstract class TableCache implements Observer
 	records++;
       }
 
-      // SQL-Statements abschließen
+      // SQL-Statements abschlieï¿½en
       // (records ist nun richtig gesetzt).
       rset.close();
       sm.close();
@@ -808,7 +809,7 @@ public abstract class TableCache implements Observer
     // Ggf. reload auf die Child-Tabellen anwenden ...
     if ( loadReferences )
       for ( int i=0; i<reference.size(); i++ )
-	((TableCache)reference.elementAt(i)).reload( true, keepRecord );
+	reference.elementAt(i).reload( true, keepRecord );
   }
 
   public void update(Observable o,Object arg)
@@ -827,13 +828,13 @@ public abstract class TableCache implements Observer
   /**
    * Liefert die aktuelle Zeile in der Tabelle.
    *
-   * Das erste Feld ist stets der Primärschlüssel, die restlichen Felder
-   * repräsentieren den Inhalt, welcher surch die Attribute gegeben ist.
+   * Das erste Feld ist stets der Primï¿½rschlï¿½ssel, die restlichen Felder
+   * reprï¿½sentieren den Inhalt, welcher surch die Attribute gegeben ist.
    *
    * Die aktuelle Zeile ist durch den Wert <code>currentRecord</code>
    * gegeben. Dieser Wert kann durch die Funktionen
    * <code>moveToRecord</code> und <code>goToRecord</code>
-   * geändert werden.
+   * geï¿½ndert werden.
    *
    * Gilt <code>currentRecord==records</code> (also z.B. bei einer
    * leeren Tabelle), dann liefert die Funktion <code>null</code>.
@@ -849,7 +850,7 @@ public abstract class TableCache implements Observer
 
     if ( isEOD() ) return null;
 
-    Object[] oa = (Object[])data.elementAt( currentRecord );
+    Object[] oa = data.elementAt( currentRecord );
     Object[] tmp = new Object[columns];
     for ( int i=0; i<columns; i++ )
       tmp[i] = oa[i];
@@ -879,10 +880,10 @@ public abstract class TableCache implements Observer
 
   /**
    * Liefert den Index der aktuellen Zeile (<code>currentRecord</code>)
-   * zurück.
+   * zurï¿½ck.
    *
    * Diese Funktion ruft <b>nicht</b> <code>reload</code> auf
-   * (hätte auch absolut keinen Sinn, da im Falle eines Neuladens der
+   * (hï¿½tte auch absolut keinen Sinn, da im Falle eines Neuladens der
    * Wert von <code>currentRecord</code> auf <code>0</code> gesetzt wird.
    *
    * @return Index der aktuellen Zeile
@@ -948,16 +949,16 @@ public abstract class TableCache implements Observer
   }
 
   /**
-   * Ändern der aktuellen Zeile (Tabellen-Navigation)
+   * ï¿½ndern der aktuellen Zeile (Tabellen-Navigation)
    *
    * Falls der neue Zeilen-Index verschieden vom aktuellen ist,
    * wird bei allen referenzierten Tabellen ein <code>reload</code>
-   * erzwungen. In diesem Fall wird <code>true</code> zurückgegeben,
+   * erzwungen. In diesem Fall wird <code>true</code> zurï¿½ckgegeben,
    * sonst <code>false</code>.
    *
    * @param newRecord neuer Zeilenindex
    *
-   * @return Änderungszustand
+   * @return ï¿½nderungszustand
    *
    * @exception ArrayIndexOutOfBoundsException falls
    * <code>newRecord&lt;0</code> oder <code>newRecord&gt;records</code>
@@ -990,12 +991,12 @@ public abstract class TableCache implements Observer
    * Relative Navigation im Cache.
    *
    * Liefert <code>true</code>, falls der aktuelle Zeilenindex
-   * geändert wurde oder falls <code>dir==CURRENT</code> gilt,
+   * geï¿½ndert wurde oder falls <code>dir==CURRENT</code> gilt,
    * sonst <code>false</code>.
    *
    * @param dir Richtungs-Konstante
    *
-   * @return Änderungszustand
+   * @return ï¿½nderungszustand
    *
    * @exception SQLException wenn im DBMS ein Fehler auftritt.
    */
@@ -1055,7 +1056,7 @@ public abstract class TableCache implements Observer
     throws SQLException
   {
     for ( int i=0; i<reference.size(); i++ ) {
-      TableCache tc = (TableCache)reference.elementAt( i );
+      TableCache tc = reference.elementAt( i );
       tc.useReload = true;
       tc.reload( true, keepRecord );
       tc.forceReferenceReload( keepRecord );
@@ -1067,7 +1068,7 @@ public abstract class TableCache implements Observer
    *
    * @param idName Name der sog. Sequence-ID
    *
-   * @return nächster Wert der gegebenen Sequence-ID
+   * @return nï¿½chster Wert der gegebenen Sequence-ID
    *
    * @exception SQLException wenn im DBMS ein Fehler auftritt.
    *
@@ -1091,7 +1092,7 @@ public abstract class TableCache implements Observer
   }
 
   /**
-   * Erzeugt einen Primärschlüssel.
+   * Erzeugt einen Primï¿½rschlï¿½ssel.
    *
    * Implementierung:
    * <pre>
@@ -1102,7 +1103,7 @@ public abstract class TableCache implements Observer
    * }
    * </pre>
    *
-   * @return Primärschlüssel
+   * @return Primï¿½rschlï¿½ssel
    *
    * @exception SQLException wenn im DBMS ein Fehler auftritt.
    *
@@ -1115,15 +1116,15 @@ public abstract class TableCache implements Observer
   }
 
   /**
-   * Ändert die Daten der aktuellen Zeile.
+   * ï¿½ndert die Daten der aktuellen Zeile.
    *
    * Der Parameter <code>rowData</code> darf <b>kein</b>
-   * Schlüsselfeld enthalten, d.h. dieses Array besitzt ein Feld weniger, als
+   * Schlï¿½sselfeld enthalten, d.h. dieses Array besitzt ein Feld weniger, als
    * durch <code>columns</code> angegeben.
    *
-   * Da durch die Änderung die Sortierung verloren gehen kann, wird die
+   * Da durch die ï¿½nderung die Sortierung verloren gehen kann, wird die
    * (Teil-)Tabelle neu eingelesen. Dabei wird <code>currentRecord</code>
-   * so angepasst, dass er die evtl. geänderte Zeilenposition annimmt.
+   * so angepasst, dass er die evtl. geï¿½nderte Zeilenposition annimmt.
    *
    * @param rowData neue Zeile
    */
@@ -1131,7 +1132,7 @@ public abstract class TableCache implements Observer
     throws SQLException
   {
     // Nichts passiert, wenn Tabelle leer ist, oder wenn vorher kein reload()
-    // ausgeführt wurde.
+    // ausgefï¿½hrt wurde.
     if ( isEOD() ) return;
 
     // Update-Kommando berechnen ...
@@ -1152,23 +1153,23 @@ public abstract class TableCache implements Observer
     debugLine( "executing statement" );
     debugLine( ">> "+sb.toString() );
 
-    // Update ausführen ...
+    // Update ausfï¿½hren ...
     Statement sm = connection.createStatement();
     sm.executeUpdate( sb.toString() );
     sm.close();
 
     // Neue Datensatz-Position berechnen ...
-    Object key = ((Object[])data.elementAt(currentRecord))[0];
+    Object key = data.elementAt(currentRecord)[0];
     useReload = true;
     reload();
     currentRecord = findIndexByKey( key );
   }
 
   /**
-   * Einfügen von Daten.
+   * Einfï¿½gen von Daten.
    *
    * Der Parameter <code>rowData</code> darf <b>kein</b>
-   * Schlüsselfeld enthalten, d.h. dieses Array besitzt ein Feld weniger, als
+   * Schlï¿½sselfeld enthalten, d.h. dieses Array besitzt ein Feld weniger, als
    * durch <code>columns</code> angegeben.
    *
    *
@@ -1177,19 +1178,19 @@ public abstract class TableCache implements Observer
   public void insert(Object[] rowData)
     throws SQLException
   {
-    // Im Gegensatz zu update() führen wir hier ein reload() aus ...
+    // Im Gegensatz zu update() fï¿½hren wir hier ein reload() aus ...
     reload();
 
     // Erzeuge neuen PriKey ...
     Object newKey = createKey();
-    // ... und eine vollständige neue Zeile.
+    // ... und eine vollstï¿½ndige neue Zeile.
     Object[] newRow = new Object[columns];
 
-    // Daten übernehmen ...
+    // Daten ï¿½bernehmen ...
     for ( int i=0; i<rowData.length; i++ )
       newRow[i+1] = rowData[i];
 
-    // ... und den Schlüssel
+    // ... und den Schlï¿½ssel
     newRow[0] = newKey;
 
     // Insert-Kommando formulieren ...
@@ -1200,7 +1201,7 @@ public abstract class TableCache implements Observer
     sb.append( getKeyName() );
 
     for ( int i=0; i<parent.size(); i++ ) {
-      TableCache p = (TableCache)parent.elementAt( i );
+      TableCache p = parent.elementAt( i );
       sb.append( ","+p.getKeyName() );
     }
 
@@ -1210,7 +1211,7 @@ public abstract class TableCache implements Observer
     sb.append( newKey.toString() );
 
     for ( int i=0; i<parent.size(); i++ ) {
-      TableCache p = (TableCache)parent.elementAt( i );
+      TableCache p = parent.elementAt( i );
       sb.append( ","+p.getKeyValue() );
     }
 
@@ -1221,12 +1222,12 @@ public abstract class TableCache implements Observer
     debugLine( "executing statement" );
     debugLine( ">> "+sb.toString() );
 
-    // Insert ausführen ...
+    // Insert ausfï¿½hren ...
     Statement sm = connection.createStatement();
     sm.executeUpdate( sb.toString() );
     sm.close();
 
-    // Neue Datensatz-Position berechnen und vollständiges Neuladen
+    // Neue Datensatz-Position berechnen und vollstï¿½ndiges Neuladen
     useReload = true;
     reload();
     forceReferenceReload();
@@ -1244,10 +1245,8 @@ public abstract class TableCache implements Observer
   {
     if ( currentRecord == records ) return;
 
-    Object key = getKeyValue();
-
     for ( int i=0; i<reference.size(); i++ )
-      ((TableCache)reference.elementAt(i)).delete( true );
+      reference.elementAt(i).delete( true );
 
     StringBuffer sb = new StringBuffer();
     sb.append( "delete from " );
@@ -1259,7 +1258,7 @@ public abstract class TableCache implements Observer
     if ( all ) {
       // Selektion bzgl. Parents oder
       for ( int i=0; i<parent.size(); i++ ) {
-	TableCache p = (TableCache)parent.elementAt( i );
+	TableCache p = parent.elementAt( i );
 	String keyName = p.getKeyName();
 	Object keyValue = p.getKeyValue();
 	if ( keyValue != null ) {
@@ -1301,7 +1300,7 @@ public abstract class TableCache implements Observer
   public int findIndexByKey(Object key)
   {
     for ( int i=0; i<records; i++ ) {
-      Object key2 = ((Object[])data.elementAt(i))[0];
+      Object key2 = data.elementAt(i)[0];
       if ( key.toString().equals(key2.toString()) )
 	return i;
     }
