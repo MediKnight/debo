@@ -37,7 +37,7 @@ public class PermutationTableModelDecorator implements TableModel
     return model.getColumnName( columnIndex );
   }
 
-  public Class getColumnClass(int columnIndex) {
+  public Class<?> getColumnClass(int columnIndex) {
     return model.getColumnClass( columnIndex );
   }
 

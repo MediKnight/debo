@@ -30,7 +30,7 @@ public abstract class SQLRecord extends AbstractStorable {
 		return sb.toString();
 	}
 
-	// Paket-interne Funktion: Empfängt Daten vom Objekt
+	// Paket-interne Funktion: Empfï¿½ngt Daten vom Objekt
 	void getInternal(Object[] data) {
 		get(data);
 	}
@@ -40,7 +40,7 @@ public abstract class SQLRecord extends AbstractStorable {
 			data[i] = this.data[i];
 	}
 
-	// Paket-interne Funktion: Überträgt Daten zum Objekt
+	// Paket-interne Funktion: ï¿½bertrï¿½gt Daten zum Objekt
 	void putInternal(Object[] data) {
 		put(data);
 	}
@@ -50,7 +50,7 @@ public abstract class SQLRecord extends AbstractStorable {
 			this.data[i] = data[i];
 	}
 
-	// Paket-interne Funktion: Setzt Primärschlüssel
+	// Paket-interne Funktion: Setzt Primï¿½rschlï¿½ssel
 	void setKeyInternal(Object key) {
 		setKey(key);
 	}
@@ -61,7 +61,7 @@ public abstract class SQLRecord extends AbstractStorable {
 	public abstract String getIdentifier();
 
 	/**
-	 * Liefert Schlüssel-Attribut.
+	 * Liefert Schlï¿½ssel-Attribut.
 	 */
 	public abstract String getKeyIdentifier();
 

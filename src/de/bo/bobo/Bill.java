@@ -11,7 +11,7 @@ import de.bo.base.store2.sql.*;
 import de.bo.base.util.*;
 
 /**
- * Baltic-Online Geschäftsobjekt <b>Rechnung</b>.
+ * Baltic-Online Geschï¿½ftsobjekt <b>Rechnung</b>.
  * <p>
  */
 
@@ -61,7 +61,7 @@ public abstract class Bill extends Bobo
     }
 
     /**
-     * Liefert "Eltern"-Schlüssel zum gegebenen Index (im Bereich von
+     * Liefert "Eltern"-Schlï¿½ssel zum gegebenen Index (im Bereich von
      * <code>getParentCount()</code>).
      *
      * Eine Rechnung hat keine "Eltern" im Sinne der BO-Hierarchie und
@@ -207,9 +207,9 @@ public abstract class Bill extends Bobo
     }
 
     /**
-     * Liefert Namen des Primärschlüssels.
+     * Liefert Namen des Primï¿½rschlï¿½ssels.
      *
-     * (i.A. Spaltenattribute des Primärschlüssels)
+     * (i.A. Spaltenattribute des Primï¿½rschlï¿½ssels)
      *
      * @return <code>"id"</code>
      */
@@ -246,14 +246,14 @@ public abstract class Bill extends Bobo
      * This method returns <tt>null</tt> if there exists no link for
      * this bill.
      */
-    public Collection retrieveGroup()
+    public Collection<XLink> retrieveGroup()
 	throws StoreException {
 
 	BOBase boBase = (BOBase)getStoreKeeper();
 	XLink xlink = new XLink(boBase);
 	Object key = getKey();
 	SQLSelection sel = new SQLSelection(boBase.getSQLToolkit(),"oid",key);
-	Collection coll = boBase.retrieve(xlink,sel);
+	Collection<XLink> coll = boBase.retrieve(xlink,sel);
 
 	if ( coll.size() > 0 ) {
 	    xlink = (XLink)coll.iterator().next();

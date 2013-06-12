@@ -2,18 +2,20 @@ package de.bo.base.store2;
 
 import java.util.*;
 
+import de.bo.base.store2.sql.SQLRecord;
+
 /**
  * Ein StoreKeeper ("Lagerhalter") ist ein Objekt, das andere Objekte
  * lagern und liefern kann.
  * <p>
- * Ein StoreKeeper kann aber keine Objekte erzeugen (das müssen die
+ * Ein StoreKeeper kann aber keine Objekte erzeugen (das mï¿½ssen die
  * Objekte schon selbst tun), sondern kann neuen Objekten nur
- * einen Schlüssel liefern.
+ * einen Schlï¿½ssel liefern.
  * <p>
- * Typische Beispiele für einen "StoreKeeper" ist eine Tabelle einer
+ * Typische Beispiele fï¿½r einen "StoreKeeper" ist eine Tabelle einer
  * Datenbank, eine Datenbank selbst oder ein "Java-Space".
  * <p>
- * Objekte, die von einem StoreKeeper verwaltet werden sollen, müssen
+ * Objekte, die von einem StoreKeeper verwaltet werden sollen, mï¿½ssen
  * das Interface <code>Storable</code> implementieren.
  *
  * @see Storable
@@ -22,12 +24,12 @@ import java.util.*;
 public interface StoreKeeper
 {
   /**
-   * Eindeutigen Schlüssel für ein Objekt erzeugen.
+   * Eindeutigen Schlï¿½ssel fï¿½r ein Objekt erzeugen.
    *
-   * @param object das Objekt, für den der Schlüssel erzeugt werden soll
+   * @param object das Objekt, fï¿½r den der Schlï¿½ssel erzeugt werden soll
    * (meistens <code>this</code>)
    *
-   * @return Schlüssel
+   * @return Schlï¿½ssel
    */
   public Object createKey(Storable object)
     throws StoreException;
@@ -37,7 +39,7 @@ public interface StoreKeeper
    * 
    * @param object das Objekt, das die Daten erhalten soll
    * (meistens <code>this</code>)
-   * @param key Passender Schlüssel
+   * @param key Passender Schlï¿½ssel
    *
    * @return Array
    */
@@ -45,12 +47,12 @@ public interface StoreKeeper
     throws StoreException;
 
   /**
-   * Daten dem StoreKeeper hinzufügen.
+   * Daten dem StoreKeeper hinzufï¿½gen.
    * 
    * @param object das Objekt, das die Daten liefern soll
    * (meistens <code>this</code>)
    * @param data Quell-Array
-   * @param key Neuer Schlüssel (kann <tt>null</tt> sein).
+   * @param key Neuer Schlï¿½ssel (kann <tt>null</tt> sein).
    */
   public void insert(Storable object,Object[] data,Object newKey)
     throws StoreException;
@@ -61,7 +63,7 @@ public interface StoreKeeper
    * @param object das Objekt, das die Daten liefern soll
    * (meistens <code>this</code>)
    * @param data Quell-Array
-   * @param key Passender Schlüssel
+   * @param key Passender Schlï¿½ssel
    */
   public void store(Storable object,Object[] data,Object key)
     throws StoreException;
@@ -69,9 +71,9 @@ public interface StoreKeeper
   /**
    * Daten aus dem StoreKeeper entfernen.
    * 
-   * @param object das Objekt, das gelöscht werden soll
+   * @param object das Objekt, das gelï¿½scht werden soll
    * (meistens <code>this</code>)
-   * @param key Passender Schlüssel
+   * @param key Passender Schlï¿½ssel
    */
   public void delete(Storable object,Object key)
     throws StoreException;
@@ -80,17 +82,17 @@ public interface StoreKeeper
   /**
    * Liefert Collection aller Objekte vom Typ der Klasse des Objekts
    * <code>object</code>, die die Bedingungen der gegeben Selektion
-   * erfüllen.
+   * erfï¿½llen.
    *
    * @param object Quell-Objekttyp
    * @param selection Selektion
    *
    * @see Selection
    */
-  public Collection retrieve(Storable object,Selection selection)
+  public <E extends SQLRecord> Collection<E> retrieve(E object,Selection selection)
     throws StoreException;
 
-  public Collection retrieve(Storable object,
+  public <E extends SQLRecord> Collection<E> retrieve(E object,
 			     Selection selection,
 			     ObjectFilter filter)
     throws StoreException;

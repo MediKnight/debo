@@ -114,7 +114,7 @@ public abstract class SQLBase implements StoreKeeper, TraceConstants {
 	 * Erzeugen eines SQL-Query-Statements ohne Sortierung.
 	 *
 	 * @param record Datenbank-Objekt (Datensatz)
-	 * @param selection Auswahl (bei <tt>null</tt> unbeschränkte
+	 * @param selection Auswahl (bei <tt>null</tt> unbeschrï¿½nkte
 	 * Auswahl)
 	 *
 	 * @return SQL-Query-String
@@ -131,7 +131,7 @@ public abstract class SQLBase implements StoreKeeper, TraceConstants {
 	 * Erzeugen eines SQL-Query-Statements.
 	 *
 	 * @param record Datenbank-Objekt (Datensatz)
-	 * @param selection Auswahl (bei <tt>null</tt> unbeschränkte
+	 * @param selection Auswahl (bei <tt>null</tt> unbeschrï¿½nkte
 	 * Auswahl)
 	 * @param order SQL Order-Klausel (Kommata-getrennte Attribut-Liste
 	 * mit evtl. "desc"-Zusatz).
@@ -177,10 +177,10 @@ public abstract class SQLBase implements StoreKeeper, TraceConstants {
 	}
 
 	/**
-	 * Objekt aus Datenbank zum passenden Schlüssel einlesen.
+	 * Objekt aus Datenbank zum passenden Schlï¿½ssel einlesen.
 	 *
 	 * @param object Quell-Objekt (dient nur zur Identifizierung)
-	 * @param key Passender Schlüssel
+	 * @param key Passender Schlï¿½ssel
 	 */
 	public Object[] retrieve(Storable object, Object key)
 		throws StoreException {
@@ -262,7 +262,7 @@ public abstract class SQLBase implements StoreKeeper, TraceConstants {
 
 			PreparedStatement stmt = connection.prepareStatement(sb.toString());
 
-			int q = 0; // zählt '?'
+			int q = 0; // zï¿½hlt '?'
 			for (int i = 0; i < n; i++)
 				if (data[i] != null)
 					stmt.setObject(++q, data[i]);
@@ -365,7 +365,7 @@ public abstract class SQLBase implements StoreKeeper, TraceConstants {
 
 			PreparedStatement stmt = connection.prepareStatement(sb.toString());
 
-			int q = 0; // zählt '?'
+			int q = 0; // zï¿½hlt '?'
 			for (int i = 0; i < n; i++) {
 				if (i == keyColumn) {
 					if (key == null)
@@ -451,25 +451,25 @@ public abstract class SQLBase implements StoreKeeper, TraceConstants {
 		}
 	}
 
-	public Collection retrieve(Storable object) throws StoreException {
+	public <E extends SQLRecord> Collection<E> retrieve(E object) throws StoreException {
 
 		return retrieve(object, null, null, null);
 	}
 
-	public Collection retrieve(Storable object, ObjectFilter filter)
+	public <E extends SQLRecord> Collection<E> retrieve(E object, ObjectFilter filter)
 		throws StoreException {
 
 		return retrieve(object, null, filter, null);
 	}
 
-	public Collection retrieve(Storable object, Selection selection)
+	public <E extends SQLRecord> Collection<E> retrieve(E object, Selection selection)
 		throws StoreException {
 
 		return retrieve(object, selection, null, null);
 	}
 
-	public Collection retrieve(
-		Storable object,
+	public <E extends SQLRecord> Collection<E> retrieve(
+		E object,
 		Selection selection,
 		String order)
 		throws StoreException {
@@ -477,8 +477,8 @@ public abstract class SQLBase implements StoreKeeper, TraceConstants {
 		return retrieve(object, selection, null, order);
 	}
 
-	public Collection retrieve(
-		Storable object,
+	public <E extends SQLRecord> Collection<E> retrieve(
+		E object,
 		Selection selection,
 		ObjectFilter filter)
 		throws StoreException {
@@ -486,20 +486,19 @@ public abstract class SQLBase implements StoreKeeper, TraceConstants {
 		return retrieve(object, selection, filter, null);
 	}
 
-	public Collection retrieve(
-		Storable object,
+	public <E extends SQLRecord> Collection<E> retrieve(
+	    E object,
 		Selection selection,
 		ObjectFilter filter,
 		String order)
 		throws StoreException {
 
-		SQLRecord record = (SQLRecord) object;
-		Vector v = new Vector(RETRIEVAL_SIZE, RETRIEVAL_INC);
-		int n = record.getAttributes().length;
+		Vector<E> v = new Vector<E>(RETRIEVAL_SIZE, RETRIEVAL_INC);
+		int n = object.getAttributes().length;
 
 		try {
 			PreparedStatement sm =
-				createQueryStatement(record, (SQLSelection) selection, order);
+				createQueryStatement(object, (SQLSelection) selection, order);
 
 			if (tracer != null)
 				tracer.trace(TRACECLASS, sm);
@@ -512,9 +511,9 @@ public abstract class SQLBase implements StoreKeeper, TraceConstants {
 				for (int i = 0; i < n; i++)
 					data[i] = rset.getObject(i + 1);
 
-				SQLRecord r2 = (SQLRecord) record.getClass().newInstance();
+				E r2 = (E) object.getClass().newInstance();
 				r2.putInternal(data);
-				r2.setStoreKeeper(record.getStoreKeeper());
+				r2.setStoreKeeper(object.getStoreKeeper());
 
 				if (filter == null || filter.accept(r2))
 					v.add(r2);
@@ -526,7 +525,7 @@ public abstract class SQLBase implements StoreKeeper, TraceConstants {
 			// Baue evtl. kleineren Vector
 			if (v.size() <= RETRIEVAL_SIZE / 2) {
 				int m = v.size();
-				Vector v1 = new Vector(m);
+				Vector<E> v1 = new Vector<E>(m);
 				for (int i = 0; i < m; i++)
 					v1.add(v.get(i));
 
