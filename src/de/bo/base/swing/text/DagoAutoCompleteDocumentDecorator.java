@@ -9,17 +9,17 @@ import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
 
 /**
- * Diese Klasse stellt einen <CODE>DocumentDecorator</CODE> für
+ * Diese Klasse stellt einen <CODE>DocumentDecorator</CODE> fï¿½r
  * <CODE>JTextComponents</CODE> dar,
- * der bei Eingabe eines Prefixes aus einer Liste eine mögliche Ergänzung
- * auswählt und diese in der JTextComponent selektiert.
+ * der bei Eingabe eines Prefixes aus einer Liste eine mï¿½gliche Ergï¿½nzung
+ * auswï¿½hlt und diese in der JTextComponent selektiert.
  * (Netscape macht das bei der URL genauso :-)
  *
- * Bei einem Datum würde man Tag, Monat und Jahr mit getrennten
- * Vervollständigungen bearbeiten. Dazu würde <CODE>getCompletableSuffix</CODE>
- * jeweils den String nach dem letzten Punkt zurückliefern und
+ * Bei einem Datum wï¿½rde man Tag, Monat und Jahr mit getrennten
+ * Vervollstï¿½ndigungen bearbeiten. Dazu wï¿½rde <CODE>getCompletableSuffix</CODE>
+ * jeweils den String nach dem letzten Punkt zurï¿½ckliefern und
  * <CODE>getCompletions</CODE> anhand der Anzahl der Punkte die richtige
- * Vervollständigung ermitteln.
+ * Vervollstï¿½ndigung ermitteln.
  *
  * @version 0.01 1.8.1999
  * @author Dagobert Michelsen
@@ -29,18 +29,18 @@ public abstract	class DagoAutoCompleteDocumentDecorator extends DocumentDecorato
 	protected	JTextComponent	textComponent;
 
 	/**
-	 * Konstruktor fuer eine selbstvervollständigende <CODE>JTextComponent</CODE>.
-	 * @param textComponent Die <CODE>JTextComponent</CODE> für die
-	 *		Auswahl des Vervollständigungsvorschlages
+	 * Konstruktor fuer eine selbstvervollstï¿½ndigende <CODE>JTextComponent</CODE>.
+	 * @param textComponent Die <CODE>JTextComponent</CODE> fï¿½r die
+	 *		Auswahl des Vervollstï¿½ndigungsvorschlages
 	 **/
 	public DagoAutoCompleteDocumentDecorator( JTextComponent textComponent ) {
   	this( textComponent.getDocument(), textComponent, null );
 	}
 
 	/**
-	 * Konstruktor fuer eine selbstvervollständigende <CODE>JTextComponent</CODE>.
-	 * @param textComponent Die <CODE>JTextComponent</CODE> für die
-	 *		Auswahl des Vervollständigungsvorschlages
+	 * Konstruktor fuer eine selbstvervollstï¿½ndigende <CODE>JTextComponent</CODE>.
+	 * @param textComponent Die <CODE>JTextComponent</CODE> fï¿½r die
+	 *		Auswahl des Vervollstï¿½ndigungsvorschlages
    * @param id Die neue Id dieses Decorators
 	 **/
 	public DagoAutoCompleteDocumentDecorator( JTextComponent textComponent, Object id ) {
@@ -48,10 +48,10 @@ public abstract	class DagoAutoCompleteDocumentDecorator extends DocumentDecorato
 	}
 
 	/**
-	 * Konstruktor für eine selbstvervollständigende <CODE>JTextComponent</CODE>.
+	 * Konstruktor fï¿½r eine selbstvervollstï¿½ndigende <CODE>JTextComponent</CODE>.
 	 * @param document Das darunterliegende <CODE>Document</CODE>
-	 * @param textComponent Die <CODE>JTextComponent</CODE> für die
-	 *		Auswahl des Vervollständigungsvorschlages
+	 * @param textComponent Die <CODE>JTextComponent</CODE> fï¿½r die
+	 *		Auswahl des Vervollstï¿½ndigungsvorschlages
 	 **/
 	public DagoAutoCompleteDocumentDecorator( Document document,
 			JTextComponent textComponent ) {
@@ -59,10 +59,10 @@ public abstract	class DagoAutoCompleteDocumentDecorator extends DocumentDecorato
 	}
 
 	/**
-	 * Konstruktor für eine selbstvervollständigende <CODE>JTextComponent</CODE>.
+	 * Konstruktor fï¿½r eine selbstvervollstï¿½ndigende <CODE>JTextComponent</CODE>.
 	 * @param document Das darunterliegende <CODE>Document</CODE>
-	 * @param textComponent Die <CODE>JTextComponent</CODE> für die
-	 *		Auswahl des Vervollständigungsvorschlages
+	 * @param textComponent Die <CODE>JTextComponent</CODE> fï¿½r die
+	 *		Auswahl des Vervollstï¿½ndigungsvorschlages
    * @param id Die neue Id dieses Decorators
 	 **/
 	public DagoAutoCompleteDocumentDecorator( Document document,
@@ -72,47 +72,47 @@ public abstract	class DagoAutoCompleteDocumentDecorator extends DocumentDecorato
 	}
 
 	/**
-	 * Diese Methode liefert eine <CODE>Enumeration</CODE> mit den möglichen
-	 * Vervollständigungen und muß von der abgeleiteten Klasse
-	 * überschrieben werden. Durch die Parameter können hier unterschiedliche
-   * Vervollständigungen für verschiedene Prefixe zurückgeliefert werden.
-   * @param beforeText Der Text vor der einzufügenden Stelle.
-   * @param str Der einzufügende Text.
+	 * Diese Methode liefert eine <CODE>Enumeration</CODE> mit den mï¿½glichen
+	 * Vervollstï¿½ndigungen und muï¿½ von der abgeleiteten Klasse
+	 * ï¿½berschrieben werden. Durch die Parameter kï¿½nnen hier unterschiedliche
+   * Vervollstï¿½ndigungen fï¿½r verschiedene Prefixe zurï¿½ckgeliefert werden.
+   * @param beforeText Der Text vor der einzufï¿½genden Stelle.
+   * @param str Der einzufï¿½gende Text.
 	 * @return Eine <CODE>Enumeration</CODE> von <CODE>String</CODE> die
-	 *		die möglichen Vervollständigungen angibt.
+	 *		die mï¿½glichen Vervollstï¿½ndigungen angibt.
 	 **/
-	abstract public	Enumeration	getCompletions( String beforeText, String str );
+	abstract public	Enumeration<String>	getCompletions( String beforeText, String str );
 
   /**
-   * Diese Methode wird aufgerufen, wenn eine Vervollständigung gefunden worden
-   * ist. Damit kann etwa eine der Vervollständigung entsprechende Information
+   * Diese Methode wird aufgerufen, wenn eine Vervollstï¿½ndigung gefunden worden
+   * ist. Damit kann etwa eine der Vervollstï¿½ndigung entsprechende Information
    * in einer Statuszeile angezeigt werden.
-   * @param completion Die Vervollständigung, die bei dem Abgleich mit der
+   * @param completion Die Vervollstï¿½ndigung, die bei dem Abgleich mit der
    *    Eingabe vorgeschlagen wird.
    **/
 	public	void	completionFound( String completion ) {
 	}
 
   /**
-   * Diese Methode bestimmt das Suffix der Eingabe, für das die
-   * Vervollständigung durchgeführt werden soll. Als Resultat wird
+   * Diese Methode bestimmt das Suffix der Eingabe, fï¿½r das die
+   * Vervollstï¿½ndigung durchgefï¿½hrt werden soll. Als Resultat wird
    * im Normalfall die Konkatenation von dem bereits vorhandenen und dem
-   * neuen Text zurückgeliefert. Es kann aber auch nur ein bestimmtes
+   * neuen Text zurï¿½ckgeliefert. Es kann aber auch nur ein bestimmtes
    * Endstueck extrahiert werden (z.B. der Text nach dem letzten Komma).
-   * Abgeleitete Klassen sollten diese Methode überschreiben.
-   * @param beforeText Der Text vor der einzufügenden Stelle.
-   * @param str Der einzufügende Text.
-   * @return Der Text, der vervollständigt werden soll.
+   * Abgeleitete Klassen sollten diese Methode ï¿½berschreiben.
+   * @param beforeText Der Text vor der einzufï¿½genden Stelle.
+   * @param str Der einzufï¿½gende Text.
+   * @return Der Text, der vervollstï¿½ndigt werden soll.
    **/
 	public	String	getCompletableSuffix( String beforeText, String str ) {
 		return beforeText + str;
 	}
 
 	/**
-	 * Diese Methode führt eine Enfügung durch.
+	 * Diese Methode fï¿½hrt eine Enfï¿½gung durch.
 	 * @param offs ist der Startoffset f&uuml;r die Einf&uuml;gung
-	 * @param str enthält den einzufügenden String
-	 * @param a enthält die Attribute des einzufügenden Strings
+	 * @param str enthï¿½lt den einzufï¿½genden String
+	 * @param a enthï¿½lt die Attribute des einzufï¿½genden Strings
 	 **/
 	public void insertString( int offs, String str, AttributeSet a )
 	throws BadLocationException {
@@ -125,17 +125,17 @@ public abstract	class DagoAutoCompleteDocumentDecorator extends DocumentDecorato
 		if( afterText.equals( "" ) ) {
 			String completableSuffix	= getCompletableSuffix( beforeText, str );
 			if( !completableSuffix.equals( "" ) ) {
-  			Enumeration completions = getCompletions( beforeText, str );
+  			Enumeration<String> completions = getCompletions( beforeText, str );
 				while( completions.hasMoreElements() ) {
-					String completion = (String) completions.nextElement();
+					String completion = completions.nextElement();
 					if( completion.regionMatches( 0, completableSuffix, 0, completableSuffix.length() ) ) {
 						final	int	from	= beforeText.length() + str.length();
 						final	int	to		= beforeText.length() + completion.length();
 
-						// Benachrichtigung, dass eine Vervollständigung gefunden wurde
+						// Benachrichtigung, dass eine Vervollstï¿½ndigung gefunden wurde
 						completionFound( completion );
 
-            // Wenn eine Vervollständigung existiert, diese Auswählen
+            // Wenn eine Vervollstï¿½ndigung existiert, diese Auswï¿½hlen
 						if( from != to ) {
 							SwingUtilities.invokeLater( new Runnable() {
 								public void run() {

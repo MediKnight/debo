@@ -8,9 +8,9 @@ import de.bo.base.swing.DocumentComboBox;
 
 /**
  * Diese Klasse stellt ein <CODE>Document</CODE> dar, was an eine
- * editierbare <CODE>DocumentComboBox</CODE> gehängt werden kann und dann alle
+ * editierbare <CODE>DocumentComboBox</CODE> gehï¿½ngt werden kann und dann alle
  * Eingaben in dem Textfeld der ComboBox entsprechend den
- * Listeneinträgen in der <CODE>DocumentComboBox</CODE> vervollständigt.
+ * Listeneintrï¿½gen in der <CODE>DocumentComboBox</CODE> vervollstï¿½ndigt.
  *
  * Anwendung:
  * <PRE>
@@ -28,43 +28,43 @@ import de.bo.base.swing.DocumentComboBox;
  **/
 
 public class DocumentComboBoxCompleteDecorator extends DagoAutoCompleteDocumentDecorator {
-	protected	DocumentComboBox	documentComboBox;
+	protected DocumentComboBox<String> documentComboBox;
 
   /**
    * Dieser Konstruktor bekommt als Parameter eine DocumenetComboBox, deren
-   * Text vervollständigt werden soll.
-   * @param documentComboBox Die DocumentComboBox, deren Text vervollständigt
+   * Text vervollstï¿½ndigt werden soll.
+   * @param documentComboBox Die DocumentComboBox, deren Text vervollstï¿½ndigt
    *		werden soll.
    **/
-	public DocumentComboBoxCompleteDecorator( DocumentComboBox documentComboBox ) {
+	public DocumentComboBoxCompleteDecorator( DocumentComboBox<String> documentComboBox ) {
     this( null, documentComboBox );
 	}
 
   /**
    * Dieser Konstruktor bekommt als Parameter ein Document, auf dem die
-   * Vervollständigung angewendet werden soll und eine DocumentComboBox,
-   * deren JTextField den zu vervollständigenden Text enthält.
+   * Vervollstï¿½ndigung angewendet werden soll und eine DocumentComboBox,
+   * deren JTextField den zu vervollstï¿½ndigenden Text enthï¿½lt.
    **/
 	public DocumentComboBoxCompleteDecorator( Document document,
-			DocumentComboBox documentComboBox ) {
+			DocumentComboBox<String> documentComboBox ) {
 		super( document, documentComboBox.getTextField() );
 		this.documentComboBox = documentComboBox;
 	}
 
 	/**
-	 * Diese Methode liefert eine <CODE>Enumeration</CODE> mit den möglichen
-	 * Vervollständigungen. Da die Vervollständigungen für alle Prefixe gleich
+	 * Diese Methode liefert eine <CODE>Enumeration</CODE> mit den mï¿½glichen
+	 * Vervollstï¿½ndigungen. Da die Vervollstï¿½ndigungen fï¿½r alle Prefixe gleich
    * sind, werden die Parameter hier ignoriert.
-   * @param beforeText Der Text vor der einzufügenden Stelle.
-   * @param str Der einzufügende Text.
+   * @param beforeText Der Text vor der einzufï¿½genden Stelle.
+   * @param str Der einzufï¿½gende Text.
 	 * @return Eine <CODE>Enumeration</CODE> von <CODE>String</CODE> die
-	 *		die möglichen Vervollständigungen angibt.
+	 *		die mï¿½glichen Vervollstï¿½ndigungen angibt.
 	 **/
-	public Enumeration getCompletions( String beforeText, String str ) {
-		return new Enumeration() {
+	public Enumeration<String> getCompletions( String beforeText, String str ) {
+		return new Enumeration<String>() {
 			int index = 0;
 			public	boolean	hasMoreElements() { return index < documentComboBox.getItemCount(); }
-			public	Object	nextElement()			{ return documentComboBox.getItemAt( index++ ); }
+			public	String	nextElement()     { return documentComboBox.getItemAt( index++ ); }
 		};
 	}
 }
