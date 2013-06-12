@@ -346,6 +346,7 @@ implements Cloneable,java.io.Serializable
     int n = array.length;
     int m = src.length;
 
+    @SuppressWarnings("unchecked")
     E[] dest = (E[])
       java.lang.reflect.Array.
       newInstance( src.getClass().getComponentType(), m );

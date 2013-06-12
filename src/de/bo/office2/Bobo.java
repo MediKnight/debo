@@ -159,6 +159,7 @@ public abstract class Bobo extends AbstractStorable
      * @param sel Auswahl
      * @param order <code>true</code> bei Sortierung
      */
+    @SuppressWarnings("unchecked")
     public Enumeration<Bobo> getEnumeration(Selection sel,boolean order) {
 	return ((StoreKeeper<Bobo>) storeKeeper).getEnumeration(this,sel,order);
     }
@@ -170,6 +171,7 @@ public abstract class Bobo extends AbstractStorable
      * @param key passender Key
      * @param order <code>true</code> bei Sortierung
      */
+    @SuppressWarnings("unchecked")
     public Enumeration<Bobo> getEnumeration(String keyIdentifier,
 				      Object key,
 				      boolean order) {

@@ -511,7 +511,8 @@ public abstract class SQLBase implements StoreKeeper, TraceConstants {
 				for (int i = 0; i < n; i++)
 					data[i] = rset.getObject(i + 1);
 
-				E r2 = (E) object.getClass().newInstance();
+				@SuppressWarnings("unchecked")
+                E r2 = (E) object.getClass().newInstance();
 				r2.putInternal(data);
 				r2.setStoreKeeper(object.getStoreKeeper());
 
