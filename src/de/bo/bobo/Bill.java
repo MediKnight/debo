@@ -256,7 +256,7 @@ public abstract class Bill extends Bobo
     Collection<XLink> coll = boBase.retrieve(xlink,sel);
 
     if ( coll.size() > 0 ) {
-      xlink = (XLink)coll.iterator().next();
+      xlink = coll.iterator().next();
       Object gid = xlink.getGroupId();
       sel = new SQLSelection(boBase.getSQLToolkit(),"gid",gid);
       coll = boBase.retrieve(xlink,sel);
@@ -277,10 +277,10 @@ public abstract class Bill extends Bobo
     XLink xlink = new XLink(boBase);
     Object key = getKey();
     SQLSelection sel = new SQLSelection(boBase.getSQLToolkit(),"oid",key);
-    Collection coll = boBase.retrieve(xlink,sel);
+    Collection<XLink> coll = boBase.retrieve(xlink,sel);
 
     if ( coll.size() > 0 ) {
-      ((XLink)coll.iterator().next()).delete();
+      coll.iterator().next().delete();
     }
   }
 
@@ -294,7 +294,7 @@ public abstract class Bill extends Bobo
     XLink xlink = new XLink(boBase);
     Object key = getKey();
     SQLSelection sel = new SQLSelection(boBase.getSQLToolkit(),"oid",key);
-    Collection coll = boBase.retrieve(xlink,sel);
+    Collection<XLink> coll = boBase.retrieve(xlink,sel);
 
     return coll.size() > 0;
   }
@@ -317,14 +317,14 @@ public abstract class Bill extends Bobo
   }
 
   public static Object createGroup(BOBase boBase,
-      Collection coll1,Collection coll2)
+      Collection<Bobo> coll1,Collection<Bobo> coll2)
           throws StoreException {
 
     return createGroup(boBase,null,coll1,coll2);
   }
 
   public static Object createGroup(BOBase boBase,Object gid,
-      Collection coll1,Collection coll2)
+      Collection<Bobo> coll1,Collection<Bobo> coll2)
           throws StoreException {
 
     Connection c = boBase.getConnection();
@@ -363,13 +363,13 @@ public abstract class Bill extends Bobo
   }
 
   public static void addLinks(BOBase boBase,Object gid,
-      Collection coll,int sideIndex)
+      Collection<Bobo> coll,int sideIndex)
           throws StoreException {
 
-    for ( Iterator i=coll.iterator(); i.hasNext(); ) {
+    for ( Iterator<Bobo> i=coll.iterator(); i.hasNext(); ) {
       XLink xlink = new XLink(boBase);
       xlink.setGroupId(gid);
-      xlink.setObjectId(((Bobo)i.next()).getKey());
+      xlink.setObjectId(i.next().getKey());
       xlink.setSideIndex(sideIndex);
       xlink.store();
     }

@@ -6,9 +6,9 @@ import de.bo.base.store2.*;
 import de.bo.base.store2.sql.*;
 
 /**
- * Basis-Klasse für Baltic-Online Business-Objects (BOBO).
+ * Basis-Klasse fï¿½r Baltic-Online Business-Objects (BOBO).
  * <p>
- * Diese Klasse hat keine Kenntnisse über die verwendete Datenverwaltung.
+ * Diese Klasse hat keine Kenntnisse ï¿½ber die verwendete Datenverwaltung.
  */
 
 public abstract class Bobo extends SQLRecord
@@ -153,7 +153,7 @@ public abstract class Bobo extends SQLRecord
 	    osel.addSelection(new SQLSelection(tk,"kunde",key));
 	    osel.addSelection(new SQLSelection(tk,"einsatz",key));
 
-	    Collection coll = null;
+	    Collection<? extends Bill> coll = null;
 	    try {
 		coll = boBase.retrieve(new Claim(boBase),osel);
 	    }
