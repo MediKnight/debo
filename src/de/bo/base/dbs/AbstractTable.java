@@ -286,7 +286,7 @@ public abstract class AbstractTable
 
     // Abfrageergebnisse Zeile f�r Zeile holen und Schl�ssel speichern ...
     // int cs = getCacheSize();
-    int cs = 0;
+//    int cs = 0;
 
     if ( tc != null )
       tc.startConsume();

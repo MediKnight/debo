@@ -12,8 +12,6 @@ public class DepartmentRecord extends AbstractRecord
 
   public DepartmentRecord(AbstractTable table) {
     super( table );
-
-    Connection conn = table.getConnection();
   }
 
   public boolean create()

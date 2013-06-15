@@ -146,7 +146,6 @@ public abstract class SQLBase implements StoreKeeper, TraceConstants {
 
 		try {
 			StringBuffer sbQuery = new StringBuffer();
-			String[] attribute = record.getAttributes();
 
 			sbQuery.append(createSelectString(record));
 

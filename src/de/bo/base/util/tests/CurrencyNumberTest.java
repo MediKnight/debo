@@ -150,7 +150,7 @@ public class CurrencyNumberTest extends TestCase {
         assertEquals(100.47d, cn1.round(2).doubleValue(), 0.001d);
         assertEquals(100.46d, cn2.round(2).doubleValue(), 0.001d);
         assertEquals(100.3334d, cn3.round(4).doubleValue(), 0.001d);
-        assertEquals(100.3333d, cn3.round(4).doubleValue(), 0.001d);
+        assertEquals(100.3333d, cn4.round(4).doubleValue(), 0.001d);
     }
 
     public void testToEuro() {

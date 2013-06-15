@@ -121,7 +121,6 @@ public abstract class BooleanTableSelection extends TableSelection
     if ( n == 1 ) return selection.elementAt( 0 ).toString();
 
     StringBuffer sb = new StringBuffer();
-    String or = DBUtilities.getOperatorString(DBUtilities.OR);
     String op = getOperatorString();
     sb.append( "(" );
     for ( int i=0; i<n; i++ ) {

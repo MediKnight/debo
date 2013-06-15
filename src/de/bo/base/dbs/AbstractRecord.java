@@ -38,15 +38,15 @@ public abstract class AbstractRecord implements DBStoreable
   protected boolean created;
 
   /**
-   * Lösch-Zustand des Datensatzes.
+   * Lï¿½sch-Zustand des Datensatzes.
    *
-   * Ein Datensatz ist "deleted", wenn er ungültig ist.
-   * Ein Datensatz wird ungültig, wenn er mit der Funktion
-   * <code>delete</code> erfolgreich gelöscht wurde.
+   * Ein Datensatz ist "deleted", wenn er ungï¿½ltig ist.
+   * Ein Datensatz wird ungï¿½ltig, wenn er mit der Funktion
+   * <code>delete</code> erfolgreich gelï¿½scht wurde.
    * Ein Datensatz ist solange "deleted", bis er mit der Funktion
-   * <code>retrieve</code> einen gültigen Zustand erhält.
+   * <code>retrieve</code> einen gï¿½ltigen Zustand erhï¿½lt.
    *
-   * Per Default ist ein Datensatz ungültig, d.h. "deleted".
+   * Per Default ist ein Datensatz ungï¿½ltig, d.h. "deleted".
    *
    * @see #delete
    * @see #retrieve
@@ -54,13 +54,13 @@ public abstract class AbstractRecord implements DBStoreable
   protected boolean deleted;
 
   /**
-   * Erzeugt einen neuen (aber ungültigen) Datensatz mit der Verbindung
-   * zur zugehörigen Tabelle.
+   * Erzeugt einen neuen (aber ungï¿½ltigen) Datensatz mit der Verbindung
+   * zur zugehï¿½rigen Tabelle.
    *
    * Der Konstruktor setzt <code>created</code> auf <code>false</code>
    * und <code>deleted</code> auf <code>true</code>
    *
-   * @param table zugehörige Tabelle
+   * @param table zugehï¿½rige Tabelle
    *
    * @see #created
    * @see #deleted
@@ -73,11 +73,11 @@ public abstract class AbstractRecord implements DBStoreable
   }
 
   /**
-   * Speichert Datensatz, wenn gültig.
+   * Speichert Datensatz, wenn gï¿½ltig.
    *
    * Ist das Flag <code>created</code> gesetzt, dann wird auf die
    * korrespondierende Tabelle ein <pre>INSERT</pre>, sonst ein
-   * <pre>UPDATE</pre> ausgeführt.
+   * <pre>UPDATE</pre> ausgefï¿½hrt.
    *
    * Es kann nur dann gespeichert werden, wenn das Flag
    * <code>deleted</code> nicht gesetzt ist.
@@ -93,10 +93,10 @@ public abstract class AbstractRecord implements DBStoreable
     throws SQLException {
     //    debugCall( "store()" );
 
-    // gelöschte Objekte können nicht gespeichert werden!
+    // gelï¿½schte Objekte kï¿½nnen nicht gespeichert werden!
     if ( deleted ) return false;
 
-    // record füllen ...
+    // record fï¿½llen ...
     makeDataAbstract();
 
     // Bei created table.insert() aufrufen ...
@@ -118,21 +118,21 @@ public abstract class AbstractRecord implements DBStoreable
   }
 
   /**
-   * Löschen des gegebenen Datensatzes.
+   * Lï¿½schen des gegebenen Datensatzes.
    *
-   * Wenn möglich, wird der Datensatz aus der korrespondierenden Quelle
-   * gelöscht.
+   * Wenn mï¿½glich, wird der Datensatz aus der korrespondierenden Quelle
+   * gelï¿½scht.
    *
-   * Das Flag <code>deleted</code> wird gesetzt, wenn das Löschen erfolgreich
+   * Das Flag <code>deleted</code> wird gesetzt, wenn das Lï¿½schen erfolgreich
    * war.
-   * Ein Datensatz kann nicht gelöscht werden, wenn das Flag
+   * Ein Datensatz kann nicht gelï¿½scht werden, wenn das Flag
    * <code>deleted</code> gesetzt ist.
    *
    * @return <code>true</code> bei Erfolg
    *
    * @exception SQLException wenn betreffende Datenbank einen Fehler
-   * erzeugt, oder der Datensatz aufgrund relationaler Abhängigkeiten nicht
-   * gelöscht werden kann.
+   * erzeugt, oder der Datensatz aufgrund relationaler Abhï¿½ngigkeiten nicht
+   * gelï¿½scht werden kann.
    */
   public boolean delete()
     throws SQLException {
@@ -140,7 +140,7 @@ public abstract class AbstractRecord implements DBStoreable
 
     created = false;
 
-    // gelöschte Objekte können nicht noch einmal gelöscht werden!
+    // gelï¿½schte Objekte kï¿½nnen nicht noch einmal gelï¿½scht werden!
     if ( deleted ) return false;
 
     if ( !table.delete( getKey() ) )
@@ -152,7 +152,7 @@ public abstract class AbstractRecord implements DBStoreable
   }
 
   /**
-   * Liefert <tt>retrieve()</tt> zurück, ohne Datensatz auszulesen.
+   * Liefert <tt>retrieve()</tt> zurï¿½ck, ohne Datensatz auszulesen.
    * <p>
    * Diese Methode bezieht sich nicht auf die <tt>retrieve()</tt>-Methoden
    * mit Parameter.
@@ -167,13 +167,13 @@ public abstract class AbstractRecord implements DBStoreable
   /**
    * Liest Datensatz.
    *
-   * Liest Datensatz von zugehöriger Tabelle entsprechend der
+   * Liest Datensatz von zugehï¿½riger Tabelle entsprechend der
    * Datensatzposition in der Tabelle.
    *
    * Es kann nicht gelesen werden, wenn das Flag <code>created</code>
    * gesetzt ist.
    *
-   * Bei Erfolg wird das Flag <code>deleted</code> gelöscht.
+   * Bei Erfolg wird das Flag <code>deleted</code> gelï¿½scht.
    *
    * @return <code>true</code> bei Erfolg
    *
@@ -200,15 +200,15 @@ public abstract class AbstractRecord implements DBStoreable
   /**
    * Liest Datensatz.
    *
-   * Liest Datensatz von zugehöriger Tabelle entsprechend des
-   * gegebenen Schlüssels.
+   * Liest Datensatz von zugehï¿½riger Tabelle entsprechend des
+   * gegebenen Schlï¿½ssels.
    *
    * Es kann nicht gelesen werden, wenn das Flag <code>created</code>
    * gesetzt ist.
    *
-   * Bei Erfolg wird das Flag <code>deleted</code> gelöscht.
+   * Bei Erfolg wird das Flag <code>deleted</code> gelï¿½scht.
    *
-   * @param key Schlüssel
+   * @param key Schlï¿½ssel
    * @return <code>true</code> bei Erfolg
    *
    * @exception SQLException wenn betreffende Datenbank einen Fehler
@@ -237,7 +237,7 @@ public abstract class AbstractRecord implements DBStoreable
    * Es kann nicht gelesen werden, wenn das Flag <code>created</code>
    * gesetzt ist.
    *
-   * Bei Erfolg wird das Flag <code>deleted</code> gelöscht.
+   * Bei Erfolg wird das Flag <code>deleted</code> gelï¿½scht.
    *
    * Es wird vorausgesetzt, dass die Quelldaten zum Datensatz passen.
    *
@@ -267,7 +267,7 @@ public abstract class AbstractRecord implements DBStoreable
    * Erzeugt einen Datensatz.
    *
    * Erzeugt einen Datensatz in dem Sinne, dass das Array
-   * <code>record</code> von der zugehörigen Tabelle gesetzt wird,
+   * <code>record</code> von der zugehï¿½rigen Tabelle gesetzt wird,
    * da diese weiss, wieviel Spalten der Datensatz besitzen soll.
    *
    * Ein Datensatz kann nicht erzeugt werden, wenn <code>created</code>
@@ -296,12 +296,12 @@ public abstract class AbstractRecord implements DBStoreable
   }
 
   /**
-   * Liefert Schlüssel zum Datensatz.
+   * Liefert Schlï¿½ssel zum Datensatz.
    *
-   * Liefert Schlüssel, wenn <code>deleted</code> auf <code>false</code>
+   * Liefert Schlï¿½ssel, wenn <code>deleted</code> auf <code>false</code>
    * ist, sonst <code>null</code>.
    *
-   * @return zugehöriger Schlüssel
+   * @return zugehï¿½riger Schlï¿½ssel
    */
   public Object getKey() {
     try {
@@ -333,7 +333,7 @@ public abstract class AbstractRecord implements DBStoreable
 //   }
 
   /**
-   * Prüft Datensatz auf Inhalt.
+   * Prï¿½ft Datensatz auf Inhalt.
    *
    * @param toFind Suchstring
    * @return <code>hasContents( toFind, false, true )</code>
@@ -345,18 +345,18 @@ public abstract class AbstractRecord implements DBStoreable
   }
 
   /**
-   * Prüft Datensatz auf Inhalt.
+   * Prï¿½ft Datensatz auf Inhalt.
    *
    * Diese Funktion kann benutz werden, um alle Felder des Datensatzes
    * nach einem String zu durchsuchen.
-   * Bei mehreren Datensätzen ist es allerdings günstiger,
+   * Bei mehreren Datensï¿½tzen ist es allerdings gï¿½nstiger,
    * Selektionen auf die Tabelle anzuwenden und dann einen Consumer
    * auf die Tabelle loszulassen.
    *
    * @param toFind Suchstring
    * @param exact gesetzt, wenn <b>keine</b> Teilstring-Suche erfolgen soll.
-   * @param ignoreCase gesetzt, wenn Groß/Kleinschreibung nicht
-   * berücksichtigt werden soll.
+   * @param ignoreCase gesetzt, wenn Groï¿½/Kleinschreibung nicht
+   * berï¿½cksichtigt werden soll.
    * @return <code>true</code>, wenn Suchstring gefunden wurde.
    *
    * @see TableSelection
@@ -407,11 +407,11 @@ public abstract class AbstractRecord implements DBStoreable
   }
 
   /**
-   * Liefert eindeutigen Schlüssel, wenn der Datensatz neu erzeugt
+   * Liefert eindeutigen Schlï¿½ssel, wenn der Datensatz neu erzeugt
    * wird.
    *
-   * Wie ein Schlüssel erzeugt werden kann, hängt i.A. von dem verwendeten
-   * DBMS ab. Derartige Abhängigkeiten können von der Klasse
+   * Wie ein Schlï¿½ssel erzeugt werden kann, hï¿½ngt i.A. von dem verwendeten
+   * DBMS ab. Derartige Abhï¿½ngigkeiten kï¿½nnen von der Klasse
    * <code>DBUtilities</code> kompensiert werden.
    *
    * Eine typische Implementierung:
@@ -422,7 +422,7 @@ public abstract class AbstractRecord implements DBStoreable
    * }
    * </pre>
    *
-   * @return neuer Schlüssel
+   * @return neuer Schlï¿½ssel
    *
    * @see AbstractTable
    * @see DBUtilities
@@ -430,7 +430,7 @@ public abstract class AbstractRecord implements DBStoreable
   protected abstract Object createKey() throws SQLException;
 
   /**
-   * Überführt benannte (konkrete) Elemente eines Datensatzes in die
+   * ï¿½berfï¿½hrt benannte (konkrete) Elemente eines Datensatzes in die
    * abstrakte Darstellung durch das Array <code>record</code>.
    *
    * Diese Funktion wird von <code>store</code> aufgerufen.
@@ -480,8 +480,8 @@ public abstract class AbstractRecord implements DBStoreable
   protected abstract void makeDataConcrete();
 
   protected void debugCall(String msg) {
-    String s = "calling "+msg+" from ";
-    s += getClass().getName();
+//    String s = "calling "+msg+" from ";
+//    s += getClass().getName();
 //    StdApplication.debugMsg( s );
   }
 }
