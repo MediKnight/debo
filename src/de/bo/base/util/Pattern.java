@@ -57,8 +57,7 @@ public class Pattern
 	    // character (if `]', it's the special case)
 	    ci+=2;
 
-	    char p2;
-	    while ((p2=pattern.charAt(ci)) != ']') ci++;
+	    while ((pattern.charAt(ci)) != ']') ci++;
 	    minpost++;      // range matches only single character
 	    break;
 	  case '\\':
