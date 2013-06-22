@@ -5,9 +5,24 @@
     =================================
   -->
   <property name="project.src" value="src"/>
-  <property name="project.classes" value="bin"/>
+  <property name="project.classes" value="build"/>
   <property name="project.lib" value="lib"/>
 
+  <path id="build.classpath">
+  </path>
+
+
+  <target name="compile" description="Compiles the Task">
+        <mkdir dir="${project.classes}" />
+    <javac srcdir="${project.src}" destdir="${project.classes}" encoding="ISO-8859-1"
+           includeantruntime="false">
+      <classpath refid="build.classpath"/>
+    </javac>
+    <copy todir="${project.classes}">
+      <fileset dir="${project.src}"
+               excludes="**/*.java" />
+    </copy>
+  </target>
 
   <!--
     ==================================
@@ -23,7 +38,7 @@
     </tstamp>
   </target>
 
-  <target name="dist" depends="init">
+  <target name="dist" depends="init, compile">
     <delete dir="${dist.dir}"/>
     <mkdir dir="${dist.dir}"/>
     <jar jarfile="${dist.dir}/${dist.jar}" basedir="${project.classes}"/>
