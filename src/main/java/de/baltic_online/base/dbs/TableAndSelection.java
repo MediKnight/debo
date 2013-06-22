@@ -1,0 +1,11 @@
+package de.baltic_online.base.dbs;
+
+/**
+ */
+
+public class TableAndSelection extends BooleanTableSelection
+{
+  public String getOperatorString() {
+    return DBUtilities.getOperatorString( DBUtilities.AND );
+  }
+}
