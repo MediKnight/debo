@@ -92,7 +92,7 @@ public class DefaultDateModel extends AbstractDateModel {
 	    Calendar newDate = (Calendar) date.clone();
 	    Calendar oldDate = date;
 
-	    newDate.add( Calendar.MONTH, delta );
+	   newDate.add( Calendar.MONTH, delta );
 	    date = newDate;
 	    
 	    fireDateChanged( oldDate );
